@@ -31,17 +31,20 @@ def get_db():
 def init_db():
     """初始化数据库表 - 强制重建以支持表结构变更"""
     from app.models.schedule import Schedule, Task
+    from app.models.achievement import Achievement, UserAchievement
+    from app.services.achievement_service import AchievementService
     from sqlalchemy import inspect
     
     inspector = inspect(engine)
     tables = inspector.get_table_names()
     
-    # 如果表已存在且缺少schedule_id列，则删除所有表重建
-    if 'task' in tables:
-        task_columns = [col['name'] for col in inspector.get_columns('task')]
-        if 'schedule_id' not in task_columns:
-            print("⚠️  检测到旧表结构，正在重建数据库...")
-            Base.metadata.drop_all(bind=engine)
-            print("✅ 旧表已删除")
-    
+    # 创建所有表
     Base.metadata.create_all(bind=engine)
+    
+    # 初始化成就数据
+    db = SessionLocal()
+    try:
+        achievement_service = AchievementService(db)
+        achievement_service.initialize_default_achievements()
+    finally:
+        db.close()

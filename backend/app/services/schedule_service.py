@@ -13,13 +13,17 @@ class ScheduleService:
     def __init__(self, db: Session):
         self.db = db
     
-    def get_schedule(self) -> Optional[Schedule]:
-        """获取单个日程表（简化版本，只保留一条记录）"""
-        return self.db.query(Schedule).order_by(Schedule.id.desc()).first()
+    def get_schedule(self, student_name: str, student_class: str) -> Optional[Schedule]:
+        """获取日程表（必传学生姓名和班级）"""
+        # 根据学生姓名和班级精确匹配
+        return self.db.query(Schedule).filter(
+            Schedule.student_name == student_name,
+            Schedule.student_class == student_class
+        ).first()
     
     def create_or_update_schedule(self, data: ScheduleData) -> Schedule:
         """创建或更新日程表"""
-        schedule = self.get_schedule()
+        schedule = self.get_schedule(data.student_name, data.student_class)
         
         if schedule:
             # 更新现有日程表
@@ -84,11 +88,11 @@ class ScheduleService:
         tasks = self.db.query(Task).filter(Task.date_key == date_key).order_by(Task.order_index).all()
         return [TaskResponse.model_validate(t) for t in tasks]
     
-    def get_all_tasks(self) -> Dict[str, List[TaskResponse]]:
-        """获取当前日程表的所有任务，按日期分组"""
-        schedule = self.get_schedule()
+    def get_all_tasks(self, student_name: str, student_class: str) -> Optional[Dict[str, List[TaskResponse]]]:
+        """获取日程表的所有任务，按日期分组（必传学生姓名和班级）"""
+        schedule = self.get_schedule(student_name, student_class)
         if not schedule:
-            return {}
+            return None
         
         tasks = self.db.query(Task).filter(
             Task.schedule_id == schedule.id
@@ -100,6 +104,10 @@ class ScheduleService:
                 result[task.date_key] = []
             result[task.date_key].append(TaskResponse.model_validate(task))
         return result
+    
+    def get_all_students(self) -> List[Schedule]:
+        """获取所有学生的日程表信息"""
+        return self.db.query(Schedule).order_by(Schedule.student_name).all()
     
     def clear_all_data(self):
         """清空所有数据"""

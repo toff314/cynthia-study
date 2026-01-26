@@ -61,7 +61,7 @@ async def save_quiz(data: Dict[str, Any]):
             "filename": result["filename"],
             "path": f"@quizzes/{result['filename']}"
         },
-        message=f"文件已保存至 @data/quizzes/{result['filename']}"
+        message=f"文件已保存为 {result['filename']}"
     )
 
 
@@ -79,7 +79,7 @@ async def upload_quiz(content: str = Query(..., description="JSON内容")):
                 "filename": result["filename"],
                 "path": f"@data/quizzes/{result['filename']}"
             },
-            message=f"文件已保存至 @data/quizzes/{result['filename']}"
+            message=f"文件 @da已保存为 {result['filename']}"
         )
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="JSON格式错误")
