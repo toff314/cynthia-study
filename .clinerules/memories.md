@@ -10,6 +10,7 @@
 
 # Environment Configuration
 - 英文Windows环境下需解决ASGI默认latin-1编码与UTF-8文件保存的冲突及IDE乱码问题。
+- 前端开发服务器需将host配置为0.0.0.0以暴露IP供局域网访问。
 
 # Default_Data
 - The default task list includes 晨读, 完成作业, 体育锻炼, 阅读, and 家务.
