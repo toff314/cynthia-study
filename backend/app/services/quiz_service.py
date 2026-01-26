@@ -6,7 +6,13 @@ from typing import List, Optional, Dict, Any
 
 from app.config import settings
 from app.schemas.quiz import FileInfo, QuizData
-from app.utils.file_helper import generate_filename, get_file_size
+from app.utils.file_helper import (
+    generate_filename,
+    get_file_size,
+    validate_filename,
+    validate_content_size,
+    MAX_FILE_SIZE
+)
 
 
 class QuizService:
@@ -51,7 +57,19 @@ class QuizService:
         """保存阅读题数据到文件"""
         title = data.get("title", "quiz")
         filename = generate_filename(title)
+        
+        # 验证生成的文件名是否安全
+        is_valid, error_msg = validate_filename(filename)
+        if not is_valid:
+            raise ValueError(f"文件名验证失败: {error_msg}")
+        
         file_path = self.quiz_dir / filename
+        
+        # 验证文件路径是否在允许的目录内（防止路径遍历）
+        try:
+            file_path.resolve().relative_to(self.quiz_dir.resolve())
+        except ValueError:
+            raise ValueError("文件路径不在允许的目录内")
         
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -63,11 +81,73 @@ class QuizService:
     
     def upload_file(self, content: str, title: str) -> Dict[str, str]:
         """上传并保存文件"""
+        # 验证内容大小是否超过限制
+        is_valid, error_msg = validate_content_size(content, MAX_FILE_SIZE)
+        if not is_valid:
+            raise ValueError(error_msg)
+        
+        # 检查内容是否包含危险的JSON模式（防止JSON注入）
         try:
             data = json.loads(content)
-            return self.save_quiz(data)
-        except json.JSONDecodeError:
-            return {
-                "filename": "",
-                "path": ""
-            }
+        except json.JSONDecodeError as e:
+            raise ValueError(f"JSON格式错误: {str(e)}")
+        
+        # 验证JSON数据结构的基本安全性
+        if not isinstance(data, dict):
+            raise ValueError("JSON数据必须是对象类型")
+        
+        # 检查数据中是否包含潜在的恶意内容
+        self._validate_json_safety(data)
+        
+        return self.save_quiz(data)
+    
+    def _validate_json_safety(self, data: Dict[str, Any], depth: int = 0) -> None:
+        """
+        验证JSON数据的安全性
+        
+        参数:
+            data: 待验证的数据
+            depth: 当前递归深度，防止过深嵌套
+        """
+        # 防止过深嵌套（可能导致栈溢出）
+        MAX_DEPTH = 20
+        if depth > MAX_DEPTH:
+            raise ValueError(f"JSON数据嵌套层级过深（最大{MAX_DEPTH}层）")
+        
+        # 限制数组长度
+        MAX_ARRAY_LENGTH = 1000
+        if isinstance(data, list):
+            if len(data) > MAX_ARRAY_LENGTH:
+                raise ValueError(f"数组长度超出限制（最大{MAX_ARRAY_LENGTH}元素）")
+            for item in data:
+                self._validate_json_safety(item, depth + 1)
+        
+        # 检查字符串内容（防止XSS等攻击）
+        elif isinstance(data, str):
+            # 限制单个字符串长度
+            MAX_STRING_LENGTH = 10000
+            if len(data) > MAX_STRING_LENGTH:
+                raise ValueError(f"字符串长度超出限制（最大{MAX_STRING_LENGTH}字符）")
+            
+            # 检查潜在的脚本注入标签
+            dangerous_patterns = ['<script', '</script', 'javascript:', 'eval(', 'setTimeout(', 'setInterval(']
+            data_lower = data.lower()
+            for pattern in dangerous_patterns:
+                if pattern in data_lower:
+                    raise ValueError(f"JSON内容包含潜在危险: {pattern}")
+        
+        # 递归检查字典
+        elif isinstance(data, dict):
+            # 限制字典键数量
+            MAX_DICT_KEYS = 100
+            if len(data) > MAX_DICT_KEYS:
+                raise ValueError(f"字典键数量超出限制（最大{MAX_DICT_KEYS}）")
+            
+            for key, value in data.items():
+                # 检查键名
+                if not isinstance(key, str):
+                    raise ValueError("字典键必须是字符串类型")
+                if len(key) > 200:
+                    raise ValueError(f"字典键名过长（最大200字符）: {key[:50]}...")
+                
+                self._validate_json_safety(value, depth + 1)

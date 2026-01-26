@@ -1,0 +1,6 @@
+
+@.clinerules
+backend/venv
+backend/data
+frontend/node_modules
+backend/data/cynthia.db

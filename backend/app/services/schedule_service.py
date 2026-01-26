@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.models.schedule import Schedule, Task
 from app.schemas.schedule import ScheduleData, TaskCreate, TaskResponse
+from app.utils.file_helper import validate_text_input, sanitize_text
 
 
 class ScheduleService:
@@ -15,26 +16,50 @@ class ScheduleService:
     
     def get_schedule(self, student_name: str, student_class: str) -> Optional[Schedule]:
         """获取日程表（必传学生姓名和班级）"""
+        # 验证学生姓名
+        is_valid, error_msg = validate_text_input(student_name, "学生姓名", max_length=50)
+        if not is_valid:
+            raise ValueError(error_msg)
+        
+        # 验证班级
+        is_valid, error_msg = validate_text_input(student_class, "班级", max_length=50)
+        if not is_valid:
+            raise ValueError(error_msg)
+        
         # 根据学生姓名和班级精确匹配
         return self.db.query(Schedule).filter(
-            Schedule.student_name == student_name,
-            Schedule.student_class == student_class
+            Schedule.student_name == sanitize_text(student_name),
+            Schedule.student_class == sanitize_text(student_class)
         ).first()
     
     def create_or_update_schedule(self, data: ScheduleData) -> Schedule:
         """创建或更新日程表"""
-        schedule = self.get_schedule(data.student_name, data.student_class)
+        # 验证学生姓名
+        is_valid, error_msg = validate_text_input(data.student_name, "学生姓名", max_length=50)
+        if not is_valid:
+            raise ValueError(error_msg)
+        
+        # 验证班级
+        is_valid, error_msg = validate_text_input(data.student_class, "班级", max_length=50)
+        if not is_valid:
+            raise ValueError(error_msg)
+        
+        # 清理输入
+        clean_name = sanitize_text(data.student_name)
+        clean_class = sanitize_text(data.student_class)
+        
+        schedule = self.get_schedule(clean_name, clean_class)
         
         if schedule:
             # 更新现有日程表
-            schedule.student_name = data.student_name
-            schedule.student_class = data.student_class
+            schedule.student_name = clean_name
+            schedule.student_class = clean_class
             schedule.week_offset = data.week_offset
         else:
             # 创建新日程表
             schedule = Schedule(
-                student_name=data.student_name,
-                student_class=data.student_class,
+                student_name=clean_name,
+                student_class=clean_class,
                 week_offset=data.week_offset
             )
             self.db.add(schedule)
@@ -71,11 +96,19 @@ class ScheduleService:
                 # 跳过空任务
                 if not task_name or task_name.strip() == "":
                     continue
+                
+                # 验证任务名（防止XSS和注入）
+                is_valid, error_msg = validate_text_input(task_name, "任务名", max_length=200)
+                if not is_valid:
+                    raise ValueError(error_msg)
+                
+                # 清理任务名
+                clean_task_name = sanitize_text(task_name)
                     
                 db_task = Task(
                     schedule_id=schedule_id,
                     date_key=date_key,
-                    task_name=task_name,
+                    task_name=clean_task_name,
                     stars=stars,
                     order_index=idx
                 )
@@ -90,6 +123,7 @@ class ScheduleService:
     
     def get_all_tasks(self, student_name: str, student_class: str) -> Optional[Dict[str, List[TaskResponse]]]:
         """获取日程表的所有任务，按日期分组（必传学生姓名和班级）"""
+        # 验证参数（get_schedule方法中已经有验证）
         schedule = self.get_schedule(student_name, student_class)
         if not schedule:
             return None

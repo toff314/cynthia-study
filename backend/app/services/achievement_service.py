@@ -207,7 +207,7 @@ class AchievementService:
                 continue  # 已解锁，跳过
             
             # 检查是否满足解锁条件
-            if self._check_achievement_unlock(achievement, tasks):
+            if self._check_achievement_unlock(achievement, tasks, schedule_id):
                 # 解锁成就
                 user_achievement = UserAchievement(
                     achievement_id=achievement.id,
@@ -221,8 +221,18 @@ class AchievementService:
         
         return newly_unlocked
     
-    def _check_achievement_unlock(self, achievement: Achievement, tasks: List[Task]) -> bool:
+    def _check_achievement_unlock(self, achievement: Achievement, tasks: List[Task], schedule_id: int) -> bool:
         """检查单个成就是否解锁"""
+        # 处理逻辑类型的成就
+        if achievement.task_match_type == "logic":
+            if achievement.code == "lucky_day":
+                return self._check_lucky_day(tasks)
+            elif achievement.code == "first_blood":
+                return self._check_first_blood(tasks)
+            elif achievement.code == "all_rounder":
+                return self._check_all_rounder(schedule_id)
+            return False
+        
         count = self._count_matching_tasks(achievement, tasks)
         
         # 解析解锁条件，如 "完成10次"
@@ -237,6 +247,10 @@ class AchievementService:
     
     def _count_matching_tasks(self, achievement: Achievement, tasks: List[Task]) -> int:
         """计算匹配要求的任务数量"""
+        # logic 类型的成就返回1（表示解锁一次）
+        if achievement.task_match_type == "logic":
+            return 1
+        
         if not achievement.task_keywords:
             return 0
         
@@ -260,6 +274,85 @@ class AchievementService:
                     count += 1
         
         return count
+    
+    def _get_schedule_id_from_tasks(self, tasks: List[Task]) -> int:
+        """从任务列表中获取日程表ID"""
+        if not tasks:
+            return 0
+        return tasks[0].schedule_id
+    
+    def _check_lucky_day(self, tasks: List[Task]) -> bool:
+        """检查幸运日：一天内完成所有日常任务"""
+        if not tasks:
+            return False
+        
+        # 按日期分组任务
+        tasks_by_date = {}
+        for task in tasks:
+            if task.date_key not in tasks_by_date:
+                tasks_by_date[task.date_key] = []
+            tasks_by_date[task.date_key].append(task)
+        
+        # 检查是否有任何一天所有任务都完成了（stars > 0）
+        for date_key, date_tasks in tasks_by_date.items():
+            if all(task.stars > 0 for task in date_tasks):
+                # 至少有3个任务才算一天的任务
+                if len(date_tasks) >= 3:
+                    return True
+        
+        return False
+    
+    def _check_first_blood(self, tasks: List[Task]) -> bool:
+        """检查首胜达人：制作日程第一天就完成所有任务"""
+        if not tasks:
+            return False
+        
+        # 获取最早的日期
+        sorted_dates = sorted(set(task.date_key for task in tasks))
+        if not sorted_dates:
+            return False
+        
+        first_day = sorted_dates[0]
+        
+        # 检查第一天的所有任务是否都完成了
+        first_day_tasks = [task for task in tasks if task.date_key == first_day]
+        if len(first_day_tasks) >= 3 and all(task.stars > 0 for task in first_day_tasks):
+            return True
+        
+        return False
+    
+    def _check_all_rounder(self, schedule_id: int) -> bool:
+        """检查全能小博士：在所有类别（阅读、运动、挑战、家务、亲子）都获得铜牌以上成就"""
+        if schedule_id == 0:
+            return False
+        
+        # 定义各类别的成就代码
+        categories = {
+            'reading': ['reading_bronze', 'reading_silver', 'reading_gold'],
+            'exercise': ['exercise_bronze', 'exercise_silver', 'exercise_gold'],
+            'challenge': ['challenge_bronze', 'challenge_silver', 'challenge_gold'],
+            'housework': ['housework_bronze', 'housework_silver', 'housework_gold'],
+            'family': ['family_teamwork', 'family_chef', 'storyteller']
+        }
+        
+        # 获取用户已解锁的成就
+        unlocked_achievements = self.db.query(UserAchievement).filter(
+            UserAchievement.schedule_id == schedule_id
+        ).all()
+        
+        unlocked_codes = {
+            self.db.query(Achievement).get(ua.achievement_id).code 
+            for ua in unlocked_achievements 
+            if self.db.query(Achievement).get(ua.achievement_id)
+        }
+        
+        # 检查每个类别是否至少有铜牌成就
+        categories_unlocked = 0
+        for category, codes in categories.items():
+            if any(code in unlocked_codes for code in codes):
+                categories_unlocked += 1
+        
+        return categories_unlocked >= 5
     
     def initialize_default_achievements(self):
         """初始化默认成就（如果没有成就数据）"""
@@ -634,7 +727,7 @@ class AchievementService:
                 description="一天内完成所有日常任务",
                 icon="🍀",
                 level="silver",
-                task_match_type="any",
+                task_match_type="logic",
                 task_keywords="",  # 通过程序逻辑判断
                 unlock_condition="一天完成所有任务",
                 is_hidden=True
@@ -642,12 +735,12 @@ class AchievementService:
             Achievement(
                 code="first_blood",
                 name="首胜达人",
-                description="寒假第一天就完成所有任务",
+                description="制作任务第一天就完成所有任务",
                 icon="🥇",
                 level="gold",
-                task_match_type="any",
+                task_match_type="logic",
                 task_keywords="",
-                unlock_condition="寒假第一天完成任务",
+                unlock_condition="制作任务第一天完成任务",
                 is_hidden=True
             ),
 
@@ -658,10 +751,10 @@ class AchievementService:
                 description="在所有类别（阅读、运动、挑战、家务、亲子）都获得铜牌以上成就",
                 icon="🏅",
                 level="gold",
-                task_match_type="any",
+                task_match_type="logic",
                 task_keywords="",
                 unlock_condition="获得5类成就",
-                is_hidden=False
+                is_hidden=True
             )
         ]
         

@@ -26,47 +26,51 @@ async def get_schedule(
     db: Session = Depends(get_db)
 ):
     """获取日程表数据（必传学生姓名和班级）"""
-    service = ScheduleService(db)
-    schedule = service.get_schedule(student_name, student_class)
-    
-    if not schedule:
+    try:
+        service = ScheduleService(db)
+        schedule = service.get_schedule(student_name, student_class)
+        
+        if not schedule:
+            return ApiResponse(
+                success=True,
+                data={
+                    "id": None,
+                    "student_name": student_name,
+                    "student_class": student_class,
+                    "week_offset": 0,
+                    "weekly_tasks": {}
+                }
+            )
+        
+        tasks = service.get_all_tasks(student_name, student_class)
+        weekly_tasks = {}
+        if tasks:
+            for date_key, task_list in tasks.items():
+                weekly_tasks[date_key] = {
+                    "tasks": [
+                        {
+                            "id": t.id,
+                            "task_name": t.task_name,
+                            "name": t.task_name,
+                            "stars": t.stars
+                        }
+                        for t in task_list
+                    ]
+                }
+        
         return ApiResponse(
             success=True,
             data={
-                "id": None,
-                "student_name": student_name,
-                "student_class": student_class,
-                "week_offset": 0,
-                "weekly_tasks": {}
+                "id": schedule.id,
+                "student_name": schedule.student_name,
+                "student_class": schedule.student_class,
+                "week_offset": schedule.week_offset,
+                "weekly_tasks": weekly_tasks
             }
         )
-    
-    tasks = service.get_all_tasks(student_name, student_class)
-    weekly_tasks = {}
-    if tasks:
-        for date_key, task_list in tasks.items():
-            weekly_tasks[date_key] = {
-                "tasks": [
-                    {
-                        "id": t.id,
-                        "task_name": t.task_name,
-                        "name": t.task_name,
-                        "stars": t.stars
-                    }
-                    for t in task_list
-                ]
-            }
-    
-    return ApiResponse(
-        success=True,
-        data={
-            "id": schedule.id,
-            "student_name": schedule.student_name,
-            "student_class": schedule.student_class,
-            "week_offset": schedule.week_offset,
-            "weekly_tasks": weekly_tasks
-        }
-    )
+    except ValueError as e:
+        # 处理输入验证错误
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.get("/schedule/students")
@@ -93,13 +97,20 @@ async def get_all_students(db: Session = Depends(get_db)):
 @router.post("/schedule")
 async def save_schedule(data: ScheduleData, db: Session = Depends(get_db)):
     """保存日程表数据"""
-    service = ScheduleService(db)
-    schedule = service.create_or_update_schedule(data)
-    
-    return ApiResponse(
-        success=True,
-        message="日程表保存成功"
-    )
+    try:
+        service = ScheduleService(db)
+        schedule = service.create_or_update_schedule(data)
+        
+        return ApiResponse(
+            success=True,
+            message="日程表保存成功"
+        )
+    except ValueError as e:
+        # 处理输入验证错误（XSS、SQL注入等）
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        # 处理其他错误
+        raise HTTPException(status_code=500, detail=f"保存失败: {str(e)}")
 
 
 @router.delete("/schedule")
