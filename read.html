@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读题生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .info-box p strong {
+            color: #667eea;
+        }
+
+        .server-status {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f44336;
+        }
+
+        .status-dot.online {
+            background: #4caf50;
+        }
+
+        .upload-method {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .method-tab {
+            padding: 12px 30px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .method-tab:hover {
+            background: #e0e0e0;
+        }
+
+        .method-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .upload-section {
+            display: none;
+        }
+
+        .upload-section.active {
+            display: block;
+        }
+
+        .file-upload {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px dashed #667eea;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .file-label:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .file-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .file-item.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .file-item-name {
+            flex: 1;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .file-item-date {
+            font-size: 12px;
+            color: #999;
+            margin-left: 10px;
+        }
+
+        .file-item.selected .file-item-date {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .select-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .select-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .select-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .generate-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .generate-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+        }
+
+        .download-btn {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(33,150,243,0.3);
+            transition: all 0.3s;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+
+        .download-btn:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33,150,243,0.4);
+        }
+
+        .preview {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4caf50;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .preview-title {
+            color: #4caf50;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .refresh-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background: #f57c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 阅读题生成器</h1>
+            <p>选择JSON数据文件，生成阅读理解题页面</p>
+        </div>
+
+        <div class="server-status">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="serverStatusText">服务器状态：检查中...</span>
+        </div>
+
+        <div class="info-box">
+            <p><strong>💡 使用说明：</strong>选择JSON文件后，系统会自动将其保存到 <strong>@read</strong> 目录（格式：标题 + 日期 + 随机值.json）。使用前请确保服务器已启动（运行 <code>node server.js</code>）。</p>
+        </div>
+
+        <!-- 上传方式选择 -->
+        <div class="upload-method">
+            <div class="method-tab active" onclick="switchMethod('server')" id="tab-server">
+                📂 从项目选择
+            </div>
+            <div class="method-tab" onclick="switchMethod('local')" id="tab-local">
+                💻 本地上传
+            </div>
+        </div>
+
+        <!-- 方式1：从项目选择 -->
+        <div class="upload-section active" id="section-server">
+            <button class="refresh-btn" onclick="loadServerFiles()">🔄 刷新文件列表</button>
+            <div class="file-list" id="serverFileList">
+                <div class="loading">加载中...</div>
+            </div>
+            <div style="text-align: center;">
+                <button class="select-btn" onclick="selectServerFile()" id="selectServerBtn" disabled>✅ 选择此文件</button>
+            </div>
+        </div>
+
+        <!-- 方式2：本地上传 -->
+        <div class="upload-section" id="section-local">
+            <div class="file-upload">
+                <input type="file" id="jsonFile" class="file-input" accept=".json" />
+                <label for="jsonFile" class="file-label">📁 选择JSON数据文件</label>
+                <p style="margin-top: 15px; color: #666;">请选择包含题目数据的JSON文件</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="generate-btn" onclick="generatePage()" id="generateBtn" disabled>✨ 生成页面</button>
+            <button class="download-btn" onclick="downloadHTML()" id="downloadBtn" disabled>📥 下载HTML</button>
+        </div>
+
+        <div class="preview" id="preview">
+            <div class="preview-title">预览</div>
+            <iframe id="previewFrame" style="width: 100%; height: 600px; border: none;"></iframe>
+        </div>
+    </div>
+
+    <script src="template.js"></script>
+    <script>
+        let loadedData = null;
+        let generatedHTML = null;
+        let selectedServerFile = null;
+        let serverFiles = [];
+
+        const API_BASE_URL = 'http://localhost:3000';
+
+        // 生成随机字符串
+        function generateRandomString(length) {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // 检查服务器状态
+        async function checkServerStatus() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                if (response.ok) {
+                    document.getElementById('statusDot').classList.add('online');
+                    document.getElementById('serverStatusText').textContent = '服务器状态：在线';
+                    return true;
+                }
+            } catch (error) {
+                document.getElementById('statusDot').classList.remove('online');
+                document.getElementById('serverStatusText').textContent = '服务器状态：离线（请运行 node server.js）';
+                return false;
+            }
+        }
+
+        // 加载服务器文件列表
+        async function loadServerFiles() {
+            const fileList = document.getElementById('serverFileList');
+            fileList.innerHTML = '<div class="loading">加载中...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/files`);
+                const result = await response.json();
+
+                if (result.success && result.files.length > 0) {
+                    serverFiles = result.files;
+                    fileList.innerHTML = '';
+                    
+                    result.files.forEach(file => {
+                        const date = new Date(file.modified);
+                        const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+                        
+                        const item = document.createElement('div');
+                        item.className = 'file-item';
+                        item.dataset.filename = file.name;
+                        item.innerHTML = `
+                            <span class="file-item-name">${file.name}</span>
+                            <span class="file-item-date">${dateStr}</span>
+                        `;
+                        item.onclick = () => selectFileItem(file.name);
+                        fileList.appendChild(item);
+                    });
+                } else {
+                    fileList.innerHTML = '<div class="empty-state">📭 @read 目录暂无文件</div>';
+                }
+            } catch (error) {
+                fileList.innerHTML = '<div class="empty-state">❌ 加载失败：' + error.message + '</div>';
+            }
+        }
+
+        // 选择文件项
+        function selectFileItem(filename) {
+            selectedServerFile = filename;
+            
+            document.querySelectorAll('.file-item').forEach(item => {
+                item.classList.remove('selected');
+                if (item.dataset.filename === filename) {
+                    item.classList.add('selected');
+                }
+            });
+
+            document.getElementById('selectServerBtn').disabled = false;
+        }
+
+        // 从服务器选择文件
+        async function selectServerFile() {
+            if (!selectedServerFile) {
+                alert('请先选择一个文件');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/file?file=${encodeURIComponent(selectedServerFile)}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    loadedData = JSON.parse(result.content);
+                    document.getElementById('generateBtn').disabled = false;
+                    
+                    // 自动保存JSON文件到服务器
+                    const saveResult = await saveJSONToServer(loadedData);
+                    
+                    if (saveResult.success) {
+                        alert(`✅ 文件加载成功！包含 ${loadedData.sections ? loadedData.sections.length : 0} 个章节\n\n📁 文件已自动保存至 @read/${saveResult.fileName}`);
+                    } else {
+                        alert(`✅ 文件加载成功！\n⚠️ 但自动保存失败：${saveResult.error}`);
+                    }
+                }
+            } catch (error) {
+                alert('❌ 加载文件失败：' + error.message);
+            }
+        }
+
+        // 保存JSON文件到服务器
+        async function saveJSONToServer(data) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/save-json`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    return { success: true, fileName: result.fileName };
+                } else {
+                    return { success: false, error: result.error };
+                }
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // 切换上传方式
+        function switchMethod(method) {
+            document.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.upload-section').forEach(section => section.classList.remove('active'));
+
+            document.getElementById(`tab-${method}`).classList.add('active');
+            document.getElementById(`section-${method}`).classList.add('active');
+
+            if (method === 'server') {
+                loadServerFiles();
+            }
+        }
+
+        // 监听本地上传
+        document.getElementById('jsonFile').addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    try {
+                        loadedData = JSON.parse(e.target.result);
+                        document.getElementById('generateBtn').disabled = false;
+                        
+                        // 自动保存JSON文件到服务器
+                        const saveResult = await saveJSONToServer(loadedData);
+                        
+                        if (saveResult.success) {
+                            alert(`✅ JSON文件加载成功！包含 ${loadedData.sections ? loadedData.sections.length : 0} 个章节\n\n📁 文件已自动保存至 @read/${saveResult.fileName}`);
+                        } else {
+                            alert(`⚠️ JSON文件加载成功，但保存到服务器失败：${saveResult.error}\n\n请确保服务器正在运行（执行 node server.js）`);
+                        }
+                    } catch (error) {
+                        alert('❌ JSON文件格式错误，请检查文件内容');
+                        loadedData = null;
+                        document.getElementById('generateBtn').disabled = true;
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // 生成页面
+        function generatePage() {
+            if (!loadedData) {
+                alert('❌ 请先选择JSON数据文件');
+                return;
+            }
+
+            let template = getTemplateHTML();
+            const dataString = JSON.stringify(loadedData, null, 2);
+            
+            template = template.replace(
+                'const quizData = {QUIZ_DATA_PLACEHOLDER};',
+                `const quizData = ${dataString};`
+            );
+
+            const title = loadedData.title || '阅读理解题';
+            template = template.replace(
+                '<title>阅读理解题</title>',
+                `<title>${title}</title>`
+            );
+
+            generatedHTML = template;
+
+            const previewFrame = document.getElementById('previewFrame');
+            const blob = new Blob([generatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            previewFrame.src = url;
+
+            document.getElementById('downloadBtn').disabled = false;
+            document.getElementById('preview').style.display = 'block';
+        }
+
+        // 下载HTML文件
+        function downloadHTML() {
+            if (!generatedHTML) {
+                alert('❌ 请先生成页面');
+                return;
+            }
+
+            const title = loadedData.title || '阅读理解题';
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateStr = `${year}${month}${day}`;
+            const cleanTitle = title.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_');
+            const randomStr = generateRandomString(6);
+            const fileName = `${cleanTitle}_${dateStr}_${randomStr}.html`;
+
+            const blob = new Blob([generatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert(`✅ HTML文件已下载！\n文件名：${fileName}\n\n请将该文件保存至 @read 目录。`);
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('load', function() {
+            checkServerStatus();
+            loadServerFiles();
+            setInterval(checkServerStatus, 5000);
+        });
+    </script>
+</body>
+</html>

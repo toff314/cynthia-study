@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寒假每日任务日程表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header-info {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header-info h1 {
+            color: #667eea;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .week-display {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .input-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-field label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-field input {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 200px;
+            transition: border-color 0.3s;
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-print {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+        }
+
+        .btn-save {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33,150,243,0.3);
+        }
+
+        .btn-clear {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244,67,54,0.3);
+        }
+
+        .btn-clear-week {
+            background: #FF9800;
+            color: white;
+        }
+
+        .btn-clear-week:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,152,0,0.3);
+        }
+
+        .save-message {
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: fadeInOut 2s ease-in-out;
+            display: none;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .schedule-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .schedule-header h2 {
+            color: #667eea;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .schedule-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .week-info {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .week-info button {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .week-info button:hover {
+            background: #5568d3;
+        }
+
+        .week-info span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            min-width: 250px;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .day-column {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 4px;
+            min-height: 500px;
+        }
+
+        .day-column.today {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffecb3 100%);
+            border: 2px solid #ffc107;
+        }
+
+        .day-header {
+            text-align: center;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        .day-header .day-name {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 12px;
+        }
+
+        .day-header .day-date {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .task-item {
+            background: white;
+            padding: 6px;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .task-name {
+            font-size: 10px;
+            color: #333;
+            margin-bottom: 5px;
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+            word-wrap: break-word;
+        }
+
+        .task-name-input {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        .task-name-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+        }
+
+        .star {
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
+            color: #ddd;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.filled {
+            color: #ffc107;
+        }
+
+        .star.filled::before {
+            content: "★";
+        }
+
+        .star.empty::before {
+            content: "☆";
+        }
+
+        .add-task-btn {
+            width: 100%;
+            padding: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            margin-top: 6px;
+            transition: background 0.3s;
+        }
+
+        .add-task-btn:hover {
+            background: #45a049;
+        }
+
+        .delete-task-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 9px;
+            padding: 1px 4px;
+            margin-left: 3px;
+        }
+
+        .delete-task-btn:hover {
+            background: #da190b;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        /* 打印样式 */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 10mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .week-display {
+                display: none;
+            }
+
+            .input-field label,
+            .input-field input {
+                display: none;
+            }
+
+            .header-info h1 {
+                display: none;
+            }
+
+            .header-info {
+                padding: 10px;
+                margin-bottom: 10px;
+                box-shadow: none;
+                border: none;
+            }
+
+            .controls,
+            .add-task-btn,
+            .delete-task-btn,
+            .week-info button,
+            .week-info span,
+            .save-message {
+                display: none !important;
+            }
+
+            .schedule-card {
+                box-shadow: none;
+                border: 2px solid #000;
+                border-radius: 0;
+                padding: 15px;
+                page-break-inside: avoid;
+            }
+
+            .schedule-header {
+                padding-bottom: 10px;
+                border-bottom: 2px solid #000;
+                margin-bottom: 10px;
+            }
+
+            .schedule-header h2 {
+                color: #000;
+                font-size: 22px;
+            }
+
+            .schedule-header p {
+                color: #000;
+                font-size: 16px;
+                margin-top: 5px;
+            }
+
+            .day-column {
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+
+            .day-column.today {
+                border: 2px solid #000;
+            }
+
+            .task-item {
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+
+            .star {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .task-name-input {
+                border: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .days-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .day-column {
+                min-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部信息 -->
+        <div class="header-info">
+            <h1>🎄 寒假每日任务日程表 🎄</h1>
+            <div class="week-display" id="winterWeekText"></div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>姓名：</label>
+                    <input type="text" id="studentName" placeholder="请输入姓名">
+                </div>
+                <div class="input-field">
+                    <label>班级：</label>
+                    <input type="text" id="studentClass" placeholder="请输入班级">
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button class="btn btn-save" onclick="saveSchedule()">💾 保存日程表</button>
+            <button class="btn btn-clear-week" onclick="clearCurrentWeek()">🗑️ 清空本周</button>
+            <button class="btn btn-print" onclick="printSchedule()">🖨️ 打印日程表</button>
+            <button class="btn btn-clear" onclick="clearAll()">🔄 还原所有</button>
+        </div>
+
+        <!-- 保存提示 -->
+        <div class="save-message" id="saveMessage">✅ 保存成功！</div>
+
+        <!-- 日程表 -->
+        <div class="schedule-card">
+            <div class="schedule-header">
+                <h2>每周任务安排</h2>
+                <p id="studentInfo"> - </p>
+            </div>
+
+            <!-- 周次选择 -->
+            <div class="week-info">
+                <button onclick="changeWeek(-1)">◀ 上一周</button>
+                <span id="weekRange"></span>
+                <button onclick="changeWeek(1)">下一周 ▶</button>
+            </div>
+
+            <!-- 每日任务 -->
+            <div class="days-container" id="daysContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // 数据存储
+        let studentName = '';
+        let studentClass = '';
+        let currentWeekOffset = 0;
+        let weekData = {};
+
+        // 默认任务模板
+        const defaultTasks = [
+            { name: '晨读', stars: 0 },
+            { name: '完成作业', stars: 0 },
+            { name: '体育锻炼', stars: 0 },
+            { name: '阅读', stars: 0 },
+            { name: '家务', stars: 0 }
+        ];
+
+        // 格式化日期
+        function formatDate(date) {
+            return `${date.getMonth() + 1}月${date.getDate()}日`;
+        }
+
+        function formatDateKey(date) {
+            return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        }
+
+        function isToday(date) {
+            const today = new Date();
+            return date.getDate() === today.getDate() &&
+                   date.getMonth() === today.getMonth() &&
+                   date.getFullYear() === today.getFullYear();
+        }
+
+        // 获取当前周的日期范围
+        function getCurrentWeek() {
+            const today = new Date();
+            const monday = new Date(today);
+            const dayOfWeek = today.getDay();
+            const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+            monday.setDate(today.getDate() - diff + (currentWeekOffset * 7));
+
+            const days = [];
+            const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(monday);
+                date.setDate(monday.getDate() + i);
+                const dateKey = formatDateKey(date);
+                const savedTasks = weekData[dateKey]?.tasks;
+                if (savedTasks && savedTasks.length > 0) {
+                    days.push({
+                        date: date,
+                        dayName: dayNames[i],
+                        dateKey: dateKey,
+                        tasks: JSON.parse(JSON.stringify(savedTasks))
+                    });
+                } else if (savedTasks && savedTasks.length === 0) {
+                    days.push({
+                        date: date,
+                        dayName: dayNames[i],
+                        dateKey: dateKey,
+                        tasks: []
+                    });
+                } else {
+                    days.push({
+                        date: date,
+                        dayName: dayNames[i],
+                        dateKey: dateKey,
+                        tasks: JSON.parse(JSON.stringify(defaultTasks))
+                    });
+                }
+            }
+
+            return days;
+        }
+
+        // 渲染日程表
+        function renderSchedule() {
+            const currentWeek = getCurrentWeek();
+            
+            // 更新寒假周次
+            const startDate = currentWeek[0].date;
+            const winterStart = new Date(startDate.getFullYear(), 0, 21);
+            const diffTime = startDate.getTime() - winterStart.getTime();
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const weekNum = Math.floor(diffDays / 7) + 1;
+            document.getElementById('winterWeekText').textContent = `寒假第${weekNum}周`;
+
+            // 更新日期范围
+            const startDateStr = formatDate(currentWeek[0].date);
+            const endDateStr = formatDate(currentWeek[6].date);
+            document.getElementById('weekRange').textContent = `${startDateStr} 至 ${endDateStr}`;
+
+            // 更新学生信息
+            document.getElementById('studentInfo').textContent = `${studentName} - ${studentClass}`;
+
+            // 渲染每日任务
+            const daysContainer = document.getElementById('daysContainer');
+            daysContainer.innerHTML = '';
+
+            currentWeek.forEach((day, dayIndex) => {
+                const dayColumn = document.createElement('div');
+                dayColumn.className = 'day-column';
+                if (isToday(day.date)) {
+                    dayColumn.classList.add('today');
+                }
+
+                dayColumn.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-name">${day.dayName}</div>
+                        <div class="day-date">${formatDate(day.date)}</div>
+                    </div>
+                    <div class="tasks-list" id="tasks-${dayIndex}"></div>
+                    <button class="add-task-btn" onclick="addTask(${dayIndex})">+ 添加任务</button>
+                `;
+
+                daysContainer.appendChild(dayColumn);
+
+                const tasksList = document.getElementById(`tasks-${dayIndex}`);
+                day.tasks.forEach((task, taskIndex) => {
+                    renderTask(tasksList, task, dayIndex, taskIndex, day.dateKey);
+                });
+            });
+        }
+
+        // 渲染单个任务
+        function renderTask(container, task, dayIndex, taskIndex, dateKey) {
+            const taskItem = document.createElement('div');
+            taskItem.className = 'task-item';
+            taskItem.innerHTML = `
+                <div class="task-header">
+                    <div class="task-name">
+                        <input 
+                            type="text" 
+                            class="task-name-input" 
+                            value="${task.name || ''}"
+                            oninput="updateTaskName(${dayIndex}, ${taskIndex}, this.value)"
+                            placeholder=""
+                        >
+                    </div>
+                    <button class="delete-task-btn" onclick="deleteTask(${dayIndex}, ${taskIndex})">×</button>
+                </div>
+                <div class="stars">
+                    ${renderStars(task.stars, dayIndex, taskIndex)}
+                </div>
+            `;
+            container.appendChild(taskItem);
+        }
+
+        // 渲染星星
+        function renderStars(stars, dayIndex, taskIndex) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                const className = i <= stars ? 'star filled' : 'star empty';
+                html += `<span class="${className}" onclick="toggleStar(${dayIndex}, ${taskIndex}, ${i})"></span>`;
+            }
+            return html;
+        }
+
+        // 添加任务
+        function addTask(dayIndex) {
+            const currentWeek = getCurrentWeek();
+            const day = currentWeek[dayIndex];
+            if (!weekData[day.dateKey]) {
+                weekData[day.dateKey] = { tasks: JSON.parse(JSON.stringify(defaultTasks)) };
+            }
+            weekData[day.dateKey].tasks.push({ name: '', stars: 0 });
+            saveData();
+            renderSchedule();
+        }
+
+        // 更新任务名称
+        function updateTaskName(dayIndex, taskIndex, newName) {
+            const currentWeek = getCurrentWeek();
+            const day = currentWeek[dayIndex];
+            if (!weekData[day.dateKey]) {
+                weekData[day.dateKey] = { tasks: JSON.parse(JSON.stringify(defaultTasks)) };
+            }
+            weekData[day.dateKey].tasks[taskIndex].name = newName;
+            saveData();
+        }
+
+        // 删除任务
+        function deleteTask(dayIndex, taskIndex) {
+            const currentWeek = getCurrentWeek();
+            const day = currentWeek[dayIndex];
+            if (weekData[day.dateKey]) {
+                weekData[day.dateKey].tasks.splice(taskIndex, 1);
+                saveData();
+                renderSchedule();
+            }
+        }
+
+        // 切换星星
+        function toggleStar(dayIndex, taskIndex, starCount) {
+            const currentWeek = getCurrentWeek();
+            const day = currentWeek[dayIndex];
+            if (!weekData[day.dateKey]) {
+                weekData[day.dateKey] = { tasks: JSON.parse(JSON.stringify(defaultTasks)) };
+            }
+            weekData[day.dateKey].tasks[taskIndex].stars = starCount;
+            saveData();
+            renderSchedule();
+        }
+
+        // 保存数据
+        function saveData() {
+            const data = {
+                studentName: studentName,
+                studentClass: studentClass,
+                weekOffset: currentWeekOffset,
+                weekData: weekData
+            };
+            localStorage.setItem('winterSchedule', JSON.stringify(data));
+        }
+
+        // 保存日程表
+        function saveSchedule() {
+            const currentWeek = getCurrentWeek();
+            currentWeek.forEach(day => {
+                weekData[day.dateKey] = {
+                    tasks: day.tasks.map(task => ({
+                        name: task.name || '',
+                        stars: task.stars || 0
+                    }))
+                };
+            });
+            
+            const data = {
+                studentName: studentName,
+                studentClass: studentClass,
+                weekOffset: currentWeekOffset,
+                weekData: weekData
+            };
+            localStorage.setItem('winterSchedule', JSON.stringify(data));
+            
+            // 显示保存成功消息
+            const saveMessage = document.getElementById('saveMessage');
+            saveMessage.style.display = 'block';
+            setTimeout(() => {
+                saveMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        // 打印日程表
+        function printSchedule() {
+            saveSchedule();
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        // 清空本周
+        function clearCurrentWeek() {
+            const currentWeek = getCurrentWeek();
+            const startDateStr = formatDate(currentWeek[0].date);
+            const endDateStr = formatDate(currentWeek[6].date);
+            
+            if (confirm(`确定要清空本周（${startDateStr} 至 ${endDateStr}）的所有任务吗？此操作不可恢复！`)) {
+                currentWeek.forEach(day => {
+                    weekData[day.dateKey] = { tasks: [] };
+                });
+                saveData();
+                renderSchedule();
+            }
+        }
+
+        // 清空所有
+        function clearAll() {
+            if (confirm('确定要清空所有数据吗？此操作不可恢复！')) {
+                localStorage.removeItem('winterSchedule');
+                studentName = '';
+                studentClass = '';
+                currentWeekOffset = 0;
+                weekData = {};
+                document.getElementById('studentName').value = '';
+                document.getElementById('studentClass').value = '';
+                renderSchedule();
+            }
+        }
+
+        // 切换周
+        function changeWeek(offset) {
+            currentWeekOffset += offset;
+            saveData();
+            renderSchedule();
+        }
+
+        // 加载数据
+        function loadData() {
+            const saved = localStorage.getItem('winterSchedule');
+            if (saved) {
+                const data = JSON.parse(saved);
+                studentName = data.studentName || '';
+                studentClass = data.studentClass || '';
+                currentWeekOffset = data.weekOffset || 0;
+                weekData = data.weekData || {};
+                document.getElementById('studentName').value = studentName;
+                document.getElementById('studentClass').value = studentClass;
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 姓名和班级输入框监听
+            document.getElementById('studentName').addEventListener('input', function(e) {
+                studentName = e.target.value;
+                saveData();
+                renderSchedule();
+            });
+
+            document.getElementById('studentClass').addEventListener('input', function(e) {
+                studentClass = e.target.value;
+                saveData();
+                renderSchedule();
+            });
+
+            loadData();
+            renderSchedule();
+        });
+    </script>
+</body>
+</html>
