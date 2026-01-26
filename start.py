@@ -31,7 +31,7 @@ def start_backend():
     if not venv_dir.exists():
         print("❌ 后端虚拟环境不存在，请先运行:")
         print("   cd backend")
-        print("   python -m venv venv")
+        print("   python3 -m venv venv")
         print("   pip install -r requirements.txt")
         return
     
@@ -39,7 +39,7 @@ def start_backend():
     if os.name == "nt":  # Windows
         python_exe = venv_dir / "Scripts" / "python.exe"
     else:  # Linux/Mac
-        python_exe = venv_dir / "bin" / "python"
+        python_exe = venv_dir / "bin" / "python3"
     
     # 切换到后端目录
     os.chdir(BACKEND_DIR)
