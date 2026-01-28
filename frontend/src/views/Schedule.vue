@@ -599,6 +599,10 @@ const handleLoadOrCreateQuiet = async () => {
 
 /* 打印样式 */
 @media print {
+  .quick-nav {
+    display: none;
+  }
+  
   .header-info {
     display: none;
   }

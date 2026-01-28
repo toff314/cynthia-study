@@ -29,11 +29,14 @@
 ```bash
 cd backend
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
 source venv/bin/activate
 pip install -r requirements.txt
+```
+
+如果需要使用便捷启动脚本（`start.py` 或 `start_background.py`），还需要安装 `psutil`：
+
+```bash
+pip install psutil
 ```
 
 ### 2. 启动后端服务
@@ -142,24 +145,22 @@ cd backend
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
-### 3. 统一启动脚本
+### 3. 快速启动脚本
 
-创建 `start.sh` (Linux/Mac) 或 `start.bat` (Windows):
+项目提供了两个便捷的启动脚本：
 
-**Linux/Mac:**
+**`start.py`** - 一键启动脚本（前台运行）:
 ```bash
-#!/bin/bash
-cd backend
-source venv/bin/activate
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+python start.py
 ```
 
-**Windows:**
-```batch
-@echo off
-cd backend
-venv\Scripts\activate
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+**`start_background.py`** - 后台启动脚本（支持启动/停止/重启）:
+```bash
+python start_background.py start    # 启动所有服务
+python start_background.py stop     # 停止所有服务
+python start_background.py restart  # 重启所有服务
+python start_background.py status   # 查看服务状态
+python start_background.py logs     # 查看所有日志
 ```
 
 ## 数据迁移

@@ -184,7 +184,7 @@ const saveToServer = async (data: QuizData) => {
   try {
     const res = await quizApi.saveQuiz(data) as unknown as ApiResponse<{ path: string }>
     if (res.success) {
-      alert(`✅ 文件加载成功！包含 ${data.sections.length} 个章节\n\n📁`)
+      alert(`✅ 文件加载成功！包含 ${data.sections.length} 个章节\n\n`)
     }
   } catch (error) {
     console.error('文件加载失败:', error)
