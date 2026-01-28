@@ -91,26 +91,38 @@ def start_backend():
         "--port", "8000"
     ]
     
-    # 使用 nohup 创建独立进程
-    creation_flags = 0
-    
     with open(BACKEND_LOG, 'w', encoding='utf-8') as log_file:
         process = subprocess.Popen(
             cmd,
             cwd=BACKEND_DIR,
             stdout=log_file,
             stderr=subprocess.STDOUT,
-            creationflags=creation_flags
+            start_new_session=True  # Unix: 创建新会话
         )
+    
+    # 等待进程启动 fork 完成
+    time.sleep(2)
+    
+    # 尝试获取 uvicorn 子进程（python -m uvicorn 可能会 fork）
+    try:
+        parent_process = psutil.Process(process.pid)
+        children = parent_process.children(recursive=True)
+        # 如果有子进程，使用最新的子进程 PID
+        if children:
+            actual_pid = children[-1].pid
+        else:
+            actual_pid = process.pid
+    except (psutil.NoSuchProcess, psutil.AccessDenied):
+        actual_pid = process.pid
     
     # 保存 PID
     with open(BACKEND_PID_FILE, 'w') as f:
-        f.write(str(process.pid))
+        f.write(str(actual_pid))
     
     # 等待并检查是否启动成功
-    time.sleep(2)
+    time.sleep(1)
     if is_backend_running():
-        print(f"✅ 后端服务启动成功 (PID: {process.pid})")
+        print(f"✅ 后端服务启动成功 (PID: {actual_pid})")
         print(f"📝 后端日志: {BACKEND_LOG}")
         print(f"🌐 后端地址: http://localhost:8000")
         print(f"📚 API 文档: http://localhost:8000/docs")
