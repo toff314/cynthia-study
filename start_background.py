@@ -140,30 +140,26 @@ def start_frontend():
     ensure_log_dir()
     
     # 启动前端服务（后台运行）
-    # Unix: 使用 nohup
-    cmd = f"nohup npm run dev > {FRONTEND_LOG} 2>&1 &"
-    process = subprocess.Popen(
-        cmd,
-        cwd=FRONTEND_DIR,
-        shell=True
-    )
-    # 等待一段时间让 npm fork 出子进程
-    time.sleep(2)
-    # 尝试获取 node 进程
-    try:
-        process = list(psutil.process_iter(['pid', 'name', 'cmdline']))[0]
-    except:
-        process = None
+    # 使用 nohup 启动，不使用 shell=True 以便获取正确的子进程 PID
+    cmd = ["npm", "run", "dev"]
+    
+    with open(FRONTEND_LOG, 'w', encoding='utf-8') as log_file:
+        process = subprocess.Popen(
+            cmd,
+            cwd=FRONTEND_DIR,
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+            start_new_session=True  # Unix: 创建新会话，使进程成为会话领导者
+        )
     
     # 保存 PID
-    if process:
-        with open(FRONTEND_PID_FILE, 'w') as f:
-            f.write(str(process.pid))
+    with open(FRONTEND_PID_FILE, 'w') as f:
+        f.write(str(process.pid))
     
     # 等待并检查是否启动成功
     time.sleep(3)
     if is_frontend_running():
-        print(f"✅ 前端服务启动成功 (PID: {process.pid if process else 'N/A'})")
+        print(f"✅ 前端服务启动成功 (PID: {process.pid})")
         print(f"📝 前端日志: {FRONTEND_LOG}")
         print(f"🌐 前端地址: http://localhost:5173")
         return True
