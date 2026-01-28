@@ -32,6 +32,7 @@ def init_db():
     """初始化数据库表 - 强制重建以支持表结构变更"""
     from app.models.schedule import Schedule, Task
     from app.models.achievement import Achievement, UserAchievement
+    from app.models.file_metadata import FileMetadata
     from app.models.statistics import Statistics
     from app.services.achievement_service import AchievementService
     from sqlalchemy import inspect

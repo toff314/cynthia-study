@@ -1,5 +1,6 @@
 <template>
   <div class="achievement-wall">
+    <QuickNav />
     <div class="container">
       <div class="header">
         <h1>🏆 寒假成就墙 🏆</h1>
@@ -20,7 +21,10 @@
 
       <!-- 全榜排名 -->
       <div v-if="currentTab === 'all'" class="content-section">
-        <h2>👑 所有学生成就排名</h2>
+        <div class="section-header">
+          <h2>👑 所有学生成就排名</h2>
+          <button class="btn-refresh" @click="refreshRankings">🔄 刷新</button>
+        </div>
         <div v-if="loading" class="loading">加载中...</div>
         <div v-else-if="rankings.length === 0" class="empty-state">暂无数据</div>
         <div v-else class="ranking-list">
@@ -52,7 +56,10 @@
 
       <!-- 我的成就 -->
       <div v-if="currentTab === 'personal'" class="content-section">
-        <h2>⭐ 我的成就</h2>
+        <div class="section-header">
+          <h2>⭐ 我的成就</h2>
+          <button v-if="scheduleId !== null" class="btn-reset" @click="resetAchievements">🗑️ 重置</button>
+        </div>
         <div v-if="loading" class="loading">加载中...</div>
         <div v-else-if="scheduleId === null" class="empty-state">
           请先在日程表页面创建日程数据
@@ -179,7 +186,7 @@
                  class="small-achievement">
               <span class="icon">{{ ach.icon }}</span>
               <span class="name">{{ ach.name }}</span>
-              <span class="level">{{ getLevelLabel(ach.level) }}</span>
+              <span class="level-icon">{{ getLevelIcon(ach.level) }}</span>
             </div>
           </div>
         </div>
@@ -191,14 +198,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { achievementApi } from '@/api/achievement'
-import { scheduleApi } from '@/api/schedule'
-import type { Achievement, StudentRanking, TimelineEvent, StatisticsData, ApiResponse } from '@/types'
+import { useScheduleStore } from '@/stores/schedule'
+import type { Achievement, StudentRanking, TimelineEvent, StatisticsData } from '@/types'
+import QuickNav from '@/components/QuickNav.vue'
 
 const currentTab = ref<'all' | 'personal' | 'timeline'>('all')
 const loading = ref(false)
 const rankings = ref<StudentRanking[]>([])
 const achievements = ref<Achievement[]>([])
 const timeline = ref<TimelineEvent[]>([])
+const scheduleStore = useScheduleStore()
 const statistics = ref<StatisticsData>({
   reading_days: 0,
   exercise_duration: 0,
@@ -293,16 +302,10 @@ const checkAndUnlock = async () => {
   }
 }
 
-const loadScheduleId = async () => {
-  try {
-    // 获取所有学生，找到第一个学生作为当前用户
-    const studentsRes = await scheduleApi.getAllStudents() as unknown as ApiResponse<{ students: Array<{ id: number; student_name: string; student_class: string }> }>
-    if (studentsRes.success && studentsRes.data && studentsRes.data.students.length > 0) {
-      scheduleId.value = studentsRes.data.students[0].id
-    }
-  } catch (error) {
-    console.error('加载日程ID失败:', error)
-  }
+const loadScheduleId = () => {
+  // 从 cookie 读取 scheduleId
+  scheduleId.value = scheduleStore.getScheduleIdFromCookie()
+  console.log('从 cookie 读取 scheduleId:', scheduleId.value)
 }
 
 const showStudentDetail = (student: StudentRanking) => {
@@ -327,6 +330,15 @@ const getLevelLabel = (level?: string) => {
     gold: '金牌'
   }
   return labels[level || ''] || ''
+}
+
+const getLevelIcon = (level?: string) => {
+  const icons: Record<string, string> = {
+    bronze: '🥉',
+    silver: '🥈',
+    gold: '🥇'
+  }
+  return icons[level || ''] || ''
 }
 
 // 翻译匹配类型
@@ -370,6 +382,40 @@ const initializeAchievements = async () => {
   } catch (error) {
     console.error('初始化成就失败:', error)
   }
+}
+
+// 重置成就
+const resetAchievements = async () => {
+  if (scheduleId.value === null) return
+  
+  const confirmed = confirm('⚠️ 确定要重置所有成就吗？此操作将删除所有已解锁的成就记录，不可恢复！')
+  if (!confirmed) return
+  
+  try {
+    const res = await achievementApi.resetAchievements(scheduleId.value)
+    if (res.success) {
+      alert(`✅ ${res.message}`)
+      // 重新加载成就和数据
+      await loadPersonalAchievements()
+      await loadStatistics()
+      await loadTimeline()
+    }
+  } catch (error) {
+    console.error('重置成就失败:', error)
+    alert('重置失败，请稍后重试')
+  }
+}
+
+// 刷新排名
+const refreshRankings = async () => {
+  await loadAllRankings()
+}
+
+// 刷新成就
+const refreshAchievements = async () => {
+  await loadPersonalAchievements()
+  await loadStatistics()
+  await loadTimeline()
 }
 
 onMounted(async () => {
@@ -464,12 +510,58 @@ onMounted(async () => {
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
-h2 {
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
   color: #333;
   font-size: 28px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 3px solid #667eea;
+  margin: 0;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-refresh {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-refresh:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+.btn-reset {
+  padding: 10px 20px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-reset:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(244, 67, 54, 0.4);
 }
 
 h3 {
@@ -890,25 +982,8 @@ h3 {
   color: #333;
 }
 
-.small-achievement .level {
-  font-size: 12px;
-  padding: 3px 8px;
-  border-radius: 10px;
-}
-
-.small-achievement .level[data-level="bronze"] {
-  background: #CD7F32;
-  color: white;
-}
-
-.small-achievement .level[data-level="silver"] {
-  background: #C0C0C0;
-  color: white;
-}
-
-.small-achievement .level[data-level="gold"] {
-  background: #FFD700;
-  color: white;
+.small-achievement .level-icon {
+  font-size: 20px;
 }
 
 @media screen and (max-width: 768px) {

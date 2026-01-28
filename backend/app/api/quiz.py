@@ -3,10 +3,12 @@
 import json
 from pathlib import Path
 from typing import Dict, Any
-from fastapi import APIRouter, HTTPException, Query
+from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
+from app.database import get_db
 from app.schemas.quiz import FilesResponse, FileContentResponse, QuizSaveResponse
 from app.services.quiz_service import QuizService
 
@@ -21,9 +23,9 @@ class ApiResponse(BaseModel):
 
 
 @router.get("/quiz/files", response_model=ApiResponse)
-async def get_quiz_files():
+async def get_quiz_files(db: Session = Depends(get_db)):
     """获取JSON文件列表"""
-    service = QuizService()
+    service = QuizService(db)
     files = service.get_files()
     
     return ApiResponse(
@@ -33,9 +35,9 @@ async def get_quiz_files():
 
 
 @router.get("/quiz/file")
-async def get_quiz_file(name: str = Query(..., description="文件名")):
+async def get_quiz_file(name: str = Query(..., description="文件名"), db: Session = Depends(get_db)):
     """获取单个文件内容"""
-    service = QuizService()
+    service = QuizService(db)
     content = service.get_file_content(name)
     
     if content is None:
@@ -48,11 +50,22 @@ async def get_quiz_file(name: str = Query(..., description="文件名")):
 
 
 @router.post("/quiz/save")
-async def save_quiz(data: Dict[str, Any]):
+async def save_quiz(data: Dict[str, Any], db: Session = Depends(get_db)):
     """保存JSON文件"""
     try:
-        service = QuizService()
+        service = QuizService(db)
         result = service.save_quiz(data)
+        
+        # 检查是否跳过保存
+        if result.get("skipped"):
+            return ApiResponse(
+                success=True,
+                data={
+                    "filename": result["filename"],
+                    "path": f"@quizzes/{result['filename']}"
+                },
+                message=result.get("message", "文件已存在")
+            )
         
         return ApiResponse(
             success=True,
@@ -71,12 +84,23 @@ async def save_quiz(data: Dict[str, Any]):
 
 
 @router.post("/quiz/upload")
-async def upload_quiz(content: str = Query(..., description="JSON内容")):
+async def upload_quiz(content: str = Query(..., description="JSON内容"), db: Session = Depends(get_db)):
     """上传JSON文件内容"""
     try:
-        service = QuizService()
+        service = QuizService(db)
         title = ""
         result = service.upload_file(content, title)
+        
+        # 检查是否跳过保存
+        if result.get("skipped"):
+            return ApiResponse(
+                success=True,
+                data={
+                    "filename": result["filename"],
+                    "path": f"@data/quizzes/{result['filename']}"
+                },
+                message=result.get("message", "文件已存在")
+            )
         
         return ApiResponse(
             success=True,
@@ -98,16 +122,13 @@ async def upload_quiz(content: str = Query(..., description="JSON内容")):
 
 
 @router.get("/quiz/download")
-async def download_quiz_file(name: str = Query(..., description="文件名")):
+async def download_quiz_file(name: str = Query(..., description="文件名"), db: Session = Depends(get_db)):
     """下载JSON文件"""
     from app.config import settings
     from fastapi.responses import Response
     
-    service = QuizService()
+    service = QuizService(db)
     content = service.get_file_content(name)
-    # 打印日志
-    print(f"Attempting to download file: {name}")
-    print(f"File content found: {content is not None}")
     
     if content is None:
         # 尝试 glob 匹配文件（处理编码问题）

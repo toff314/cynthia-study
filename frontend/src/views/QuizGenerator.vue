@@ -1,5 +1,6 @@
 <template>
   <div class="quiz-generator">
+    <QuickNav />
     <div class="container">
       <div class="header">
         <h1>📚 阅读题生成器</h1>
@@ -111,6 +112,7 @@
 import { ref, onMounted } from 'vue'
 import { quizApi, type FileInfo } from '@/api/quiz'
 import type { QuizData, ApiResponse } from '@/types'
+import QuickNav from '@/components/QuickNav.vue'
 
 const uploadMethod = ref<'server' | 'local'>('server')
 const files = ref<FileInfo[]>([])
@@ -182,10 +184,10 @@ const saveToServer = async (data: QuizData) => {
   try {
     const res = await quizApi.saveQuiz(data) as unknown as ApiResponse<{ path: string }>
     if (res.success) {
-      alert(`✅ 文件加载成功！包含 ${data.sections.length} 个章节\n\n📁 文件已保存`)
+      alert(`✅ 文件加载成功！包含 ${data.sections.length} 个章节\n\n📁`)
     }
   } catch (error) {
-    console.error('保存文件失败:', error)
+    console.error('文件加载失败:', error)
   }
 }
 

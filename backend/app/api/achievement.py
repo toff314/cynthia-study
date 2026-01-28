@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.services.achievement_service import AchievementService
-from app.services.schedule_service import ScheduleService
+from app.models.achievement import UserAchievement
 
 router = APIRouter(prefix="/achievements", tags=["achievements"])
 
@@ -57,11 +57,15 @@ def check_and_unlock_achievements(schedule_id: int, db: Session = Depends(get_db
     newly_unlocked = service.check_and_unlock_achievements(schedule_id)
     unlocked_count = len(newly_unlocked)
     
+    # 转换为 Pydantic 模型
+    from app.schemas.achievement import AchievementResponse
+    newly_unlocked_data = [AchievementResponse.model_validate(a) for a in newly_unlocked]
+    
     result = {
         "success": True,
         "data": {
             "newly_unlocked_count": unlocked_count,
-            "newly_unlocked": [AchievementService.db_model_validate(a) for a in newly_unlocked]
+            "newly_unlocked": newly_unlocked_data
         },
         "message": f"解锁了 {unlocked_count} 个新成就！" if newly_unlocked else "没有新成就解锁"
     }
@@ -74,3 +78,19 @@ def initialize_default_achievements(db: Session = Depends(get_db)):
     service = AchievementService(db)
     service.initialize_default_achievements()
     return {"success": True, "message": "成就数据已初始化"}
+
+
+@router.delete("/reset/{schedule_id}")
+def reset_student_achievements(schedule_id: int, db: Session = Depends(get_db)):
+    """重置学生的成就记录（删除所有已解锁的成就）"""
+    # 删除该学生的所有成就记录
+    deleted_count = db.query(UserAchievement).filter(
+        UserAchievement.schedule_id == schedule_id
+    ).delete()
+    db.commit()
+    
+    return {
+        "success": True,
+        "message": f"已删除 {deleted_count} 条成就记录",
+        "data": {"deleted_count": deleted_count}
+    }

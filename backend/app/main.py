@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
+import uvicorn
 
 from app.config import settings
 from app.api import health, schedule, quiz, achievement, statistics
@@ -56,8 +57,6 @@ async def root():
 
 
 if __name__ == "__main__":
-    import uvicorn
-    
     uvicorn.run(
         "app.main:app",
         host=settings.HOST,

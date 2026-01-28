@@ -1,10 +1,13 @@
 """阅读题业务逻辑服务"""
 
+import hashlib
 import json
 from pathlib import Path
 from typing import List, Optional, Dict, Any
+from sqlalchemy.orm import Session
 
 from app.config import settings
+from app.models.file_metadata import FileMetadata
 from app.schemas.quiz import FileInfo, QuizData
 from app.utils.file_helper import (
     generate_filename,
@@ -18,7 +21,8 @@ from app.utils.file_helper import (
 class QuizService:
     """阅读题服务类"""
     
-    def __init__(self):
+    def __init__(self, db: Session):
+        self.db = db
         self.quiz_dir = settings.QUIZ_DIR
     
     def get_files(self) -> List[FileInfo]:
@@ -56,6 +60,26 @@ class QuizService:
     def save_quiz(self, data: Dict[str, Any]) -> Dict[str, str]:
         """保存阅读题数据到文件"""
         title = data.get("title", "quiz")
+        
+        # 转换为JSON字符串以计算MD5
+        json_str = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+        md5_hash = self._calculate_md5(json_str)
+        
+        # 检查是否已存在相同MD5的文件
+        existing = self.db.query(FileMetadata).filter(
+            FileMetadata.md5_hash == md5_hash,
+            FileMetadata.file_type == "quiz"
+        ).first()
+        
+        if existing:
+            # 返回已存在的文件名，提示用户文件已存在
+            return {
+                "filename": existing.filename,
+                "path": str(self.quiz_dir / existing.filename),
+                "message": f"文件已存在（MD5相同）: {existing.filename}",
+                "skipped": True
+            }
+        
         filename = generate_filename(title)
         
         # 验证生成的文件名是否安全
@@ -71,12 +95,26 @@ class QuizService:
         except ValueError:
             raise ValueError("文件路径不在允许的目录内")
         
+        # 保存文件
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         
+        # 记录文件元数据
+        file_size = file_path.stat().st_size
+        metadata = FileMetadata(
+            filename=filename,
+            md5_hash=md5_hash,
+            file_type="quiz",
+            file_size=file_size
+        )
+        self.db.add(metadata)
+        self.db.commit()
+        
         return {
             "filename": filename,
-            "path": str(file_path)
+            "path": str(file_path),
+            "message": "文件保存成功",
+            "skipped": False
         }
     
     def upload_file(self, content: str, title: str) -> Dict[str, str]:
@@ -100,6 +138,12 @@ class QuizService:
         self._validate_json_safety(data)
         
         return self.save_quiz(data)
+    
+    def _calculate_md5(self, content: str) -> str:
+        """计算内容的MD5哈希值"""
+        md5 = hashlib.md5()
+        md5.update(content.encode('utf-8'))
+        return md5.hexdigest()
     
     def _validate_json_safety(self, data: Dict[str, Any], depth: int = 0) -> None:
         """

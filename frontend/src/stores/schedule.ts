@@ -55,8 +55,8 @@ export const useScheduleStore = defineStore('schedule', () => {
       if (res.success && res.data.id) {
         // 找到了现有日程表，加载它
         scheduleData.value = res.data
-        // 保存到 cookie
-        saveStudentInfoToCookie(studentName, studentClass)
+        // 保存到 cookie（包含 scheduleId）
+        saveStudentInfoToCookie(studentName, studentClass, res.data.id)
         return { success: true, message: '拉取成功' }
       } else {
         // 没有找到，创建新的空日程表
@@ -67,9 +67,9 @@ export const useScheduleStore = defineStore('schedule', () => {
           weekly_tasks: {}
         }
         // 保存新日程表到数据库
-        await scheduleApi.saveSchedule(scheduleData.value)
-        // 保存到 cookie
-        saveStudentInfoToCookie(studentName, studentClass)
+        const saveRes = await scheduleApi.saveSchedule(scheduleData.value) as ApiResponse<{ id: number }>
+        // 保存到 cookie（包含 scheduleId）
+        saveStudentInfoToCookie(studentName, studentClass, saveRes.data?.id)
         return { success: true, message: '创建成功' }
       }
     } catch (error) {
@@ -81,9 +81,12 @@ export const useScheduleStore = defineStore('schedule', () => {
   }
 
   // 保存学生信息到 cookie
-  const saveStudentInfoToCookie = (studentName: string, studentClass: string) => {
+  const saveStudentInfoToCookie = (studentName: string, studentClass: string, scheduleId?: number) => {
     Cookies.set('student_name', studentName, { expires: 30 })
     Cookies.set('student_class', studentClass, { expires: 30 })
+    if (scheduleId) {
+      Cookies.set('schedule_id', scheduleId.toString(), { expires: 30 })
+    }
   }
 
   // 从 cookie 读取学生信息
@@ -93,10 +96,17 @@ export const useScheduleStore = defineStore('schedule', () => {
     return { studentName, studentClass }
   }
 
+  // 从 cookie 读取 scheduleId
+  const getScheduleIdFromCookie = (): number | null => {
+    const scheduleId = Cookies.get('schedule_id')
+    return scheduleId ? parseInt(scheduleId, 10) : null
+  }
+
   // 清除 cookie 中的学生信息
   const clearStudentInfoCookie = () => {
     Cookies.remove('student_name')
     Cookies.remove('student_class')
+    Cookies.remove('schedule_id')
   }
 
   // 清理空任务
@@ -198,6 +208,7 @@ export const useScheduleStore = defineStore('schedule', () => {
     clearAll,
     saveStudentInfoToCookie,
     loadStudentInfoFromCookie,
+    getScheduleIdFromCookie,
     clearStudentInfoCookie
   }
 })

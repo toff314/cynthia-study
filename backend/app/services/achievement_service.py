@@ -223,6 +223,26 @@ class AchievementService:
     
     def _check_achievement_unlock(self, achievement: Achievement, tasks: List[Task], schedule_id: int) -> bool:
         """检查单个成就是否解锁"""
+        # 处理星星类成就（基于总星星数）
+        if achievement.code in ["stars_50", "stars_100"]:
+            total_stars = sum(task.stars for task in tasks)
+            
+            # 解析解锁条件中的星星数量
+            condition = achievement.unlock_condition or "获得 1 颗星"
+            import re
+            numbers = re.findall(r'\d+', str(condition))
+            required_stars = int(numbers[0]) if numbers else 1
+            
+            return total_stars >= required_stars
+        
+        # 处理连续天数类成就
+        if achievement.code in ["streak_10", "streak_20", "streak_30"]:
+            return self._check_streak(achievement, tasks)
+        
+        # 处理书虫类成就（连续7天阅读超过30分钟）
+        if achievement.code == "bookworm":
+            return self._check_bookworm(tasks)
+        
         # 处理逻辑类型的成就
         if achievement.task_match_type == "logic":
             if achievement.code == "lucky_day":
@@ -233,6 +253,7 @@ class AchievementService:
                 return self._check_all_rounder(schedule_id)
             return False
         
+        # 普通类成就：要求任务名称匹配且已完成（stars > 0）
         count = self._count_matching_tasks(achievement, tasks)
         
         # 解析解锁条件，如 "完成10次"
@@ -246,10 +267,13 @@ class AchievementService:
         return count >= required_count
     
     def _count_matching_tasks(self, achievement: Achievement, tasks: List[Task]) -> int:
-        """计算匹配要求的任务数量"""
+        """计算匹配要求且已完成（stars > 0）的任务数量"""
         # logic 类型的成就返回1（表示解锁一次）
         if achievement.task_match_type == "logic":
             return 1
+        # any 类型的成就基于总任务数（已排除特殊处理）
+        if achievement.task_match_type == "any":
+            return sum(1 for task in tasks if task.stars > 0)
         
         if not achievement.task_keywords:
             return 0
@@ -259,6 +283,10 @@ class AchievementService:
         
         count = 0
         for task in tasks:
+            # 只统计已完成的任务（stars > 0）
+            if task.stars <= 0:
+                continue
+            
             task_name = task.task_name.lower()
             
             if achievement.task_match_type == "exact":
@@ -267,13 +295,94 @@ class AchievementService:
             elif achievement.task_match_type == "contains":
                 if any(kw in task_name for kw in keywords):
                     count += 1
-            elif achievement.task_match_type == "any":
-                count += 1
             elif achievement.task_match_type == "prefix":
                 if any(task_name.startswith(kw) for kw in keywords):
                     count += 1
         
         return count
+    
+    def _check_streak(self, achievement: Achievement, tasks: List[Task]) -> bool:
+        """检查连续完成任务天数"""
+        # 按日期排序，只考虑已完成的任务
+        completed_tasks = [task for task in tasks if task.stars > 0]
+        if not completed_tasks:
+            return False
+        
+        # 提取所有有完成任务的日期
+        date_keys = sorted(set(task.date_key for task in completed_tasks))
+        
+        # 计算连续天数
+        streak = 0
+        max_streak = 0
+        prev_date = None
+        
+        for date_str in date_keys:
+            if prev_date:
+                # 计算日期差
+                from datetime import datetime, timedelta
+                curr_date = datetime.strptime(date_str, "%Y-%m-%d")
+                prev = datetime.strptime(prev_date, "%Y-%m-%d")
+                delta = curr_date - prev
+                
+                if delta.days == 1:  # 连续
+                    streak += 1
+                    max_streak = max(max_streak, streak + 1)
+                elif delta.days > 1:  # 中断
+                    streak = 0
+                    max_streak = max(max_streak, 1)
+            else:
+                max_streak = 1
+            
+            prev_date = date_str
+        
+        # 解析需要的天数
+        import re
+        condition = achievement.unlock_condition or "完成 1 次"
+        numbers = re.findall(r'\d+', str(condition))
+        required_days = int(numbers[0]) if numbers else 1
+        
+        return max_streak >= required_days
+    
+    def _check_bookworm(self, tasks: List[Task]) -> bool:
+        """检查连续7天阅读任务"""
+        # 只考虑阅读任务且已完成的（stars > 0）
+        reading_tasks = [
+            task for task in tasks 
+            if task.stars > 0 and 
+            ('阅读' in task.task_name.lower() or '读书' in task.task_name.lower())
+        ]
+        
+        if not reading_tasks:
+            return False
+        
+        # 提取所有阅读任务的日期
+        date_keys = sorted(set(task.date_key for task in reading_tasks))
+        
+        # 计算连续阅读天数
+        streak = 0
+        max_streak = 0
+        prev_date = None
+        
+        for date_str in date_keys:
+            if prev_date:
+                # 计算日期差
+                from datetime import datetime
+                curr_date = datetime.strptime(date_str, "%Y-%m-%d")
+                prev = datetime.strptime(prev_date, "%Y-%m-%d")
+                delta = curr_date - prev
+                
+                if delta.days == 1:  # 连续
+                    streak += 1
+                    max_streak = max(max_streak, streak + 1)
+                elif delta.days > 1:  # 中断
+                    streak = 0
+                    max_streak = max(max_streak, 1)
+            else:
+                max_streak = 1
+            
+            prev_date = date_str
+        
+        return max_streak >= 7
     
     def _get_schedule_id_from_tasks(self, tasks: List[Task]) -> int:
         """从任务列表中获取日程表ID"""
@@ -295,10 +404,9 @@ class AchievementService:
         
         # 检查是否有任何一天所有任务都完成了（stars > 0）
         for date_key, date_tasks in tasks_by_date.items():
+            # 要求该天的所有任务的 stars 都 > 0
             if all(task.stars > 0 for task in date_tasks):
-                # 至少有3个任务才算一天的任务
-                if len(date_tasks) >= 3:
-                    return True
+                return True
         
         return False
     
@@ -316,7 +424,9 @@ class AchievementService:
         
         # 检查第一天的所有任务是否都完成了
         first_day_tasks = [task for task in tasks if task.date_key == first_day]
-        if len(first_day_tasks) >= 3 and all(task.stars > 0 for task in first_day_tasks):
+        
+        # 要求第一天的所有任务的 stars 都 > 0
+        if all(task.stars > 0 for task in first_day_tasks):
             return True
         
         return False
@@ -640,7 +750,7 @@ class AchievementService:
                 description="收集10幅自己的绘画作品并展示",
                 icon="🖼️",
                 level="gold",
-                task_match_type="any",
+                task_match_type="contains",
                 task_keywords="画画,绘画,美术作品",
                 unlock_condition="完成 10 次"
             ),
@@ -762,4 +872,3 @@ class AchievementService:
             self.db.add(achievement)
         
         self.db.commit()
-        print(f"✅ 已初始化 {len(achievements)} 个成就")

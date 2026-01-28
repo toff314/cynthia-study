@@ -50,5 +50,11 @@ export const achievementApi = {
   initializeAchievements: async (): Promise<ApiResponse<void>> => {
     const response = await axios.post(`${API_BASE}/initialize`)
     return response.data
+  },
+
+  // 重置学生的成就记录
+  resetAchievements: async (scheduleId: number): Promise<ApiResponse<{ deleted_count: number }>> => {
+    const response = await axios.delete(`${API_BASE}/reset/${scheduleId}`)
+    return response.data
   }
 }

@@ -25,13 +25,23 @@
 - In achievement displays, unlocked badges should be listed before locked ones, and use CSS animations.
 - AchievementWall顶部需统计隐藏成就数量，未解锁时隐藏相关区域，解锁后展开，且每个成就需展示翻译为中文的匹配规则。
 - Home.vue页面底部统计模块需包含总访问人数、总访问次数、日程数、阅读题数及成就数，且置于页面最后。
+- AchievementWall页面需添加重置成就的按钮。
+- AchievementWall.vue页面需添加一个刷新按钮。
+- AchievementWall成就详情弹窗中的金银铜文字需替换为图标显示。
+- 除主页面外，其他页面右侧需添加快捷导航，用于快速访问任务、阅读和成就页面。
 
 # Data Persistence
 - Schedule页面需将班级和姓名通过Cookie持久化，并在下次加载时从Cookie自动恢复数据。
+- AchievementWall页面的scheduleId需直接从Cookie读取，并在拉取或保存时将scheduleId与学生姓名、班级同步存入Cookie。
 
 # Business Logic
 - 成就计算逻辑根据 task_name 包含“阅读”或“读书”关键词进行匹配。
 - AchievementWall.vue页面应移除学生选择相关逻辑，仅展示当前用户自己的成就。
+- 修复_check_lucky_day逻辑bug（需严格确保当天所有任务stars>0时才返回true），并添加调试日志至_check_lucky_day和_check_first_blood。
+- Ensure 'all_rounder' logic correctly enforces stars > 0 dependency indirectly via normal achievements.
 
 # Security
 - 文件上传必须限制大小不超过1M，并实施防止文件注入攻击的安全验证措施。
+
+# Database
+- 文件保存策略需利用MD5哈希进行本地去重检查，若已存在则跳过保存，并建议引入文件表存储MD5记录。

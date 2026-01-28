@@ -1,5 +1,6 @@
 <template>
   <div class="schedule">
+    <QuickNav />
     <div class="container">
       <div class="header-info">
         <h1>🎄 寒假每日任务日程表 🎄</h1>
@@ -97,6 +98,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useScheduleStore } from '@/stores/schedule'
+import QuickNav from '@/components/QuickNav.vue'
 
 const store = useScheduleStore()
 const saveMessage = ref('')

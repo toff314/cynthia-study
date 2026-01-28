@@ -18,6 +18,7 @@ export interface WeeklyTasks {
 }
 
 export interface ScheduleData {
+  id?: number
   student_name: string
   student_class?: string
   week_offset: number
