@@ -6,4 +6,5 @@ frontend/node_modules
 backend/data/cynthia.db
 node_modules
 *.pyc
-
+logs
+*.pid
