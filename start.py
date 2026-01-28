@@ -10,12 +10,6 @@ import time
 import os
 from pathlib import Path
 
-# Windows控制台编码设置为UTF-8以支持emoji显示
-if os.name == 'nt':
-    import codecs
-    sys.stdout.reconfigure(encoding='utf-8')
-    sys.stderr.reconfigure(encoding='utf-8')
-
 # 项目根目录
 ROOT_DIR = Path(__file__).parent
 BACKEND_DIR = ROOT_DIR / "backend"
@@ -36,10 +30,7 @@ def start_backend():
         return
     
     # 直接使用虚拟环境的 Python 启动 uvicorn
-    if os.name == "nt":  # Windows
-        python_exe = venv_dir / "Scripts" / "python.exe"
-    else:  # Linux/Mac
-        python_exe = venv_dir / "bin" / "python3"
+    python_exe = venv_dir / "bin" / "python3"
     
     # 切换到后端目录
     os.chdir(BACKEND_DIR)
@@ -71,7 +62,7 @@ def install_dependencies():
     # 安装后端依赖
     print("\n--- 安装后端依赖 ---")
     venv_dir = BACKEND_DIR / "venv"
-    python_cmd = str(venv_dir / "Scripts" / "python") if os.name == "nt" else str(venv_dir / "bin" / "python")
+    python_cmd = str(venv_dir / "bin" / "python")
     
     if not venv_dir.exists():
         print("创建虚拟环境...")
