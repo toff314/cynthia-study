@@ -22,6 +22,18 @@
           <p>你可以将下载的JSON文件内容发送给AI工具（如ChatGPT、DeepSeek等），使用以下提示词生成新的阅读题：</p>
           <div class="prompt-text">你是一个文学专家，请根据以下示例JSON结构生成 [书籍名称] 的阅读题目，包含4个选择题和1个思考题，并包含答案解析，请只返回JSON数据便于我保存。</div>
           <p class="prompt-note">💡 提示：将 "[书籍名称]" 替换为你想要生成阅读题的书名</p>
+          
+          <div class="ai-links">
+            <p class="ai-links-title">🔗 推荐AI工具：</p>
+            <div class="ai-links-list">
+              <a href="https://chat.deepseek.com/" target="_blank" class="ai-link">💬 DeepSeek</a>
+              <a href="https://www.doubao.com/chat/" target="_blank" class="ai-link">☕ 豆包</a>
+              <a href="https://tongyi.aliyun.com/" target="_blank" class="ai-link">🌊 通义千问</a>
+              <a href="https://kimi.moonshot.cn/" target="_blank" class="ai-link">🌙 Kimi</a>
+              <a href="https://yiyan.baidu.com/" target="_blank" class="ai-link">🧠 文心一言</a>
+              <a href="https://chatglm.cn/" target="_blank" class="ai-link">🤖 智谱清言</a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -408,6 +420,43 @@ onMounted(() => {
   margin-bottom: 0 !important;
   color: rgba(255,255,255,0.9);
   font-style: italic;
+}
+
+.ai-links {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.ai-links-title {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.ai-links-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.ai-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.ai-link:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
 }
 
 .upload-method {

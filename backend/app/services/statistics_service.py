@@ -96,25 +96,29 @@ class StatisticsService:
             print(f"记录访问失败: {e}")
             return False
 
-    def get_client_ip(self, headers: dict) -> str:
+    def get_client_ip(self, request) -> str:
         """
-        从请求头中获取客户端真实IP地址
+        从请求对象中获取客户端真实IP地址
         
         参数:
-            headers: 请求头字典
+            request: FastAPI Request 对象
             
         返回:
             str: 客户端IP地址
         """
-        # 优先从代理头获取真实IP
-        ip = headers.get("X-Forwarded-For")
+        # 优先使用直接连接的客户端IP
+        if request.client and request.client.host:
+            return request.client.host
+
+        # 检查代理头（支持反向代理场景）
+        ip = request.headers.get("X-Forwarded-For")
         if ip:
             # X-Forwarded-For 可能包含多个IP，取第一个
             return ip.split(",")[0].strip()
 
-        ip = headers.get("X-Real-IP")
+        ip = request.headers.get("X-Real-IP")
         if ip:
             return ip.strip()
 
-        # 如果没有代理头，返回默认值
+        # 如果都获取不到，返回默认值
         return "unknown"

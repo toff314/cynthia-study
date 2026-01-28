@@ -20,7 +20,6 @@
 - 保存日程表操作完成后需显示保存成功的提示消息。
 - 打印Schedule页面时需排除寒假日程、默认任务配置、操作按钮及快捷导航，仅输出每周任务安排内容以避免遮挡。
 - 打印测验生成器时仅输出预览内容，且参考答案的分页符必须位于“参考答案”文字之前。
-- QuizGenerator组件需允许重复选择JSON文件并支持生成页面预览。
 - Home.vue 页面底部需添加创作者 Cynthia 的署名及家长联系方式的版权文案。
 - In achievement displays, unlocked badges should be listed before locked ones, and use CSS animations.
 - AchievementWall顶部需统计隐藏成就数量，未解锁时隐藏相关区域，解锁后展开，且每个成就需展示翻译为中文的匹配规则。
@@ -29,6 +28,7 @@
 - AchievementWall.vue页面需添加一个刷新按钮。
 - AchievementWall成就详情弹窗中的金银铜文字需替换为图标显示。
 - 除主页面外，其他页面右侧需添加快捷导航，用于快速访问任务、阅读和成就页面。
+- QuizGenerator组件需允许重复选择JSON文件、预览生成页面，并在界面提示附近添加书名替换说明及国内大模型（如DeepSeek、豆包）的常用URL。
 
 # Data Persistence
 - Schedule页面需将班级和姓名通过Cookie持久化，并在下次加载时从Cookie自动恢复数据。

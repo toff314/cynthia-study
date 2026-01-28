@@ -38,13 +38,13 @@ async def record_visit(request: Request, db: Session = Depends(get_db)):
     """
     记录页面访问
     
-    从请求头中获取IP地址和用户代理信息，记录用户访问
+    从请求对象中获取IP地址和用户代理信息，记录用户访问
     """
     try:
         statistics_service = StatisticsService(db)
         
-        # 从请求头获取IP地址
-        ip_address = statistics_service.get_client_ip(dict(request.headers))
+        # 从请求对象获取IP地址
+        ip_address = statistics_service.get_client_ip(request)
         user_agent = request.headers.get("User-Agent", "")
         
         # 构建记录请求
