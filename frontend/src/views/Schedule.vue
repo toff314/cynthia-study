@@ -237,7 +237,20 @@ const saveSchedule = async () => {
   }
 }
 
+// 检测是否为微信手机浏览器
+const isWeChatMobile = (): boolean => {
+  const ua = navigator.userAgent.toLowerCase()
+  return /micromessenger/i.test(ua) && /mobile/i.test(ua)
+}
+
 const printSchedule = () => {
+  // 检测是否为微信手机浏览器
+  if (isWeChatMobile()) {
+    loadMessage.value = '💡 为保证打印效果，请使用电脑浏览器访问本页面进行导出'
+    setTimeout(() => { loadMessage.value = '' }, 5000)
+    return
+  }
+  
   saveSchedule().then(() => {
     setTimeout(() => window.print(), 100)
   })
