@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
     path: '/achievement',
     name: 'Achievement',
     component: () => import('@/views/AchievementWall.vue')
+  },
+  {
+    path: '/games',
+    name: 'Games',
+    component: () => import('@/views/PuzzleGames.vue')
   }
 ]
 

@@ -28,6 +28,13 @@
           <span class="tool-arrow">→</span>
         </router-link>
 
+        <router-link to="/games" class="tool-card games">
+          <span class="tool-icon">🎮</span>
+          <h2>益智游戏中心</h2>
+          <p>远离电子产品保护视力<br/>益智游戏纸上学习乐无穷</p>
+          <span class="tool-arrow">→</span>
+        </router-link>
+
         <div class="tool-card statistics" v-loading="loading">
           <span class="tool-icon">📊</span>
           <h2>使用统计</h2>
@@ -206,6 +213,10 @@ onMounted(async () => {
 
 .tool-card.achievement:hover {
   border: 3px solid #FF9800;
+}
+
+.tool-card.games:hover {
+  border: 3px solid #E91E63;
 }
 
 .tool-card.statistics:hover {

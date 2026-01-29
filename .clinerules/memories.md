@@ -1,47 +1,13 @@
-# Data Management
-- read.html页面需支持从项目`@read`目录和本地上传JSON文件的两种方式。
-- 用户偏好使用逗号分隔的输入框配合导入按钮来配置和还原默认任务列表，而非硬编码数组。
-- Achievement badge systems, including names and unlock criteria, must be configured via external JSON data.
-- get_schedule的学生姓名和班级参数必须设为必填，create_or_update_schedule调用时需从data传入，严禁简化为取第一条。
+# Educational Game Domain
+- 开发儿童益智游戏平台，游戏需支持按年龄分级（低中高龄）和打印离线使用，旨在减少屏幕时间保护视力。
 
-# Development Tools
-- Prefer backend stack using FastAPI and SQLite, serving static files via backend services for simplicity.
-- For data visualization features, prefer using ECharts or Chart.js libraries.
-
-# Environment Configuration
-- 英文Windows环境下需解决ASGI默认latin-1编码与UTF-8文件保存的冲突及IDE乱码问题。
-- 前端开发服务器需将host配置为0.0.0.0以暴露IP供局域网访问。
-
-# Default_Data
-- The default task list includes 晨读, 完成作业, 体育锻炼, 阅读, and 家务.
+# Game Mechanics
+- 成语及英语单词接龙游戏需遵循字/字母重叠规则，采用横竖交叉的网格布局，非纯横向排列，且支持自定义生成数量。
+- 亲子类游戏需生成至少6张游戏卡牌，且卡牌题目选项必须限定为单选形式。
+- 记忆类游戏需生成6张卡片，且每张卡片的内容应包含6个具体物品。
 
 # UI/UX
-- 用户偏好默认任务配置的整体div布局应位于三个操作按钮整体的上方。
-- 保存日程表操作完成后需显示保存成功的提示消息。
-- 打印Schedule页面时需排除寒假日程、默认任务配置、操作按钮及快捷导航，仅输出每周任务安排内容以避免遮挡。
-- 打印测验生成器时仅输出预览内容，且参考答案的分页符必须位于“参考答案”文字之前。
-- Home.vue 页面底部需添加创作者 Cynthia 的署名及家长联系方式的版权文案。
-- In achievement displays, unlocked badges should be listed before locked ones, and use CSS animations.
-- AchievementWall顶部需统计隐藏成就数量，未解锁时隐藏相关区域，解锁后展开，且每个成就需展示翻译为中文的匹配规则。
-- Home.vue页面底部统计模块需包含总访问人数、总访问次数、日程数、阅读题数及成就数，且置于页面最后。
-- AchievementWall页面需添加重置成就的按钮。
-- AchievementWall.vue页面需添加一个刷新按钮。
-- AchievementWall成就详情弹窗中的金银铜文字需替换为图标显示。
-- 除主页面外，其他页面右侧需添加快捷导航，用于快速访问任务、阅读和成就页面。
-- QuizGenerator组件需允许重复选择JSON文件、预览生成页面，并在界面提示附近添加书名替换说明及国内大模型（如DeepSeek、豆包）的常用URL。
-
-# Data Persistence
-- Schedule页面需将班级和姓名通过Cookie持久化，并在下次加载时从Cookie自动恢复数据。
-- AchievementWall页面的scheduleId需直接从Cookie读取，并在拉取或保存时将scheduleId与学生姓名、班级同步存入Cookie。
-
-# Business Logic
-- 成就计算逻辑根据 task_name 包含“阅读”或“读书”关键词进行匹配。
-- AchievementWall.vue页面应移除学生选择相关逻辑，仅展示当前用户自己的成就。
-- 修复_check_lucky_day逻辑bug（需严格确保当天所有任务stars>0时才返回true），并添加调试日志至_check_lucky_day和_check_first_blood。
-- Ensure 'all_rounder' logic correctly enforces stars > 0 dependency indirectly via normal achievements.
-
-# Security
-- 文件上传必须限制大小不超过1M，并实施防止文件注入攻击的安全验证措施。
-
-# Database
-- 文件保存策略需利用MD5哈希进行本地去重检查，若已存在则跳过保存，并建议引入文件表存储MD5记录。
+- 成语接龙和单词接龙游戏中，隐藏的字或字母必须显示边框以保持布局结构可见。
+- 游戏棋盘格子的高宽比应严格设置为1.414:1，以适配打印需求。
+- Puzzle游戏中4宫格和6宫格的小格子应填满大格子宽度，不留空白间距。
+- 围棋棋盘整体尺寸应调整，其宽度需至少占据页面宽度的三分之二以上。
