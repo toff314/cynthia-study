@@ -46,13 +46,15 @@
         <div
           v-for="game in currentGames"
           :key="game.type"
-          class="game-card"
+          :class="['game-card', { selected: selectedAgeGame === game.type }]"
+          @click="selectAgeGame(game.type)"
         >
           <span class="game-icon">{{ game.icon }}</span>
           <h3>{{ game.name }}</h3>
-          <button class="play-btn" @click="generateGame(game, selectedCategory)">
+          <button class="play-btn" @click.stop="generateGame(game, selectedCategory)">
             生成游戏
           </button>
+          <span class="check-mark" v-if="selectedAgeGame === game.type">✓</span>
         </div>
       </div>
     </div>
@@ -106,9 +108,25 @@
           <span class="check-mark" v-if="selectedParentGame === game.type">✓</span>
         </div>
       </div>
-      <button class="generate-btn" @click="handleGenerateParentChild">
-        生成游戏卡片 (至少6张)
-      </button>
+      
+      <!-- 生成数量选择 -->
+      <div class="count-selector">
+        <span class="count-label">生成数量：</span>
+        <button
+          v-for="count in [6, 8, 10]"
+          :key="count"
+          :class="['count-btn', { active: selectedParentCardCount === count }]"
+          @click="selectedParentCardCount = count"
+        >
+          {{ count }}张
+        </button>
+      </div>
+      
+      <div class="generate-btn-wrapper">
+        <button class="play-btn" @click="handleGenerateParentChild">
+          生成游戏卡片
+        </button>
+      </div>
     </div>
 
     <!-- 游戏预览区域 -->
@@ -254,7 +272,7 @@
       </div>
 
       <!-- 24点 -->
-      <div v-if="gameContent.numbers" class="point24-game">
+      <div v-if="gameContent.equations" class="point24-game">
         <!-- 统一的游戏规则 -->
         <div class="common-rules">
           <h3>📋 游戏规则</h3>
@@ -262,18 +280,17 @@
             <p><strong>目标：</strong>将四个数字通过运算得到结果 24</p>
             <p><strong>运算符：</strong>使用加（+）、减（-）、乘（×）、除（÷）和括号</p>
             <p><strong>规则：</strong>每个数字必须使用一次且只能使用一次</p>
-            <p v-if="gameContent.solutions && gameContent.solutions.length > 0"><strong>提示示例：</strong>{{ gameContent.solutions[0] }}</p>
           </div>
         </div>
         
-        <div class="numbers-container">
-          <div class="numbers-display">
-            <div v-for="(num, index) in gameContent.numbers" :key="index" class="number-card">
-              {{ num }}
+        <div class="equations-list">
+          <div v-for="(eq, index) in gameContent.equations" :key="index" class="equation-row">
+            <div class="equation-numbers">
+              <span v-for="(num, numIndex) in eq.numbers" :key="numIndex" class="eq-number">
+                {{ num }}
+              </span>
             </div>
-          </div>
-          <div class="target-display">
-            = {{ gameContent.target }}
+            <div class="equation-target">= {{ eq.target }}</div>
           </div>
         </div>
       </div>
@@ -318,8 +335,10 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).black?.slice(0, 50)" 
                   :key="'black-'+index"
-                  class="go-piece black"
-                ></div>
+                  class="go-piece-outer black-outer"
+                >
+                  <div class="go-piece-inner black-inner"></div>
+                </div>
               </div>
               <p v-if="(gameContent.pieces as any).black?.length > 50" class="more-pieces">... 还有 {{ (gameContent.pieces as any).black.length - 50 }} 个黑棋</p>
             </div>
@@ -329,8 +348,10 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).white?.slice(0, 50)" 
                   :key="'white-'+index"
-                  class="go-piece white"
-                ></div>
+                  class="go-piece-outer white-outer"
+                >
+                  <div class="go-piece-inner white-inner"></div>
+                </div>
               </div>
               <p v-if="(gameContent.pieces as any).white?.length > 50" class="more-pieces">... 还有 {{ (gameContent.pieces as any).white.length - 50 }} 个白棋</p>
             </div>
@@ -344,10 +365,12 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).white" 
                   :key="'white-'+index"
-                  class="chess-model-piece white"
+                  class="chess-model-piece-outer white-outer"
                   :title="piece.name"
                 >
-                  {{ piece.symbol }}
+                  <div class="chess-model-piece-inner white-inner">
+                    {{ piece.symbol }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -357,10 +380,12 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).black" 
                   :key="'black-'+index"
-                  class="chess-model-piece black"
+                  class="chess-model-piece-outer black-outer"
                   :title="piece.name"
                 >
-                  {{ piece.symbol }}
+                  <div class="chess-model-piece-inner black-inner">
+                    {{ piece.symbol }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -374,10 +399,12 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).red" 
                   :key="'red-'+index"
-                  class="xiangqi-piece red"
+                  class="xiangqi-piece-outer red-outer"
                   :title="piece.name"
                 >
-                  {{ piece.symbol }}
+                  <div class="xiangqi-piece-inner red-inner">
+                    {{ piece.symbol }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -387,10 +414,12 @@
                 <div 
                   v-for="(piece, index) in (gameContent.pieces as any).black" 
                   :key="'black-'+index"
-                  class="xiangqi-piece black"
+                  class="xiangqi-piece-outer black-outer"
                   :title="piece.name"
                 >
-                  {{ piece.symbol }}
+                  <div class="xiangqi-piece-inner black-inner">
+                    {{ piece.symbol }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -406,20 +435,15 @@
           <div class="rules-content">{{ (gameContent as any).common_instructions }}</div>
         </div>
         
-        <!-- 卡片信息 -->
-        <div class="cards-info">
-          <p>共生成 {{ gameContent.total }} 张游戏卡片</p>
-        </div>
-        
         <!-- 卡片网格 -->
         <div class="cards-grid">
           <div 
             v-for="(entry, index) in Object.entries((gameContent as any).cards)" 
             :key="index" 
-            class="game-card-item"
+            :class="['game-card-item', { 'blank-card': !entry[1] }]"
           >
             <div class="card-number">{{ index + 1 }}</div>
-            <div class="card-content">{{ entry[1] }}</div>
+            <div class="card-content">{{ entry[1] || '(空白卡片，可自己填写)' }}</div>
           </div>
         </div>
       </div>
@@ -453,6 +477,8 @@ const selectedCategory = ref<string>('')
 const selectedCount = ref<number>(10)
 const selectedChessSize = ref<number>(19)
 const selectedParentGame = ref<string>('simon_says')
+const selectedParentCardCount = ref<number>(6)
+const selectedAgeGame = ref<string>('')
 const currentGames = ref<GameType[]>([])
 const chessTypes = ref<GameType[]>([])
 const parentChildTypes = ref<GameType[]>([])
@@ -492,6 +518,11 @@ const selectCategory = async (categoryId: string) => {
 // 选择亲子游戏（单选模式）
 const selectParentGame = (gameType: string) => {
   selectedParentGame.value = gameType
+}
+
+// 选择年龄段游戏
+const selectAgeGame = (gameType: string) => {
+  selectedAgeGame.value = gameType
 }
 
 // 获取年龄段标题
@@ -539,7 +570,7 @@ const generateGame = async (game: GameType, ageGroup: string) => {
         break
 
       case 'point24':
-        const point24Result = await generatePoint24Api({ difficulty: 'normal' })
+        const point24Result = await generatePoint24Api({ difficulty: 'normal', count: 6 })
         gameContent.value = point24Result.data
         gameTitle.value = '➕ 24点'
         break
@@ -649,7 +680,8 @@ const handleGenerateParentChild = async () => {
   try {
     gameContent.value = null
     const result = await generateParentChildGamesApi({
-      game_types: [selectedParentGame.value]  // 单选：传递单个游戏类型的数组
+      game_types: [selectedParentGame.value],
+      card_count: selectedParentCardCount.value
     })
     gameContent.value = result.data
     gameTitle.value = '👨‍👩‍👧‍👦 亲子游戏卡片'
@@ -713,7 +745,7 @@ const getPuzzleCellClass = (rowIndex: number, cellIndex: number, cell: string) =
     const blankKey = `${rowIndex},${cellIndex}`
     const blankPositions: string[] = []
     
-    gameContent.valforEach((item: any) => {
+    gameContent.value.chain.forEach((item: any) => {
       const word = item.word
       const blanks = item.blanks || []
       const row = item.row ?? 0

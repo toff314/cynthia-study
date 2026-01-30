@@ -165,6 +165,7 @@ export async function generateChess(params: {
  */
 export async function generateParentChildGames(params: {
   game_types: string[]
+  card_count?: number
 }) {
   return request.post('/api/games/generate/parent-child', params)
 }

@@ -31,9 +31,10 @@ class SudokuContent(GameContent):
 
 class Point24Content(GameContent):
     """24点游戏内容"""
-    numbers: List[int] = Field(description="四个数字")
+    equations: List[Dict[str, Any]] = Field(default_factory=list, description="等式列表：[{numbers: [1,2,3,4], target: 24}, ...]")
     target: int = Field(default=24, description="目标数字")
-    solutions: List[str] = Field(default_factory=list, description="可能的解答示例")
+    numbers: Optional[List[int]] = Field(default=None, description="四个数字（兼容旧版）")
+    solutions: Optional[List[str]] = Field(default=None, description="可能的解答示例（兼容旧版）")
 
 
 class ChessContent(GameContent):
@@ -121,6 +122,7 @@ class SudokuGenerateRequest(BaseModel):
 class Point24GenerateRequest(BaseModel):
     """24点生成请求"""
     difficulty: str = Field(default="normal", description="难度")
+    count: int = Field(default=1, description="生成等式的数量")
 
 
 class ChessGenerateRequest(BaseModel):

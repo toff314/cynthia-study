@@ -161,8 +161,12 @@ async def generate_point24(request: Point24GenerateRequest):
     
     参数:
         difficulty: 难度 (easy/normal/hard)
+        count: 生成等式的数量 (默认1)
     """
-    content = GameService.generate_point24(difficulty=request.difficulty)
+    content = GameService.generate_point24(
+        difficulty=request.difficulty,
+        count=request.count
+    )
     
     return {
         "success": True,

@@ -7,6 +7,8 @@
 - 记忆类游戏需生成6张卡片，且每张卡片的内容应包含6个具体物品。
 - Sudoku games: 4-grid generates 3 horizontal items, 6-grid generates 2 horizontal items; for printing, grids must fit one page (smaller), hide bottom text, and pagination for reference answers.
 - 棋类游戏需支持生成全套棋子，围棋数量按棋盘大小计算（半黑半白），国际象棋及象棋需包含所有标准棋子。
+- Blank card generation should be treated as a distinct game category (similar to Memory King), not a simple option.
+- 24点游戏需生成6个等式，采用每列一个等式的布局，且数字与答案需在同一行显示。
 
 # UI/UX
 - 成语接龙和单词接龙游戏中，隐藏的字或字母必须显示边框以保持布局结构可见。
@@ -22,6 +24,8 @@
 - International chess black pieces should not be pure black; styling must be adjusted (e.g., using dark grey) to ensure internal patterns are visible.
 - 所有棋类游戏棋子的边框需设计为虚线样式，以便于用户打印后进行手工剪裁。
 - 在PuzzleGames.vue中，数字炸弹游戏和反向指令必须使用不同的图标进行区分，避免混淆。
+- Card game styles should be simplified to avoid overly fancy or decorative designs.
+- 亲子类游戏中，生成按钮需白框、选中显示勾选、隐藏统计文字；将生成卡片置于“西蒙说”下方，生成数量控件置于“亲子类游戏”标题下方。
 
 # Code Style
 - 将 frontend/src/views 目录下 Vue 文件内联样式拆分为独立文件以提高代码可维护性。
