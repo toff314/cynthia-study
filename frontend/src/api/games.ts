@@ -41,6 +41,11 @@ export interface SudokuPuzzle {
   index: number
 }
 
+export interface Equation {
+  numbers: number[]
+  target: number
+}
+
 export interface GameState {
   // 字谜网格游戏（共享字段）
   grid?: (string | number)[][]
@@ -60,6 +65,7 @@ export interface GameState {
   numbers?: number[]
   target?: number
   solutions?: string[]
+  equations?: Equation[]
   
   // 棋类游戏
   board_type?: string  // 棋盘类型（如 "go" 围棋）
@@ -146,6 +152,7 @@ export async function generateSudoku(params: {
  */
 export async function generatePoint24(params: {
   difficulty?: string
+  count?: number
 }) {
   return request.post('/api/games/generate/point24', params)
 }

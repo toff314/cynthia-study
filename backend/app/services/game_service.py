@@ -600,7 +600,9 @@ class GameService:
                         elif i > board_size - 4:
                             grid[i][j] = 2
         elif board_type == "xiangqi":
-            pass
+            # 中国象棋棋盘：9列10行
+            grid = [[0 for _ in range(9)] for _ in range(10)]
+            # 楚河在索引4和5之间
         elif board_type == "go":
             star_points = []
             if board_size == 19:
@@ -652,19 +654,20 @@ class GameService:
                 
                 if game_type == "simon_says":
                     actions = game_info["actions"]
-                    for i in range(min(card_count, len(actions))):
-                        cards[f"卡片{i+1}"] = actions[i]
-                
+                    for i in range(card_count):
+                        action = actions[i % len(actions)]
+                        cards[f"卡片{i+1}"] = action
+               
                 elif game_type == "who_is_undercover":
                     word_pairs = game_info["word_pairs"]
-                    for i in range(min(card_count, len(word_pairs))):
-                        pair = word_pairs[i]
+                    for i in range(card_count):
+                        pair = word_pairs[i % len(word_pairs)]
                         cards[f"卡片{i+1}"] = f"词语 A：{pair['a']}\n词语 B：{pair['b']}"
-                
+               
                 elif game_type == "reverse_command":
                     commands = game_info["commands"]
-                    for i in range(min(card_count, len(commands))):
-                        cmd = commands[i]
+                    for i in range(card_count):
+                        cmd = commands[i % len(commands)]
                         # 生成相反指令（不使用反斜杠，使用换行）
                         reverse_map = {
                             "向前": "向后", "向后": "向前",
@@ -680,18 +683,19 @@ class GameService:
                             reverse_cmd = reverse_cmd.replace(k, v)
                         # 使用换行而不是反斜杠
                         cards[f"卡片{i+1}"] = f"指令：{cmd}\n反向：{reverse_cmd}"
-                
+               
                 elif game_type == "number_game":
                     ranges = [(1, 100), (1, 50), (51, 100), (51, 150), (1, 200), (1, 30)]
                     for i in range(card_count):
                         min_num, max_num = ranges[i % len(ranges)]
                         target = random.randint(min_num, max_num)
                         cards[f"卡片{i+1}"] = f"范围：{min_num} - {max_num}\n目标数字：{target}"
-                
+               
                 elif game_type == "gesture_game":
                     suggestions = game_info["suggestions"]
-                    for i in range(min(card_count, len(suggestions))):
-                        cards[f"卡片{i+1}"] = f"起始动作：{suggestions[i]}"
+                    for i in range(card_count):
+                        suggestion = suggestions[i % len(suggestions)]
+                        cards[f"卡片{i+1}"] = f"起始动作：{suggestion}"
                 
                 elif game_type == "memory_game":
                     items_list = ITEMS_LIST
