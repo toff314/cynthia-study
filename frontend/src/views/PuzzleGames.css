@@ -743,8 +743,14 @@
   .section:not(.game-preview),
   .preview-actions,
   .toggle-solution-btn,
+  .toggle-answer-btn,
   .back-link,
-  .chess-info {
+  /* 所有游戏规则在打印时隐藏 */
+  .word-puzzle-game .common-rules,
+  .sudoku-container .common-rules,
+  .point24-game .common-rules,
+  .parent-child-game .common-rules,
+  .chess-game .common-rules {
     display: none !important;
   }
 
@@ -764,9 +770,9 @@
     display: none;
   }
 
-  /* 打印时隐藏"答案在下方"提示文字 */
-  .sudoku-info p span[style*="font-size: 12px"],
-  .sudoku-info p {
+  /* 隐藏答案显示按钮和答案区域（除非已展开） */
+  .answer-hint,
+  .answers-section h4 {
     display: none !important;
   }
 
@@ -882,5 +888,219 @@
   .preview-header {
     flex-direction: column;
     gap: 15px;
+  }
+}
+
+/* 棋子生成样式 */
+.chess-pieces {
+  text-align: center;
+}
+
+.pieces-header {
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+}
+
+.pieces-header h3 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+}
+
+.pieces-info {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.pieces-container {
+  margin-top: 30px;
+}
+
+/* 围棋棋子 */
+.go-pieces {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.piece-group {
+  background: #f9f9f9;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.piece-group h4 {
+  color: #333;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
+.piece-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.go-piece {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: relative;
+  /* 虚线外框 */
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px dashed #999;
+  border-radius: 8px;
+}
+
+.go-piece.black {
+  background: radial-gradient(circle at 30% 30%, #555, #000);
+  border: 2px solid #333;
+}
+
+.go-piece.white {
+  background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+  border: 2px solid #ccc;
+}
+
+.more-pieces {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* 国际象棋棋子 */
+.chess-model-pieces,
+.xiangqi-pieces {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chess-model-piece {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: help;
+  transition: transform 0.2s;
+  /* 虚线外框 */
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px dashed #999;
+}
+
+.chess-model-piece:hover {
+  transform: scale(1.1);
+}
+
+.chess-model-piece.white {
+  background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+  border: 2px solid #ccc;
+}
+
+.chess-model-piece.black {
+  background: linear-gradient(135deg, #555 0%, #222 100%);
+  border: 2px solid #777;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* 中国象棋棋子 */
+.xiangqi-piece {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: help;
+  transition: transform 0.2s;
+  /* 虚线外框 */
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px dashed #999;
+  border-radius: 8px;
+}
+
+.xiangqi-piece:hover {
+  transform: scale(1.1);
+}
+
+.xiangqi-piece.red {
+  background: linear-gradient(135deg, #fff 0%, #ffe0e0 100%);
+  border: 3px solid #d32f2f;
+  color: #d32f2f;
+}
+
+.xiangqi-piece.black {
+  background: linear-gradient(135deg, #333 0%, #111 100%);
+  border: 3px solid #555;
+  color: #fff;
+}
+
+/* 棋类操作按钮 */
+.chess-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.play-btn.secondary {
+  background: linear-gradient(135deg, #78909c 0%, #546e7a 100%);
+}
+
+.play-btn.secondary:hover {
+  box-shadow: 0 4px 15px rgba(120, 144, 156, 0.4);
+}
+
+/* 打印时调整棋子样式 */
+@media print {
+  .piece-grid {
+    gap: 10px !important;
+  }
+  
+  .go-piece {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .chess-model-piece {
+    width: 70px !important;
+    height: 70px !important;
+    font-size: 48px !important;
+  }
+  
+  .xiangqi-piece {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 44px !important;
+  }
+  
+  .more-pieces {
+    font-size: 12px !important;
+  }
+  
+  /* 打印时隐藏棋子表头和"还有xx个棋子"提示 */
+  .pieces-header,
+  .more-pieces {
+    display: none !important;
   }
 }

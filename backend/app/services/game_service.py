@@ -1019,6 +1019,18 @@ class GameService:
         }
 
     @staticmethod
+    def get_parent_child_game_types() -> List[Dict[str, Any]]:
+        """获取亲子类游戏类型"""
+        return [
+            {"type": "simon_says", "name": "西蒙说", "icon": "🗣️"},
+            {"type": "who_is_undercover", "name": "谁是卧底", "icon": "🕵️"},
+            {"type": "reverse_command", "name": "反向指令", "icon": "↔️"},
+            {"type": "number_game", "name": "数字炸弹", "icon": "💣"},
+            {"type": "gesture_game", "name": "动作接龙", "icon": "🤸"},
+            {"type": "memory_game", "name": "记忆大王", "icon": "🧠"}
+        ]
+
+    @staticmethod
     def generate_word_chain(age_group: str, difficulty: str = "normal",
                            chain_length: int = 10, blank_ratio: float = 0.3) -> Dict[str, Any]:
         """生成英语单词接龙字谜游戏"""
@@ -1133,7 +1145,7 @@ class GameService:
                     word = random.choice(remaining_words)
                     used_words.add(word)
                     
-                    # 减小行距从 *2 改为 +1
+                    # 放在新行，减小行距从 *2 改为 +1
                     row = len(words_data) + 1
                     col = random.randint(0, 3)
                     
@@ -1237,17 +1249,17 @@ class GameService:
             
             # 根据chain_length映射到固定的网格大小
             size_mapping = {
-                5: (6, 9),   # 6列 x 9行
-                10: (8, 12),  # 8列 x 12行
-                15: (10, 15),  # 10列 x 15行
-                20: (12, 18)   # 12列 x 18行
+                5: (8, 12),  # 8列 x 12行
+                10: (10, 15),  # 10列 x 15行
+                15: (12, 18),   # 12列 x 18行
+                20: (14, 21)   # 14列 x 21行
             }
             if chain_length in size_mapping:
                 fixed_cols, fixed_rows = size_mapping[chain_length]
             else:
                 # 默认大小（如果chain_length不在映射中）
-                fixed_cols = 8
-                fixed_rows = 12
+                fixed_cols = 10
+                fixed_rows = 15
 
             # 生成固定大小的网格
             grid = [['' for _ in range(fixed_cols)] for _ in range(fixed_rows)]
@@ -1600,6 +1612,7 @@ class GameService:
                 "games": []
             }
 
+
     @staticmethod
     def get_all_game_categories() -> List[Dict[str, Any]]:
         """获取所有游戏分类"""
@@ -1638,9 +1651,11 @@ class GameService:
 
     @staticmethod
     def get_chess_types() -> List[Dict[str, Any]]:
-        """获取棋类游戏类型（仅围棋）"""
+        """获取棋类游戏类型"""
         return [
-            {"type": "go", "name": "围棋", "icon": "⚫", "sizes": [9, 13, 19]}
+            {"type": "go", "name": "围棋", "icon": "⚫", "sizes": [9, 13, 19]},
+            {"type": "chess", "name": "国际象棋", "icon": "♔"},
+            {"type": "xiangqi", "name": "中国象棋", "icon": "♟"}
         ]
 
     @staticmethod
@@ -1671,3 +1686,136 @@ class GameService:
         if age_group:
             query = query.filter(Game.age_group == age_group)
         return query.order_by(Game.created_at.desc()).limit(50).all()
+
+    @staticmethod
+    def generate_chess_pieces(chess_type: str, board_size: int = 19) -> Dict[str, Any]:
+        """生成棋子
+        
+        参数:
+            chess_type: 棋类类型 (go/chess/xiangqi)
+            board_size: 棋盘大小（围棋需要）
+        
+        返回:
+            包含棋子信息的字典
+        """
+        pieces = {}
+        total_count = 0
+        title = ""
+        
+        if chess_type == "go":
+            # 围棋：黑白棋子各半，根据棋盘大小计算
+            total_positions = board_size * board_size
+            half_count = total_positions // 2
+            
+            # 创建黑白棋子列表
+            pieces["black"] = [{"id": i + 1, "type": "black"} for i in range(half_count)]
+            pieces["white"] = [{"id": i + 1, "type": "white"} for i in range(half_count)]
+            
+            total_count = len(pieces["black"]) + len(pieces["white"])
+            title = f"围棋棋子 ({board_size}×{board_size})"
+            
+        elif chess_type == "chess":
+            # 国际象棋：标准棋子配置
+            # 白棋：1王、1后、2车、2象、2马、8兵
+            white_pieces = []
+            # 兵 (Pawn) - 8个
+            for i in range(8):
+                white_pieces.append({"id": i + 1, "type": "pawn", "symbol": "♙", "name": "兵"})
+            # 马 (Knight) - 2个
+            for i in range(2):
+                white_pieces.append({"id": len(white_pieces) + 1, "type": "knight", "symbol": "♘", "name": "马"})
+            # 象 (Bishop) - 2个
+            for i in range(2):
+                white_pieces.append({"id": len(white_pieces) + 1, "type": "bishop", "symbol": "♗", "name": "象"})
+            # 车 (Rook) - 2个
+            for i in range(2):
+                white_pieces.append({"id": len(white_pieces) + 1, "type": "rook", "symbol": "♖", "name": "车"})
+            # 后 (Queen) - 1个
+            white_pieces.append({"id": len(white_pieces) + 1, "type": "queen", "symbol": "♕", "name": "后"})
+            # 王 (King) - 1个
+            white_pieces.append({"id": len(white_pieces) + 1, "type": "king", "symbol": "♔", "name": "王"})
+            
+            # 黑棋：1王、1后、2车、2象、2马、8兵
+            black_pieces = []
+            # 兵 (Pawn) - 8个
+            for i in range(8):
+                black_pieces.append({"id": i + 1, "type": "pawn", "symbol": "♟", "name": "兵"})
+            # 马 (Knight) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "knight", "symbol": "♞", "name": "马"})
+            # 象 (Bishop) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "bishop", "symbol": "♝", "name": "象"})
+            # 车 (Rook) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "rook", "symbol": "♜", "name": "车"})
+            # 后 (Queen) - 1个
+            black_pieces.append({"id": len(black_pieces) + 1, "type": "queen", "symbol": "♛", "name": "后"})
+            # 王 (King) - 1个
+            black_pieces.append({"id": len(black_pieces) + 1, "type": "king", "symbol": "♚", "name": "王"})
+            
+            pieces["white"] = white_pieces
+            pieces["black"] = black_pieces
+            total_count = len(pieces["white"]) + len(pieces["black"])
+            title = "国际象棋棋子"
+            
+        elif chess_type == "xiangqi":
+            # 中国象棋：标准棋子配置
+            # 红方：1帅、2仕、2相、2车、2马、2炮、5兵
+            red_pieces = []
+            # 兵 (Soldier) - 5个
+            for i in range(5):
+                red_pieces.append({"id": i + 1, "type": "soldier", "symbol": "兵", "name": "兵"})
+            # 炮 (Cannon) - 2个
+            for i in range(2):
+                red_pieces.append({"id": len(red_pieces) + 1, "type": "cannon", "symbol": "炮", "name": "炮"})
+            # 马 (Horse) - 2个
+            for i in range(2):
+                red_pieces.append({"id": len(red_pieces) + 1, "type": "horse", "symbol": "马", "name": "马"})
+            # 车 (Chariot) - 2个
+            for i in range(2):
+                red_pieces.append({"id": len(red_pieces) + 1, "type": "chariot", "symbol": "车", "name": "车"})
+            # 相 (Elephant) - 2个
+            for i in range(2):
+                red_pieces.append({"id": len(red_pieces) + 1, "type": "elephant", "symbol": "相", "name": "相"})
+            # 仕 (Advisor) - 2个
+            for i in range(2):
+                red_pieces.append({"id": len(red_pieces) + 1, "type": "advisor", "symbol": "仕", "name": "仕"})
+            # 帅 (General) - 1个
+            red_pieces.append({"id": len(red_pieces) + 1, "type": "general", "symbol": "帅", "name": "帅"})
+            
+            # 黑方：1将、2士、2象、2车、2马、2炮、5卒
+            black_pieces = []
+            # 卒 (Soldier) - 5个
+            for i in range(5):
+                black_pieces.append({"id": i + 1, "type": "soldier", "symbol": "卒", "name": "卒"})
+            # 炮 (Cannon) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "cannon", "symbol": "炮", "name": "炮"})
+            # 马 (Horse) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "horse", "symbol": "马", "name": "马"})
+            # 车 (Chariot) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "chariot", "symbol": "车", "name": "车"})
+            # 象 (Elephant) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "elephant", "symbol": "象", "name": "象"})
+            # 士 (Advisor) - 2个
+            for i in range(2):
+                black_pieces.append({"id": len(black_pieces) + 1, "type": "advisor", "symbol": "士", "name": "士"})
+            # 将 (General) - 1个
+            black_pieces.append({"id": len(black_pieces) + 1, "type": "general", "symbol": "将", "name": "将"})
+            
+            pieces["red"] = red_pieces
+            pieces["black"] = black_pieces
+            total_count = len(pieces["red"]) + len(pieces["black"])
+            title = "中国象棋棋子"
+        
+        return {
+            "chess_type": chess_type,
+            "board_size": board_size,
+            "pieces": pieces,
+            "title": title,
+            "total_count": total_count
+        }

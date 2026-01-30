@@ -13,7 +13,8 @@ from ..schemas.game import (
     SudokuGenerateRequest,
     Point24GenerateRequest,
     ChessGenerateRequest,
-    ParentChildGenerateRequest
+    ParentChildGenerateRequest,
+    ChessPiecesGenerateRequest
 )
 
 router = APIRouter(prefix="/games", tags=["games"])
@@ -205,6 +206,27 @@ async def generate_parent_child_games(request: ParentChildGenerateRequest):
         "success": True,
         "data": content,
         "message": "亲子游戏生成成功"
+    }
+
+
+@router.post("/generate/chess-pieces", response_model=dict)
+async def generate_chess_pieces(request: ChessPiecesGenerateRequest):
+    """
+    生成棋子
+    
+    参数:
+        chess_type: 棋类类型 (go/chess/xiangqi)
+        board_size: 棋盘大小（围棋需要）
+    """
+    content = GameService.generate_chess_pieces(
+        chess_type=request.chess_type,
+        board_size=request.board_size
+    )
+    
+    return {
+        "success": True,
+        "data": content,
+        "message": f"{content['title']}生成成功"
     }
 
 

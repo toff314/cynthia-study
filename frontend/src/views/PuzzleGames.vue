@@ -79,9 +79,14 @@
               {{ size }}×{{ size }}
             </button>
           </div>
-          <button class="play-btn" @click="handleGenerateChess(chess)">
-            生成棋盘
-          </button>
+          <div class="chess-actions">
+            <button class="play-btn" @click="handleGenerateChess(chess)">
+              生成棋盘
+            </button>
+            <button class="play-btn secondary" @click="handleGenerateChessPieces(chess)">
+              生成棋子
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -122,10 +127,15 @@
 
       <!-- 成语接龙/单词接龙字谜网格 -->
       <div v-if="gameContent.grid && gameContent.chain" class="word-puzzle-game">
-        <div class="chain-info">
-          <p>难度：{{ gameContent.difficulty }}</p>
-          <p>数量：{{ gameContent.chain_length }}个词</p>
-          <p>说明：字/字母在交叉点重叠，找出所有隐藏的成语/单词</p>
+        <!-- 统一的游戏规则 -->
+        <div class="common-rules">
+          <h3>📋 游戏规则</h3>
+          <div class="rules-content">
+            <p><strong>难度：</strong>{{ gameContent.difficulty }}</p>
+            <p><strong>数量：</strong>{{ gameContent.chain_length }}个词</p>
+            <p><strong>游戏说明：</strong>字/字母在交叉点重叠，找出所有隐藏的成语/单词</p>
+            <p><strong>玩法：</strong>根据给定的字谜网格，找到所有隐藏的成语或单词。每个词都通过字或字母的重叠与其他词连接，形成交叉的接龙结构。</p>
+          </div>
         </div>
         
         <!-- 字谜网格 -->
@@ -166,10 +176,15 @@
 
       <!-- 数独（支持多个谜题并排） -->
       <div v-if="gameContent.puzzles && gameContent.size" class="sudoku-container">
-        <div class="sudoku-info">
-          <p>大小：{{ gameContent.size }}×{{ gameContent.size }}</p>
-          <p>难度：{{ gameContent.difficulty }}</p>
-          <p>数量：{{ gameContent.count }}个<br/><span style="font-size: 12px;">（答案在下方）</span></p>
+        <!-- 统一的游戏规则 -->
+        <div class="common-rules">
+          <h3>📋 游戏规则</h3>
+          <div class="rules-content">
+            <p><strong>大小：</strong>{{ gameContent.size }}×{{ gameContent.size }}</p>
+            <p><strong>难度：</strong>{{ gameContent.difficulty }}</p>
+            <p><strong>数量：</strong>{{ gameContent.count }}个（答案在下方）</p>
+            <p><strong>游戏说明：</strong>在空格中填入1-{{ gameContent.size }}的数字，使每行、每列以及每个宫内的数字都不重复。{{ gameContent.size === 4 ? '4宫格：2×2的宫格' : gameContent.size === 6 ? '6宫格：2×3的宫格' : '9宫格：3×3的宫格' }}</p>
+          </div>
         </div>
         
         <!-- 谜题区域（并排排列） -->
@@ -180,24 +195,24 @@
             class="puzzle-item"
           >
             <div class="puzzle-number" v-if="(gameContent.count ?? 0) > 1">#{{ puzzleIndex + 1 }}</div>
-            <div class="sudoku-board" :class="`size-${gameContent.size} small`">
-              <div
-                v-for="(row, rowIndex) in puzzle.grid"
-                :key="rowIndex"
-                class="sudoku-row"
-              >
+              <div class="sudoku-board" :class="`size-${gameContent.size} small`">
                 <div
-                  v-for="(cell, cellIndex) in row"
-                  :key="cellIndex"
-                  :class="['sudoku-cell', {
-                    'border-thick-right': shouldHaveThickBorder(gameContent.size, cellIndex, 'right'),
-                    'border-thick-bottom': shouldHaveThickBorder(gameContent.size, rowIndex, 'bottom')
-                  }]"
+                  v-for="(row, rowIndex) in puzzle.grid"
+                  :key="rowIndex"
+                  class="sudoku-row"
                 >
-                  {{ typeof cell === 'number' && cell > 0 ? cell : '' }}
+                  <div
+                    v-for="(cell, cellIndex) in row"
+                    :key="cellIndex"
+                    :class="['sudoku-cell', {
+                      'border-thick-right': shouldHaveThickBorder(Number(gameContent.size), cellIndex, 'right'),
+                      'border-thick-bottom': shouldHaveThickBorder(Number(gameContent.size), rowIndex, 'bottom')
+                    }]"
+                  >
+                    {{ typeof cell === 'number' && cell > 0 ? cell : '' }}
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
         
@@ -221,8 +236,8 @@
                     v-for="(cell, cellIndex) in row"
                     :key="`sol-${puzzleIndex}-${rowIndex}-${cellIndex}`"
                     :class="['sudoku-cell', {
-                      'border-thick-right': shouldHaveThickBorder(gameContent.size!, cellIndex, 'right'),
-                      'border-thick-bottom': shouldHaveThickBorder(gameContent.size!, rowIndex, 'bottom')
+                      'border-thick-right': shouldHaveThickBorder(Number(gameContent.size!), cellIndex, 'right'),
+                      'border-thick-bottom': shouldHaveThickBorder(Number(gameContent.size!), rowIndex, 'bottom')
                     }]"
                   >
                     {{ cell }}
@@ -240,6 +255,17 @@
 
       <!-- 24点 -->
       <div v-if="gameContent.numbers" class="point24-game">
+        <!-- 统一的游戏规则 -->
+        <div class="common-rules">
+          <h3>📋 游戏规则</h3>
+          <div class="rules-content">
+            <p><strong>目标：</strong>将四个数字通过运算得到结果 24</p>
+            <p><strong>运算符：</strong>使用加（+）、减（-）、乘（×）、除（÷）和括号</p>
+            <p><strong>规则：</strong>每个数字必须使用一次且只能使用一次</p>
+            <p v-if="gameContent.solutions && gameContent.solutions.length > 0"><strong>提示示例：</strong>{{ gameContent.solutions[0] }}</p>
+          </div>
+        </div>
+        
         <div class="numbers-container">
           <div class="numbers-display">
             <div v-for="(num, index) in gameContent.numbers" :key="index" class="number-card">
@@ -250,20 +276,14 @@
             = {{ gameContent.target }}
           </div>
         </div>
-        <div v-if="gameContent.solutions && gameContent.solutions.length > 0" class="solutions-hint">
-          <p>提示示例：{{ gameContent.solutions[0] }}</p>
-        </div>
-        <div class="point24-tips">
-          <p>💡 使用加减乘除（+ - × ÷）和括号，将这四个数字计算出24</p>
-          <p>✨ 每个数字必须使用一次且只能使用一次</p>
-        </div>
       </div>
 
-      <!-- 棋类 -->
+      <!-- 棋类棋盘 -->
       <div v-if="gameContent.board_type" class="chess-game">
-        <div class="chess-info">
-          <h3>{{ gameContent.title }}</h3>
-          <div class="chess-instructions">{{ gameContent.instructions }}</div>
+        <!-- 统一的游戏规则 -->
+        <div class="common-rules">
+          <h3>📋 游戏规则</h3>
+          <div class="rules-content">{{ gameContent.instructions }}</div>
         </div>
         <div class="chess-board" :class="`size-${gameContent.board_size}`">
           <div
@@ -277,6 +297,102 @@
               :class="['chess-cell', { 'has-star': hasStarPoint(rowIndex, cellIndex) }]"
             >
             <span v-if="hasStarPoint(rowIndex, cellIndex)" class="star-point">●</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 棋类棋子 -->
+      <div v-if="gameContent.chess_type && gameContent.pieces" class="chess-pieces">
+        <div class="pieces-header">
+          <h3>{{ gameContent.title }}</h3>
+          <p class="pieces-info">共生成 {{ gameContent.total_count }} 个棋子</p>
+        </div>
+        
+        <div class="pieces-container">
+          <!-- 围棋棋子 -->
+          <div v-if="gameContent.chess_type === 'go'" class="go-pieces">
+            <div class="piece-group">
+              <h4>黑棋 ({{ (gameContent.pieces as any).black?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).black?.slice(0, 50)" 
+                  :key="'black-'+index"
+                  class="go-piece black"
+                ></div>
+              </div>
+              <p v-if="(gameContent.pieces as any).black?.length > 50" class="more-pieces">... 还有 {{ (gameContent.pieces as any).black.length - 50 }} 个黑棋</p>
+            </div>
+            <div class="piece-group">
+              <h4>白棋 ({{ (gameContent.pieces as any).white?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).white?.slice(0, 50)" 
+                  :key="'white-'+index"
+                  class="go-piece white"
+                ></div>
+              </div>
+              <p v-if="(gameContent.pieces as any).white?.length > 50" class="more-pieces">... 还有 {{ (gameContent.pieces as any).white.length - 50 }} 个白棋</p>
+            </div>
+          </div>
+
+          <!-- 国际象棋棋子 -->
+          <div v-if="gameContent.chess_type === 'chess'" class="chess-model-pieces">
+            <div class="piece-group">
+              <h4>白棋 ({{ (gameContent.pieces as any).white?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).white" 
+                  :key="'white-'+index"
+                  class="chess-model-piece white"
+                  :title="piece.name"
+                >
+                  {{ piece.symbol }}
+                </div>
+              </div>
+            </div>
+            <div class="piece-group">
+              <h4>黑棋 ({{ (gameContent.pieces as any).black?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).black" 
+                  :key="'black-'+index"
+                  class="chess-model-piece black"
+                  :title="piece.name"
+                >
+                  {{ piece.symbol }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 中国象棋棋子 -->
+          <div v-if="gameContent.chess_type === 'xiangqi'" class="xiangqi-pieces">
+            <div class="piece-group">
+              <h4>红棋 ({{ (gameContent.pieces as any).red?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).red" 
+                  :key="'red-'+index"
+                  class="xiangqi-piece red"
+                  :title="piece.name"
+                >
+                  {{ piece.symbol }}
+                </div>
+              </div>
+            </div>
+            <div class="piece-group">
+              <h4>黑棋 ({{ (gameContent.pieces as any).black?.length || 0 }})</h4>
+              <div class="piece-grid">
+                <div 
+                  v-for="(piece, index) in (gameContent.pieces as any).black" 
+                  :key="'black-'+index"
+                  class="xiangqi-piece black"
+                  :title="piece.name"
+                >
+                  {{ piece.symbol }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -323,6 +439,7 @@ import {
   generateSudoku,
   generatePoint24 as generatePoint24Api,
   generateChess as generateChessApi,
+  generateChessPieces as generateChessPiecesApi,
   generateParentChildGames as generateParentChildGamesApi,
   type GameCategory,
   type GameType,
@@ -494,6 +611,39 @@ const handleGenerateChess = async (chess: GameType) => {
   }
 }
 
+// 生成棋子
+const handleGenerateChessPieces = async (chess: GameType) => {
+  try {
+    console.log('开始生成棋子...')
+    gameContent.value = null
+    const size = selectedChessSize.value || chess.sizes?.[0] || 19
+    console.log('棋类类型:', chess.type, '棋盘大小:', size)
+    
+    const result = await generateChessPiecesApi({
+      chess_type: chess.type,
+      board_size: chess.type === 'go' ? size : undefined
+    })
+    console.log('棋子生成结果:', result)
+    
+    gameContent.value = result.data
+    gameTitle.value = result.data.title || '棋子'
+    
+    console.log('gameContent.value已设置:', gameContent.value)
+
+    await nextTick()
+    
+    setTimeout(() => {
+      const preview = document.querySelector('.game-preview')
+      if (preview) {
+        preview.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
+  } catch (error) {
+    console.error('生成棋子失败:', error)
+    alert('生成棋子失败，请重试')
+  }
+}
+
 // 生成亲子类游戏
 const handleGenerateParentChild = async () => {
   try {
@@ -563,7 +713,7 @@ const getPuzzleCellClass = (rowIndex: number, cellIndex: number, cell: string) =
     const blankKey = `${rowIndex},${cellIndex}`
     const blankPositions: string[] = []
     
-    gameContent.value.chain.forEach((item: any) => {
+    gameContent.valforEach((item: any) => {
       const word = item.word
       const blanks = item.blanks || []
       const row = item.row ?? 0

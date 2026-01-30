@@ -132,3 +132,18 @@ class ChessGenerateRequest(BaseModel):
 class ParentChildGenerateRequest(BaseModel):
     """亲子类游戏生成请求"""
     game_types: List[str] = Field(..., description="游戏类型列表：['simon_says', 'who_is_undercover', 'reverse_command', ...]")
+
+
+class ChessPiecesGenerateRequest(BaseModel):
+    """棋子生成请求"""
+    chess_type: str = Field(..., description="棋类类型：go/chess/xiangqi")
+    board_size: int = Field(default=19, description="棋盘大小（围棋需要）")
+
+
+class ChessPiecesContent(GameContent):
+    """棋子内容"""
+    chess_type: str = Field(description="棋类类型")
+    board_size: int = Field(description="棋盘大小")
+    pieces: Dict[str, Any] = Field(description="棋子详情")
+    title: str = Field(description="标题")
+    total_count: int = Field(description="总数量")

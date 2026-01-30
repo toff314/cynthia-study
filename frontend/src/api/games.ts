@@ -68,6 +68,11 @@ export interface GameState {
   instructions?: string
   star_points?: [number, number][]
   
+  // 棋子
+  chess_type?: string  // 棋类类型（go/chess/xiangqi）
+  pieces?: Record<string, any>  // 棋子详情
+  total_count?: number  // 总数量
+  
   // 亲子类游戏
   common_instructions?: string
   cards?: Record<string, string>
@@ -162,6 +167,16 @@ export async function generateParentChildGames(params: {
   game_types: string[]
 }) {
   return request.post('/api/games/generate/parent-child', params)
+}
+
+/**
+ * 生成棋子
+ */
+export async function generateChessPieces(params: {
+  chess_type: string
+  board_size?: number
+}) {
+  return request.post('/api/games/generate/chess-pieces', params)
 }
 
 /**
