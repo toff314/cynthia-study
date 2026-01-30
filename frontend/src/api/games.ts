@@ -35,6 +35,12 @@ export interface WordChainItem {
   direction?: 'horizontal' | 'vertical'
 }
 
+export interface SudokuPuzzle {
+  grid: (number | string)[][]
+  solution: number[][]
+  index: number
+}
+
 export interface GameState {
   // 字谜网格游戏（共享字段）
   grid?: (string | number)[][]
@@ -44,7 +50,9 @@ export interface GameState {
   chain_length?: number
   difficulty?: string
   
-  // 数独游戏
+  // 数独游戏（新格式支持多个谜题）
+  puzzles?: SudokuPuzzle[]
+  count?: number
   solution?: number[][]
   size?: number
   
@@ -61,7 +69,8 @@ export interface GameState {
   star_points?: [number, number][]
   
   // 亲子类游戏
-  cards?: any[]
+  common_instructions?: string
+  cards?: Record<string, string>
   total?: number
 }
 
