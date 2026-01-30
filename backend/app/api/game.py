@@ -203,8 +203,12 @@ async def generate_parent_child_games(request: ParentChildGenerateRequest):
     
     参数:
         game_types: 游戏类型列表
+        card_count: 生成卡片数量
     """
-    content = GameService.generate_parent_child_games(request.game_types)
+    content = GameService.generate_parent_child_games(
+        game_types=request.game_types,
+        card_count=request.card_count
+    )
     
     return {
         "success": True,

@@ -29,19 +29,6 @@
     <div v-if="selectedCategory && ['low', 'mid', 'high'].includes(selectedCategory)" class="section">
       <h2>{{ getAgeTitle() }}</h2>
       
-      <!-- 生成数量选择 -->
-      <div class="count-selector">
-        <span class="count-label">生成数量：</span>
-        <button
-          v-for="count in [5, 10, 15, 20]"
-          :key="count"
-          :class="['count-btn', { active: selectedCount === count }]"
-          @click="selectedCount = count"
-        >
-          {{ count }}个
-        </button>
-      </div>
-      
       <div class="games-grid">
         <div
           v-for="game in currentGames"
@@ -56,6 +43,19 @@
           </button>
           <span class="check-mark" v-if="selectedAgeGame === game.type">✓</span>
         </div>
+      </div>
+      
+      <!-- 生成数量选择 -->
+      <div class="count-selector">
+        <span class="count-label">生成数量：</span>
+        <button
+          v-for="count in [5, 10, 15, 20]"
+          :key="count"
+          :class="['count-btn', { active: selectedCount === count }]"
+          @click="selectedCount = count"
+        >
+          {{ count }}个
+        </button>
       </div>
     </div>
 
@@ -97,19 +97,6 @@
     <div v-if="selectedCategory === 'parent_child'" class="section">
       <h2>👨‍👩‍👧‍👦 亲子类游戏 - 单选一个游戏类型</h2>
       
-      <!-- 生成数量选择 -->
-      <div class="count-selector">
-        <span class="count-label">生成数量：</span>
-        <button
-          v-for="count in [6, 8, 10]"
-          :key="count"
-          :class="['count-btn', { active: selectedParentCardCount === count }]"
-          @click="selectedParentCardCount = count"
-        >
-          {{ count }}张
-        </button>
-      </div>
-      
       <div class="games-grid">
         <div
           v-for="game in parentChildTypes"
@@ -124,6 +111,19 @@
           </button>
           <span class="check-mark" v-if="selectedParentGame === game.type">✓</span>
         </div>
+      </div>
+      
+      <!-- 生成数量选择 -->
+      <div class="count-selector">
+        <span class="count-label">生成数量：</span>
+        <button
+          v-for="count in [6, 8, 10]"
+          :key="count"
+          :class="['count-btn', { active: selectedParentCardCount === count }]"
+          @click="selectedParentCardCount = count"
+        >
+          {{ count }}张
+        </button>
       </div>
     </div>
 
@@ -300,7 +300,7 @@
           <h3>📋 游戏规则</h3>
           <div class="rules-content">{{ gameContent.instructions }}</div>
         </div>
-        <div class="chess-board" :class="`size-${gameContent.board_size}`">
+        <div class="chess-board" :class="`size-${gameContent.board_size}`" :data-board-type="gameContent.board_type">
           <div
             v-for="(row, rowIndex) in gameContent.grid"
             :key="rowIndex"
@@ -428,7 +428,7 @@
             :class="['game-card-item', { 'blank-card': !entry[1] }]"
           >
             <div class="card-number">{{ index + 1 }}</div>
-            <div class="card-content">{{ entry[1] || '(空白卡片，可自己填写)' }}</div>
+            <div class="card-content">{{ entry[1] || '' }}</div>
           </div>
         </div>
       </div>
@@ -472,6 +472,9 @@ const gameTitle = ref<string>('')
 const showSolution = ref(false)
 const showChainAnswer = ref(false)
 const lastGameParams = ref<any>(null)
+const lastGameType = ref<string>('')
+const lastChessParams = ref<any>(null)
+const lastParentChildParams = ref<any>(null)
 
 // 获取分类
 onMounted(async () => {
@@ -527,6 +530,7 @@ const generateGame = async (game: GameType, ageGroup: string) => {
     showSolution.value = false
 
     lastGameParams.value = { game, ageGroup }
+    lastGameType.value = game.type
 
     switch (game.type) {
       case 'idiom_chain':
@@ -577,9 +581,11 @@ const generateGame = async (game: GameType, ageGroup: string) => {
 const handleGeneratePoint24 = async () => {
   try {
     gameContent.value = null
-    const result = await generatePoint24Api({})
+    showSolution.value = false
+    const result = await generatePoint24Api({ difficulty: 'normal', count: 6 })
     gameContent.value = result.data
     gameTitle.value = '➕ 24点'
+    lastGameType.value = 'point24'
 
     setTimeout(() => {
       const preview = document.querySelector('.game-preview')
@@ -598,6 +604,7 @@ const handleGenerateChess = async (chess: GameType) => {
   try {
     console.log('开始生成棋盘...')
     gameContent.value = null
+    showSolution.value = false
     const size = selectedChessSize.value || chess.sizes?.[0] || 9
     console.log('棋盘大小:', size)
     
@@ -610,6 +617,9 @@ const handleGenerateChess = async (chess: GameType) => {
     
     gameContent.value = result.data
     gameTitle.value = result.data.title || '棋盘'
+    
+    lastGameType.value = `chess_${chess.type}`
+    lastChessParams.value = { chess, size }
     
     console.log('gameContent.value已设置:', gameContent.value)
 
@@ -632,6 +642,7 @@ const handleGenerateChessPieces = async (chess: GameType) => {
   try {
     console.log('开始生成棋子...')
     gameContent.value = null
+    showSolution.value = false
     const size = selectedChessSize.value || chess.sizes?.[0] || 19
     console.log('棋类类型:', chess.type, '棋盘大小:', size)
     
@@ -643,6 +654,9 @@ const handleGenerateChessPieces = async (chess: GameType) => {
     
     gameContent.value = result.data
     gameTitle.value = result.data.title || '棋子'
+    
+    lastGameType.value = `chess_pieces_${chess.type}`
+    lastChessParams.value = { chess, size }
     
     console.log('gameContent.value已设置:', gameContent.value)
 
@@ -664,12 +678,19 @@ const handleGenerateChessPieces = async (chess: GameType) => {
 const handleGenerateParentChild = async () => {
   try {
     gameContent.value = null
+    showSolution.value = false
     const result = await generateParentChildGamesApi({
       game_types: [selectedParentGame.value],
       card_count: selectedParentCardCount.value
     })
     gameContent.value = result.data
     gameTitle.value = '👨‍👩‍👧‍👦 亲子游戏卡片'
+    
+    lastGameType.value = 'parent_child'
+    lastParentChildParams.value = {
+      gameType: selectedParentGame.value,
+      cardCount: selectedParentCardCount.value
+    }
 
     setTimeout(() => {
       const preview = document.querySelector('.game-preview')
@@ -690,9 +711,40 @@ const handleGenerateParentChildByType = async (gameType: string) => {
 }
 
 // 重新生成游戏
-const regenerateGame = () => {
-  if (lastGameParams.value) {
-    generateGame(lastGameParams.value.game, lastGameParams.value.ageGroup)
+const regenerateGame = async () => {
+  showSolution.value = false
+  
+  switch (lastGameType.value) {
+    case 'idiom_chain':
+    case 'word_chain':
+    case 'sudoku':
+    case 'point24':
+      if (lastGameParams.value) {
+        await generateGame(lastGameParams.value.game, lastGameParams.value.ageGroup)
+      }
+      break
+      
+    case 'chess_go':
+    case 'chess_chess':
+    case 'chess_xiangqi':
+      if (lastChessParams.value) {
+        await handleGenerateChess(lastChessParams.value.chess)
+      }
+      break
+      
+    case 'chess_pieces_go':
+    case 'chess_pieces_chess':
+    case 'chess_pieces_xiangqi':
+      if (lastChessParams.value) {
+        await handleGenerateChessPieces(lastChessParams.value.chess)
+      }
+      break
+      
+    case 'parent_child':
+      if (lastParentChildParams.value) {
+        await handleGenerateParentChild()
+      }
+      break
   }
 }
 

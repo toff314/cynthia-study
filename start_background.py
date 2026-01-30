@@ -2,11 +2,9 @@
 后台一键启动脚本 - 支持启动、停止、重启和状态检查
 """
 
-import os
 import sys
 import subprocess
 import time
-import signal
 import psutil
 from pathlib import Path
 

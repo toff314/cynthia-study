@@ -602,11 +602,61 @@
   width: 100%;
 }
 
-.chess-board .chess-cell {
+/* 国际象棋棋盘 - 黑白相间 */
+.chess-board[data-board-type="chess"] .chess-cell {
+  border: 1px solid #000;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 国际象棋白格 */
+.chess-board[data-board-type="chess"] .chess-row:nth-child(odd) .chess-cell:nth-child(odd),
+.chess-board[data-board-type="chess"] .chess-row:nth-child(even) .chess-cell:nth-child(even) {
+  background: #f0d9b5; /* 浅色格子 */
+}
+
+/* 国际象棋黑格 */
+.chess-board[data-board-type="chess"] .chess-row:nth-child(odd) .chess-cell:nth-child(even),
+.chess-board[data-board-type="chess"] .chess-row:nth-child(even) .chess-cell:nth-child(odd) {
+  background: #b58863; /* 深色格子 */
+}
+
+/* 围棋等其他棋盘 */
+.chess-board:not([data-board-type="chess"]) .chess-cell {
   border: 1px solid #000;
   background: #dcb35c;
   flex: 1;
   min-width: 0;
+}
+
+/* 中国象棋楚河汉界 - 合并第5行（索引4） */
+.chess-board[data-board-type="xiangqi"] .chess-row:nth-child(5) .chess-cell {
+  border: none;
+  background: transparent;
+  position: relative;
+}
+
+.chess-board[data-board-type="xiangqi"] .chess-row:nth-child(5) {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  background: #dcb35c;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chess-board[data-board-type="xiangqi"] .chess-row:nth-child(5) .chess-cell:first-child {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 20px;
 }
 
 .chess-board.size-8 .chess-cell {

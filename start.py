@@ -22,15 +22,16 @@ def start_backend():
     
     # 检查虚拟环境
     venv_dir = BACKEND_DIR / "venv"
-    if not venv_dir.exists():
-        print("❌ 后端虚拟环境不存在，请先运行:")
-        print("   cd backend")
-        print("   python3 -m venv venv")
-        print("   pip install -r requirements.txt")
-        return
-    
-    # 直接使用虚拟环境的 Python 启动 uvicorn
-    python_exe = venv_dir / "bin" / "python3"
+    if venv_dir.exists():
+        # 使用虚拟环境的 Python
+        if os.name == 'nt':  # Windows
+            python_exe = venv_dir / "Scripts" / "python.exe"
+        else:  # Linux/macOS
+            python_exe = venv_dir / "bin" / "python3"
+    else:
+        # 使用系统 Python
+        print("⚠️  未检测到虚拟环境，使用系统 Python")
+        python_exe = sys.executable
     
     # 切换到后端目录
     os.chdir(BACKEND_DIR)
@@ -62,23 +63,38 @@ def install_dependencies():
     # 安装后端依赖
     print("\n--- 安装后端依赖 ---")
     venv_dir = BACKEND_DIR / "venv"
-    python_cmd = str(venv_dir / "bin" / "python")
     
     if not venv_dir.exists():
         print("创建虚拟环境...")
         os.chdir(BACKEND_DIR)
         subprocess.run([sys.executable, "-m", "venv", "venv"], check=True)
     
-    # 使用虚拟环境的 Python 直接安装依赖（使用清华源加速）
+    # 根据操作系统选择正确的 Python 可执行文件路径
+    if os.name == 'nt':  # Windows
+        python_cmd = str(venv_dir / "Scripts" / "python.exe")
+    else:  # Linux/macOS
+        python_cmd = str(venv_dir / "bin" / "python")
+    
+    # 使用虚拟环境的 Python 直接安装依赖
     os.chdir(BACKEND_DIR)
-    # 设置环境变量确保pip使用UTF-8编码读取文件
     env = os.environ.copy()
     env["PYTHONIOENCODING"] = "utf-8"
-    subprocess.run([
-        python_cmd, "-m", "pip", "install", "-r", "requirements.txt",
-        "-i", "https://pypi.tuna.tsinghua.edu.cn/simple",
-        "--trusted-host", "pypi.tuna.tsinghua.edu.cn"
-    ], encoding='utf-8', env=env, check=True)
+    
+    # 检测 Python 版本，如果是 3.14+ 使用 PyPI 官方源（有预编译包）
+    python_version = sys.version_info
+    if python_version >= (3, 14):
+        print("检测到 Python 3.14+，使用 PyPI 官方源")
+        subprocess.run([
+            python_cmd, "-m", "pip", "install", "-r", "requirements.txt",
+            "-i", "https://pypi.org/simple"
+        ], encoding='utf-8', env=env, check=True)
+    else:
+        print("使用清华镜像源加速")
+        subprocess.run([
+            python_cmd, "-m", "pip", "install", "-r", "requirements.txt",
+            "-i", "https://pypi.tuna.tsinghua.edu.cn/simple",
+            "--trusted-host", "pypi.tuna.tsinghua.edu.cn"
+        ], encoding='utf-8', env=env, check=True)
     
     print("✅ 后端依赖安装完成")
     

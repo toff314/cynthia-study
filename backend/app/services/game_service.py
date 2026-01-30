@@ -5,7 +5,11 @@ from typing import List, Dict, Any, Optional
 # 从外部文件导入游戏数据
 from ..data.game_data import (
     IDIOMS, WORDS, PARENT_CHILD_GAMES, 
-    CHESS_INSTRUCTIONS, ITEMS_LIST
+    CHESS_INSTRUCTIONS, ITEMS_LIST,
+    SUDOKU_TEMPLATES, SUDOKU_EMPTY_CELLS,
+    POINT24_SOLVABLE_SETS, CHESS_PIECES, XIANGQI_PIECES,
+    GO_STAR_POINTS, CHAIN_GRID_SIZES,
+    POINT24_NUM_RANGES, NUMBER_GAME_RANGES
 )
 
 # 成语数据库 - 引用外部数据
@@ -13,7 +17,12 @@ GameIdioms = IDIOMS
 GameWords = WORDS
 GameParentChildGames = PARENT_CHILD_GAMES
 GameChessInstructions = CHESS_INSTRUCTIONS
-GameItemsList = ITEMS_LIST
+GameSudokuTemplates = SUDOKU_TEMPLATES
+GameSudokuEmptyCells = SUDOKU_EMPTY_CELLS
+GamePoint24Sets = POINT24_SOLVABLE_SETS
+GameChessPieces = CHESS_PIECES
+GameGoStarPoints = GO_STAR_POINTS
+GameChainGridSizes = CHAIN_GRID_SIZES
 
 
 class GameService:
@@ -202,13 +211,8 @@ class GameService:
                 
                 blank_positions_map[word_data['word']] = blank_indices
             
-            # 根据chain_length映射到固定的网格大小
-            size_mapping = {
-                5: (6, 9),
-                10: (8, 12),
-                15: (10, 15),
-                20: (12, 18)
-            }
+            # 使用外部数据中的网格大小映射
+            size_mapping = CHAIN_GRID_SIZES.get("idiom", {})
             if chain_length in size_mapping:
                 fixed_cols, fixed_rows = size_mapping[chain_length]
             else:
@@ -429,12 +433,8 @@ class GameService:
                 
                 blank_positions_map[word_data['word']] = blank_indices
             
-            size_mapping = {
-                5: (8, 12),
-                10: (10, 15),
-                15: (12, 18),
-                20: (14, 21)
-            }
+            # 使用外部数据中的网格大小映射
+            size_mapping = CHAIN_GRID_SIZES.get("word", {})
             if chain_length in size_mapping:
                 fixed_cols, fixed_rows = size_mapping[chain_length]
             else:
@@ -485,43 +485,26 @@ class GameService:
         
         puzzles = []
         
-        base_4x4 = [
-            [1, 2, 3, 4],
-            [3, 4, 1, 2],
-            [2, 1, 4, 3],
-            [4, 3, 2, 1]
-        ]
+        # 使用外部数据中的模板
+        base_4x4 = SUDOKU_TEMPLATES.get("4x4", [])
+        base_6x6 = SUDOKU_TEMPLATES.get("6x6", [])
+        base_9x9 = SUDOKU_TEMPLATES.get("9x9", [])
         
-        base_6x6 = [
-            [1, 2, 3, 4, 5, 6],
-            [4, 5, 6, 1, 2, 3],
-            [2, 3, 1, 5, 6, 4],
-            [5, 6, 4, 2, 3, 1],
-            [3, 1, 2, 6, 4, 5],
-            [6, 4, 5, 3, 1, 2]
-        ]
-        
-        base_9x9 = [
-            [5, 3, 4, 6, 7, 8, 9, 1, 2],
-            [6, 7, 2, 1, 9, 5, 3, 4, 8],
-            [1, 9, 8, 3, 4, 2, 5, 6, 7],
-            [8, 5, 9, 7, 6, 1, 4, 2, 3],
-            [4, 2, 6, 8, 5, 3, 7, 9, 1],
-            [7, 1, 3, 9, 2, 4, 8, 5, 6],
-            [9, 6, 1, 5, 3, 7, 2, 8, 4],
-            [2, 8, 7, 4, 1, 9, 6, 3, 5],
-            [3, 4, 5, 2, 8, 6, 1, 7, 9]
-        ]
+        # 使用外部数据中的空格数配置
+        empty_cells_config = SUDOKU_EMPTY_CELLS
         
         for i in range(num_puzzles):
             if size == 4:
-                empty_cells = 3 if difficulty == "easy" else 4
+                size_key = "4x4"
+                empty_cells = empty_cells_config[size_key].get(difficulty, 4)
                 solution = [[(num + i) % 4 + 1 for num in row] for row in base_4x4]
             elif size == 6:
-                empty_cells = 12 if difficulty == "easy" else (15 if difficulty == "normal" else 18)
+                size_key = "6x6"
+                empty_cells = empty_cells_config[size_key].get(difficulty, 15)
                 solution = [[(num + i) % 6 + 1 for num in row] for row in base_6x6]
             else:
-                empty_cells = 30 if difficulty == "easy" else (40 if difficulty == "normal" else 50)
+                size_key = "9x9"
+                empty_cells = empty_cells_config[size_key].get(difficulty, 40)
                 solution = [[(num % 9) + 1 for num in row] for row in base_9x9]
             
             grid = [row[:] for row in solution]
@@ -550,17 +533,10 @@ class GameService:
             difficulty: 难度级别 (easy, normal, hard)
             count: 生成等式的数量
         """
-        if difficulty == "easy":
-            num_range = range(1, 6)
-        elif difficulty == "hard":
-            num_range = range(3, 10)
-        else:
-            num_range = range(1, 10)
-        
-        solvable_sets = [
-            [1, 2, 3, 4], [2, 3, 4, 6], [1, 3, 4, 6],
-            [2, 4, 6, 8], [3, 4, 6, 8], [1, 5, 5, 3]
-        ]
+        # 使用外部数据中的24点可解集合
+        num_ranges = POINT24_NUM_RANGES
+        num_range = num_ranges.get(difficulty, range(1, 10))
+        solvable_sets = POINT24_SOLVABLE_SETS
         
         equations = []
         for _ in range(count):
@@ -584,37 +560,52 @@ class GameService:
         """生成棋类游戏"""
         instructions = CHESS_INSTRUCTIONS.get(board_type, CHESS_INSTRUCTIONS["checkers"])
         
-        grid = [[0 for _ in range(board_size)] for _ in range(board_size)]
+        grid = []
+        river_pos = -1  # 楚河汉界位置（仅用于中国象棋）
+        rows = 0
+        cols = 0
         
+        # 根据棋类类型生成棋盘
         if board_type == "chess":
-            grid[0] = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
-            grid[1] = ['p'] * board_size
-            grid[-2] = ['P'] * board_size
-            grid[-1] = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+            # 国际象棋：8x8黑白相间方格
+            rows = 8
+            cols = 8
+            grid = []
+            for i in range(rows):
+                row = []
+                for j in range(cols):
+                    # 黑白相间：(i + j) 为偶数是白格(0)，奇数是黑格(1)
+                    row.append(0 if (i + j) % 2 == 0 else 1)
+                grid.append(row)
+            
         elif board_type == "checkers":
-            for i in range(board_size):
-                for j in range(board_size):
+            # 国际跳棋：board_size x board_size
+            rows = board_size
+            cols = board_size
+            grid = [[0 for _ in range(cols)] for _ in range(rows)]
+            for i in range(rows):
+                for j in range(cols):
                     if (i + j) % 2 == 1:
                         if i < 3:
                             grid[i][j] = 1
-                        elif i > board_size - 4:
+                        elif i > rows - 4:
                             grid[i][j] = 2
+                            
         elif board_type == "xiangqi":
-            # 中国象棋棋盘：9列10行
-            grid = [[0 for _ in range(9)] for _ in range(10)]
-            # 楚河在索引4和5之间
+            # 中国象棋：9列10行，第5行（索引4）为楚河汉界（合并为一格）
+            rows = 10
+            cols = 9
+            grid = [[0 for _ in range(cols)] for _ in range(rows)]
+            # 第5行（索引4）设为特殊值-1，表示楚河汉界（需要合并）
+            grid[4] = [-1] * cols  # 用-1标记楚河汉界行
+            river_pos = 5  # 楚河汉界在第5行之后（索引4和5之间）
+            
         elif board_type == "go":
-            star_points = []
-            if board_size == 19:
-                star_points = [(3, 3), (3, 9), (3, 15),
-                              (9, 3), (9, 9), (9, 15),
-                              (15, 3), (15, 9), (15, 15)]
-            elif board_size == 13:
-                star_points = [(3, 3), (3, 6), (3, 9),
-                              (6, 3), (6, 6), (6, 9),
-                              (9, 3), (9, 6), (9, 9)]
-            elif board_size == 9:
-                star_points = [(2, 2), (2, 6), (4, 4), (6, 2), (6, 6)]
+            # 围棋：board_size x board_size 方格
+            rows = board_size
+            cols = board_size
+            grid = [[0 for _ in range(cols)] for _ in range(rows)]
+            star_points = GO_STAR_POINTS.get(board_size, [])
             return {
                 "board_type": board_type,
                 "board_size": board_size,
@@ -626,8 +617,10 @@ class GameService:
         
         return {
             "board_type": board_type,
-            "board_size": board_size,
+            "board_size": cols,  # 棋盘列数
+            "rows": rows,  # 棋盘行数
             "grid": grid,
+            "river_pos": river_pos,  # 楚河汉界位置（仅中国象棋使用）
             "title": instructions["title"],
             "instructions": instructions["instructions"]
         }
@@ -665,27 +658,14 @@ class GameService:
                         cards[f"卡片{i+1}"] = f"词语 A：{pair['a']}\n词语 B：{pair['b']}"
                
                 elif game_type == "reverse_command":
-                    commands = game_info["commands"]
+                    command_pairs = game_info["command_pairs"]
                     for i in range(card_count):
-                        cmd = commands[i % len(commands)]
-                        # 生成相反指令（不使用反斜杠，使用换行）
-                        reverse_map = {
-                            "向前": "向后", "向后": "向前",
-                            "左": "右", "右": "左",
-                            "上": "下", "下": "上",
-                            "举起": "放下", "睁开": "闭上", "站": "坐",
-                            "举起右手": "放下左手", "举起左手": "放下右手",
-                            "摸右耳朵": "摸左耳朵", "点头": "摇头",
-                            "坐下": "站起来", "向左转": "向右转"
-                        }
-                        reverse_cmd = cmd
-                        for k, v in reverse_map.items():
-                            reverse_cmd = reverse_cmd.replace(k, v)
-                        # 使用换行而不是反斜杠
-                        cards[f"卡片{i+1}"] = f"指令：{cmd}\n反向：{reverse_cmd}"
+                        pair = command_pairs[i % len(command_pairs)]
+                        cards[f"卡片{i+1}"] = f"指令：{pair['original']}\n反向：{pair['reverse']}"
                
                 elif game_type == "number_game":
-                    ranges = [(1, 100), (1, 50), (51, 100), (51, 150), (1, 200), (1, 30)]
+                    # 使用外部数据中的数字范围配置
+                    ranges = NUMBER_GAME_RANGES
                     for i in range(card_count):
                         min_num, max_num = ranges[i % len(ranges)]
                         target = random.randint(min_num, max_num)
@@ -798,58 +778,14 @@ class GameService:
             title = f"围棋棋子 ({board_size}×{board_size})"
             
         elif chess_type == "chess":
-            white_pieces = []
-            for i in range(8):
-                white_pieces.append({"id": i + 1, "type": "pawn", "symbol": "♙", "name": "兵"})
-            for i in range(2):
-                white_pieces.append({"id": len(white_pieces) + 1, "type": "knight", "symbol": "♘", "name": "马"})
-                white_pieces.append({"id": len(white_pieces) + 1, "type": "bishop", "symbol": "♗", "name": "象"})
-            for i in range(2):
-                white_pieces.append({"id": len(white_pieces) + 1, "type": "rook", "symbol": "♖", "name": "车"})
-            white_pieces.append({"id": len(white_pieces) + 1, "type": "queen", "symbol": "♕", "name": "后"})
-            white_pieces.append({"id": len(white_pieces) + 1, "type": "king", "symbol": "♔", "name": "王"})
-            
-            black_pieces = []
-            for i in range(8):
-                black_pieces.append({"id": i + 1, "type": "pawn", "symbol": "♟", "name": "兵"})
-            for i in range(2):
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "knight", "symbol": "♞", "name": "马"})
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "bishop", "symbol": "♝", "name": "象"})
-            for i in range(2):
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "rook", "symbol": "♜", "name": "车"})
-            black_pieces.append({"id": len(black_pieces) + 1, "type": "queen", "symbol": "♛", "name": "后"})
-            black_pieces.append({"id": len(black_pieces) + 1, "type": "king", "symbol": "♚", "name": "王"})
-            
-            pieces["white"] = white_pieces
-            pieces["black"] = black_pieces
+            # 使用外部数据中的国际象棋棋子定义
+            pieces = CHESS_PIECES.copy()
             total_count = len(pieces["white"]) + len(pieces["black"])
             title = "国际象棋棋子"
             
         elif chess_type == "xiangqi":
-            red_pieces = []
-            for i in range(5):
-                red_pieces.append({"id": i + 1, "type": "soldier", "symbol": "兵", "name": "兵"})
-            for i in range(2):
-                red_pieces.append({"id": len(red_pieces) + 1, "type": "cannon", "symbol": "炮", "name": "炮"})
-                red_pieces.append({"id": len(red_pieces) + 1, "type": "horse", "symbol": "马", "name": "马"})
-                red_pieces.append({"id": len(red_pieces) + 1, "type": "chariot", "symbol": "车", "name": "车"})
-                red_pieces.append({"id": len(red_pieces) + 1, "type": "elephant", "symbol": "相", "name": "相"})
-                red_pieces.append({"id": len(red_pieces) + 1, "type": "advisor", "symbol": "仕", "name": "仕"})
-            red_pieces.append({"id": len(red_pieces) + 1, "type": "general", "symbol": "帅", "name": "帅"})
-            
-            black_pieces = []
-            for i in range(5):
-                black_pieces.append({"id": i + 1, "type": "soldier", "symbol": "卒", "name": "卒"})
-            for i in range(2):
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "cannon", "symbol": "炮", "name": "炮"})
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "horse", "symbol": "马", "name": "马"})
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "chariot", "symbol": "车", "name": "车"})
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "elephant", "symbol": "象", "name": "象"})
-                black_pieces.append({"id": len(black_pieces) + 1, "type": "advisor", "symbol": "士", "name": "士"})
-            black_pieces.append({"id": len(black_pieces) + 1, "type": "general", "symbol": "将", "name": "将"})
-            
-            pieces["red"] = red_pieces
-            pieces["black"] = black_pieces
+            # 使用外部数据中的中国象棋棋子定义
+            pieces = XIANGQI_PIECES.copy()
             total_count = len(pieces["red"]) + len(pieces["black"])
             title = "中国象棋棋子"
         

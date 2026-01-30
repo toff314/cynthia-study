@@ -134,6 +134,7 @@ class ChessGenerateRequest(BaseModel):
 class ParentChildGenerateRequest(BaseModel):
     """亲子类游戏生成请求"""
     game_types: List[str] = Field(..., description="游戏类型列表：['simon_says', 'who_is_undercover', 'reverse_command', ...]")
+    card_count: int = Field(default=6, description="生成卡片数量：6/8/10")
 
 
 class ChessPiecesGenerateRequest(BaseModel):
