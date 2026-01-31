@@ -81,7 +81,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { getStatisticsSummary, recordVisit } from '@/api/statistics'
-import './Home.css'
 
 interface StatisticsData {
   total_users: number
@@ -141,3 +140,5 @@ onMounted(async () => {
   ])
 })
 </script>
+
+<style scoped src="./Home.css"></style>

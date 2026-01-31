@@ -12,7 +12,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -581,5 +581,53 @@ h3 {
   .achievement-icons {
     margin-right: 0;
     margin-bottom: 15px;
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+@media print {
+  .quick-nav,
+  .header,
+  .tabs,
+  .section-header,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  .achievement-wall {
+    background: white;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .content-section {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .summary-cards {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .summary-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    padding: 15px 10px;
+  }
+
+  .achievement-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+
+  .achievements-grid {
+    gap: 10px;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }

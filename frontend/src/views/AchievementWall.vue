@@ -198,7 +198,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { achievementApi } from '@/api/achievement'
-import './AchievementWall.css'
 import { useScheduleStore } from '@/stores/schedule'
 import type { Achievement, StudentRanking, TimelineEvent, StatisticsData } from '@/types'
 import QuickNav from '@/components/QuickNav.vue'
@@ -437,3 +436,5 @@ onMounted(async () => {
   }
 })
 </script>
+
+<style scoped src="./AchievementWall.css"></style>

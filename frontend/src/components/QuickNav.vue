@@ -14,6 +14,10 @@
         <span class="nav-icon">🏆</span>
         <span class="nav-text">我的成就</span>
       </router-link>
+      <router-link to="/games" class="nav-item" :class="{ active: $route.path === '/games' }">
+        <span class="nav-icon">🎮</span>
+        <span class="nav-text">益智游戏</span>
+      </router-link>
     </div>
     <router-link to="/" class="nav-item home-link" :class="{ active: $route.path === '/' }">
       <span class="nav-icon">🏠</span>

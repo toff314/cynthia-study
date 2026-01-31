@@ -8,6 +8,9 @@ import request from './index'
 export interface StatisticsSummary {
   total_users: number
   total_visits: number
+  total_schedules: number
+  total_quizzes: number
+  total_achievements: number
   last_updated: string
 }
 

@@ -592,9 +592,9 @@ class GameService:
                             grid[i][j] = 2
                             
         elif board_type == "xiangqi":
-            # 中国象棋：9列10行，第5行（索引4）为楚河汉界（合并为一格）
-            rows = 10
-            cols = 9
+            # 中国象棋：8列9行，第5行（索引4）为楚河汉界（合并为一格）
+            rows = 9
+            cols = 8
             grid = [[0 for _ in range(cols)] for _ in range(rows)]
             # 第5行（索引4）设为特殊值-1，表示楚河汉界（需要合并）
             grid[4] = [-1] * cols  # 用-1标记楚河汉界行

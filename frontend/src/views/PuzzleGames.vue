@@ -1,5 +1,6 @@
 <template>
   <div class="puzzle-games">
+    <QuickNav />
     <div class="header">
       <h1>🎮 益智游戏中心 🎮</h1>
       <p>远离电子产品，保护眼睛，在纸上快乐学习</p>
@@ -117,7 +118,7 @@
       <div class="count-selector">
         <span class="count-label">生成数量：</span>
         <button
-          v-for="count in [6, 8, 10]"
+          v-for="count in [6, 8, 10, 12]"
           :key="count"
           :class="['count-btn', { active: selectedParentCardCount === count }]"
           @click="selectedParentCardCount = count"
@@ -438,6 +439,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import QuickNav from '@/components/QuickNav.vue'
 import {
   getGameCategories,
   getGamesByAgeGroup,
@@ -454,7 +456,6 @@ import {
   type GameType,
   type GameState
 } from '@/api/games'
-import './PuzzleGames.css'
 
 // 状态管理
 const categories = ref<GameCategory[]>([])
@@ -816,3 +817,5 @@ const getPuzzleCellClass = (rowIndex: number, cellIndex: number, cell: string) =
   return classes
 }
 </script>
+
+<style scoped src="./PuzzleGames.css"></style>

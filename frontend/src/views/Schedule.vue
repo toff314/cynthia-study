@@ -99,7 +99,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { useScheduleStore } from '@/stores/schedule'
 import QuickNav from '@/components/QuickNav.vue'
-import './Schedule.css'
 
 const store = useScheduleStore()
 const saveMessage = ref('')
@@ -323,3 +322,5 @@ const handleLoadOrCreateQuiet = async () => {
   }
 }
 </script>
+
+<style scoped src="./Schedule.css"></style>

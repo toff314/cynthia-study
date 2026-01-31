@@ -9,3 +9,4 @@ node_modules
 logs
 *.pid
 venv
+tmp

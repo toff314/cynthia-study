@@ -125,7 +125,6 @@ import { ref, onMounted } from 'vue'
 import { quizApi, type FileInfo } from '@/api/quiz'
 import type { QuizData, ApiResponse } from '@/types'
 import QuickNav from '@/components/QuickNav.vue'
-import './QuizGenerator.css'
 
 const uploadMethod = ref<'server' | 'local'>('server')
 const files = ref<FileInfo[]>([])
@@ -322,3 +321,5 @@ onMounted(() => {
   loadServerFiles()
 })
 </script>
+
+<style scoped src="./QuizGenerator.css"></style>
