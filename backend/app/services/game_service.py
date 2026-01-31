@@ -647,20 +647,34 @@ class GameService:
                 
                 if game_type == "simon_says":
                     actions = game_info["actions"]
+                    # 随机选择动作
+                    selected_actions = random.sample(actions, min(card_count, len(actions)))
+                    # 如果卡片数量超过动作列表，则循环随机添加
+                    while len(selected_actions) < card_count:
+                        selected_actions.extend(random.sample(actions, min(card_count - len(selected_actions), len(actions))))
                     for i in range(card_count):
-                        action = actions[i % len(actions)]
-                        cards[f"卡片{i+1}"] = action
+                        cards[f"卡片{i+1}"] = selected_actions[i]
                
                 elif game_type == "who_is_undercover":
                     word_pairs = game_info["word_pairs"]
+                    # 随机选择词语对
+                    selected_pairs = random.sample(word_pairs, min(card_count, len(word_pairs)))
+                    # 如果卡片数量超过词语对列表，则循环随机添加
+                    while len(selected_pairs) < card_count:
+                        selected_pairs.extend(random.sample(word_pairs, min(card_count - len(selected_pairs), len(word_pairs))))
                     for i in range(card_count):
-                        pair = word_pairs[i % len(word_pairs)]
+                        pair = selected_pairs[i]
                         cards[f"卡片{i+1}"] = f"词语 A：{pair['a']}\n词语 B：{pair['b']}"
                
                 elif game_type == "reverse_command":
                     command_pairs = game_info["command_pairs"]
+                    # 随机选择指令对
+                    selected_pairs = random.sample(command_pairs, min(card_count, len(command_pairs)))
+                    # 如果卡片数量超过指令对列表，则循环随机添加
+                    while len(selected_pairs) < card_count:
+                        selected_pairs.extend(random.sample(command_pairs, min(card_count - len(selected_pairs), len(command_pairs))))
                     for i in range(card_count):
-                        pair = command_pairs[i % len(command_pairs)]
+                        pair = selected_pairs[i]
                         cards[f"卡片{i+1}"] = f"指令：{pair['original']}\n反向：{pair['reverse']}"
                
                 elif game_type == "number_game":
@@ -673,14 +687,24 @@ class GameService:
                
                 elif game_type == "gesture_game":
                     suggestions = game_info["suggestions"]
+                    # 随机选择建议
+                    selected_suggestions = random.sample(suggestions, min(card_count, len(suggestions)))
+                    # 如果卡片数量超过建议列表，则循环随机添加
+                    while len(selected_suggestions) < card_count:
+                        selected_suggestions.extend(random.sample(suggestions, min(card_count - len(selected_suggestions), len(suggestions))))
                     for i in range(card_count):
-                        suggestion = suggestions[i % len(suggestions)]
+                        suggestion = selected_suggestions[i]
                         cards[f"卡片{i+1}"] = f"起始动作：{suggestion}"
                 
                 elif game_type == "memory_game":
                     items_list = ITEMS_LIST
+                    # 随机选择物品组
+                    selected_items = random.sample(items_list, min(card_count, len(items_list)))
+                    # 如果卡片数量超过物品组列表，则循环随机添加
+                    while len(selected_items) < card_count:
+                        selected_items.extend(random.sample(items_list, min(card_count - len(selected_items), len(items_list))))
                     for i in range(card_count):
-                        items = items_list[i % len(items_list)]
+                        items = selected_items[i]
                         items_text = "、".join(items)
                         cards[f"卡片{i+1}"] = f"记忆物品：\n{items_text}"
                 
