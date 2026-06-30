@@ -171,7 +171,7 @@ def start_frontend():
     if is_frontend_running():
         print(f"✅ 前端服务启动成功 (PID: {process.pid})")
         print(f"📝 前端日志: {FRONTEND_LOG}")
-        print(f"🌐 前端地址: http://localhost:5173")
+        print(f"🌐 前端地址: http://localhost:80")
         return True
     else:
         print("❌ 前端服务启动失败，请查看日志")
@@ -201,7 +201,7 @@ def start_all():
         print("✅ 所有服务启动成功！")
         print()
         print("访问地址:")
-        print("  - 前端: http://localhost:5173")
+        print("  - 前端: http://localhost:80")
         print("  - 后端: http://localhost:8000")
         print("  - API文档: http://localhost:8000/docs")
         print()
@@ -327,7 +327,7 @@ def show_status():
         with open(FRONTEND_PID_FILE, 'r') as f:
             pid = f.read().strip()
         print(f"✅ 前端服务: 运行中 (PID: {pid})")
-        print(f"   地址: http://localhost:5173")
+        print(f"   地址: http://localhost:80")
     else:
         print("❌ 前端服务: 未运行")
     

@@ -117,6 +117,7 @@ class SudokuGenerateRequest(BaseModel):
     """数独生成请求"""
     size: int = Field(..., description="网格大小：4/6/9")
     difficulty: str = Field(default="normal", description="难度：easy/normal/hard")
+    count: Optional[int] = Field(default=None, description="生成数量：默认4宫格4个、6宫格2个、9宫格1个")
 
 
 class Point24GenerateRequest(BaseModel):

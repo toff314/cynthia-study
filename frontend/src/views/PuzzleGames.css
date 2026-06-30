@@ -1077,7 +1077,38 @@
   }
 
   .puzzles-row {
-    gap: 15px !important;
+    display: grid !important;
+    gap: 20px !important;
+    justify-items: center !important;
+  }
+
+  /* 4宫格、6宫格：打印时2列排列 */
+  .puzzles-row.size-4,
+  .puzzles-row.size-6 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* 9宫格：打印时1列排列 */
+  .puzzles-row.size-9 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .puzzle-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 4宫格、6宫格：3行（6个表格）后分页 */
+  .puzzle-item.size-4:nth-child(6n):not(:last-child),
+  .puzzle-item.size-6:nth-child(6n):not(:last-child) {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  /* 9宫格：2行（2个表格）后分页 */
+  .puzzle-item.size-9:nth-child(2n):not(:last-child) {
+    page-break-after: always !important;
+    break-after: page !important;
   }
 
   .puzzle-number {

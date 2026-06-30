@@ -143,6 +143,7 @@ export async function generateWordChain(params: {
 export async function generateSudoku(params: {
   size: number
   difficulty?: string
+  count?: number
 }) {
   return request.post('/api/games/generate/sudoku', params)
 }

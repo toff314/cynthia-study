@@ -144,7 +144,8 @@ async def generate_sudoku(request: SudokuGenerateRequest):
     """
     content = GameService.generate_sudoku(
         size=request.size,
-        difficulty=request.difficulty
+        difficulty=request.difficulty,
+        count=request.count
     )
     
     return {

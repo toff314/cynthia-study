@@ -50,7 +50,7 @@
       <div class="count-selector">
         <span class="count-label">生成数量：</span>
         <button
-          v-for="count in [5, 10, 15, 20]"
+          v-for="count in getCountOptions(selectedAgeGame, selectedCategory)"
           :key="count"
           :class="['count-btn', { active: selectedCount === count }]"
           @click="selectedCount = count"
@@ -205,11 +205,11 @@
         </div>
         
         <!-- 谜题区域（并排排列） -->
-        <div class="puzzles-row">
-          <div 
-            v-for="(puzzle, puzzleIndex) in gameContent.puzzles" 
+        <div :class="['puzzles-row', `size-${gameContent.size}`]">
+          <div
+            v-for="(puzzle, puzzleIndex) in gameContent.puzzles"
             :key="puzzleIndex"
-            class="puzzle-item"
+            :class="['puzzle-item', `size-${gameContent.size}`]"
           >
             <div class="puzzle-number" v-if="(gameContent.count ?? 0) > 1">#{{ puzzleIndex + 1 }}</div>
               <div class="sudoku-board" :class="`size-${gameContent.size} small`">
@@ -236,11 +236,11 @@
         <!-- 答案区域 -->
         <div v-if="showSolution" class="answers-section">
           <h4 style="text-align: center;">参考答案</h4>
-          <div class="puzzles-row">
-            <div 
-              v-for="(puzzle, puzzleIndex) in gameContent.puzzles" 
+          <div :class="['puzzles-row', `size-${gameContent.size}`]">
+            <div
+              v-for="(puzzle, puzzleIndex) in gameContent.puzzles"
               :key="`answer-${puzzleIndex}`"
-              class="puzzle-item"
+              :class="['puzzle-item', `size-${gameContent.size}`]"
             >
               <div class="puzzle-number" v-if="(gameContent.count ?? 0) > 1">#{{ puzzleIndex + 1 }}</div>
               <div class="sudoku-board" :class="`size-${gameContent.size} small`">
@@ -477,6 +477,29 @@ const lastGameType = ref<string>('')
 const lastChessParams = ref<any>(null)
 const lastParentChildParams = ref<any>(null)
 
+// 根据年龄段获取数独宫格大小
+const getSudokuSize = (ageGroup: string) => {
+  return ageGroup === 'low' ? 4 : (ageGroup === 'mid' ? 6 : 9)
+}
+
+// 根据游戏类型获取默认生成数量
+const getDefaultCount = (gameType: string, ageGroup: string) => {
+  if (gameType === 'sudoku') {
+    const size = getSudokuSize(ageGroup)
+    return size === 9 ? 1 : 2
+  }
+  return 10
+}
+
+// 根据游戏类型获取生成数量选项
+const getCountOptions = (gameType: string, ageGroup: string): number[] => {
+  if (gameType === 'sudoku') {
+    const size = getSudokuSize(ageGroup)
+    return size === 9 ? [1, 2, 4, 8] : [2, 4, 6, 12]
+  }
+  return [5, 10, 15, 20]
+}
+
 // 获取分类
 onMounted(async () => {
   try {
@@ -512,6 +535,7 @@ const selectParentGame = (gameType: string) => {
 // 选择年龄段游戏
 const selectAgeGame = (gameType: string) => {
   selectedAgeGame.value = gameType
+  selectedCount.value = getDefaultCount(gameType, selectedCategory.value)
 }
 
 // 获取年龄段标题
@@ -530,7 +554,7 @@ const generateGame = async (game: GameType, ageGroup: string) => {
     gameContent.value = null
     showSolution.value = false
 
-    lastGameParams.value = { game, ageGroup }
+    lastGameParams.value = { game, ageGroup, count: selectedCount.value }
     lastGameType.value = game.type
 
     switch (game.type) {
@@ -553,8 +577,8 @@ const generateGame = async (game: GameType, ageGroup: string) => {
         break
 
       case 'sudoku':
-        const size = ageGroup === 'low' ? 4 : (ageGroup === 'mid' ? 6 : 9)
-        const sudokuResult = await generateSudoku({ size })
+        const size = getSudokuSize(ageGroup)
+        const sudokuResult = await generateSudoku({ size, count: selectedCount.value })
         gameContent.value = sudokuResult.data
         gameTitle.value = '🔢 数独'
         break

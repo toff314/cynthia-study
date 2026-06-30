@@ -474,14 +474,21 @@ class GameService:
         }
 
     @staticmethod
-    def generate_sudoku(size: int = 9, difficulty: str = "normal") -> Dict[str, Any]:
-        """生成数独游戏"""
-        if size == 4:
-            num_puzzles = 3
-        elif size == 6:
-            num_puzzles = 2
-        else:
+    def generate_sudoku(size: int = 9, difficulty: str = "normal",
+                       count: Optional[int] = None) -> Dict[str, Any]:
+        """生成数独游戏
+        
+        Args:
+            size: 网格大小 (4/6/9)
+            difficulty: 难度级别 (easy/normal/hard)
+            count: 生成数量，默认4宫格4个、6宫格2个、9宫格1个
+        """
+        if count is not None:
+            num_puzzles = count
+        elif size == 9:
             num_puzzles = 1
+        else:
+            num_puzzles = 2
         
         puzzles = []
         
