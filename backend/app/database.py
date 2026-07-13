@@ -34,6 +34,7 @@ def init_db():
     from app.models.achievement import Achievement, UserAchievement
     from app.models.file_metadata import FileMetadata
     from app.models.statistics import Statistics
+    from app.models.study import QuestionBank, StudyRecord
     from app.services.achievement_service import AchievementService
     from sqlalchemy import inspect
     

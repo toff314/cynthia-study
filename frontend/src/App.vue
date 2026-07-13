@@ -22,5 +22,12 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
+  padding-left: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  #app {
+    padding-left: 40px;
+  }
 }
 </style>

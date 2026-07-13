@@ -35,6 +35,13 @@
           <span class="tool-arrow">→</span>
         </router-link>
 
+        <router-link to="/study" class="tool-card study">
+          <span class="tool-icon">📚</span>
+          <h2>学习题库</h2>
+          <p>数学·语文·英语题库练习<br/>巩固知识，查漏补缺</p>
+          <span class="tool-arrow">→</span>
+        </router-link>
+
         <div class="tool-card statistics" v-loading="loading">
           <span class="tool-icon">📊</span>
           <h2>使用统计</h2>

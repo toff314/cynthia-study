@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 .quiz-generator {
-  font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   padding: 20px;
@@ -36,7 +36,7 @@
   border-radius: 10px;
   padding: 15px 20px;
   margin-bottom: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .info-list {
@@ -68,7 +68,7 @@
 
 .tip-box:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 20px rgba(92, 184, 92, 0.3);
 }
 
 .tip-box p {
@@ -156,15 +156,15 @@
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: all 0.3s;
 }
 
-.method-tab:hover { border-color: #667eea; }
+.method-tab:hover { border-color: #5CB85C; }
 .method-tab.active {
-  background: #667eea;
+  background: #5CB85C;
   color: white;
-  border-color: #667eea;
+  border-color: #5CB85C;
 }
 
 .card {
@@ -172,7 +172,7 @@
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
 .card-header {
@@ -184,7 +184,7 @@
   margin-bottom: 15px;
 }
 
-.card-header h3 { color: #667eea; font-size: 18px; }
+.card-header h3 { color: #5CB85C; font-size: 18px; }
 
 .file-list {
   max-height: 350px;
@@ -210,11 +210,11 @@
 
 .file-item:hover { 
   background: #f0f0f0;
-  border-left-color: #667eea;
+  border-left-color: #5CB85C;
 }
 
 .file-item.selected { 
-  background: #667eea; 
+  background: #5CB85C; 
   color: white; 
   border-left-color: #4CAF50;
 }
@@ -287,7 +287,7 @@
   transition: all 0.3s;
 }
 
-.file-label:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+.file-label:hover { transform: translateY(-2px);   box-shadow: 0 5px 15px rgba(92, 184, 92, 0.4); }
 
 .file-label-icon { font-size: 32px; }
 .file-label-text { font-size: 16px; font-weight: bold; }
@@ -341,11 +341,11 @@
   border-radius: 15px;
   padding: 20px;
   margin-top: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
 .preview-title {
-  color: #667eea;
+  color: #5CB85C;
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 15px;

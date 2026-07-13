@@ -78,6 +78,10 @@
   border: 3px solid #E91E63;
 }
 
+.tool-card.study:hover {
+  border: 3px solid #9C27B0;
+}
+
 .tool-card.statistics:hover {
   border: 3px solid #9C27B0;
 }
