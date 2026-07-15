@@ -1,2693 +1,2328 @@
 {
-  "crawled_at": "2026-07-13T17:45:48",
-  "total_papers": 5,
+  "crawled_at": "2026-07-14T03:09:13",
+  "total_papers": 4,
   "papers": [
     {
-      "paper_id": "2055802",
-      "title": "2022-2023学年四川省泸州市叙永县西南大学版四年级下册期末教学质量监测数学试卷",
-      "url": "https://zujuan.xkw.com/23p2055802.html",
-      "grade": 4,
-      "semester": "下",
-      "date": "",
-      "difficulty": "medium",
-      "questions": [
-        {
-          "question_text": "1. 下列各数，与21.08相等的数是（       ）。 A．2.108\tB．21.080\tC．21.8",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "2.108"
-            },
-            {
-              "label": "B",
-              "text": "21.080"
-            },
-            {
-              "label": "C",
-              "text": "21.8"
-            }
-          ],
-          "knowledge": [
-            "小数的性质解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "2. 0.9里面有（       ）个0.1。 A．10\tB．9\tC．100",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "10"
-            },
-            {
-              "label": "B",
-              "text": "9"
-            },
-            {
-              "label": "C",
-              "text": "100"
-            }
-          ],
-          "knowledge": [
-            "小数的数位和计数单位的认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "3. 六一儿童节，四（1）班玩围三角形的游戏。下面（       ）组铁丝能围成一个三角形。 A．4cm，8cm，13cm\tB．3cm，7cm，9cm\tC．5cm，5cm，12cm",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "4cm，8cm，13cm"
-            },
-            {
-              "label": "B",
-              "text": "3cm，7cm，9cm"
-            },
-            {
-              "label": "C",
-              "text": "5cm，5cm，12cm"
-            }
-          ],
-          "knowledge": [
-            "三角形三边关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "4. 一个等腰三角形的底角是40°，这个三角形是（       ）。 A．锐角三角形\tB．直角三角形\tC．钝角三角形",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "锐角三角形"
-            },
-            {
-              "label": "B",
-              "text": "直角三角形"
-            },
-            {
-              "label": "C",
-              "text": "钝角三角形"
-            }
-          ],
-          "knowledge": [
-            "三角形的内角和解读",
-            "三角形的分类解读",
-            "等腰三角形和等边三角形的认识及特征解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "5. 下面的数，一个零都不读的是（       ）。 A．5.03\tB．1300\tC．8006",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "5.03"
-            },
-            {
-              "label": "B",
-              "text": "1300"
-            },
-            {
-              "label": "C",
-              "text": "8006"
-            }
-          ],
-          "knowledge": [
-            "万以内数的读、写法",
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "6. 把7.09两位小数“四舍五入”保留一位小数后是（       ）。 A．7.1\tB．7.0\tC．7.2",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "7.1"
-            },
-            {
-              "label": "B",
-              "text": "7.0"
-            },
-            {
-              "label": "C",
-              "text": "7.2"
-            }
-          ],
-          "knowledge": [
-            "小数的近似数"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "7. 端午节到了，食堂买回3箱粽子，平均每箱重65kg。第一箱和第二箱分别重60kg、52kg，第三箱重（       ）kg。 A．51\tB．53\tC．83",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "51"
-            },
-            {
-              "label": "B",
-              "text": "53"
-            },
-            {
-              "label": "C",
-              "text": "83"
-            }
-          ],
-          "knowledge": [
-            "无括号的运算顺序解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "8. 一个梯形，只有（       ）组对边平行。 A．2\tB．1\tC．3",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "2"
-            },
-            {
-              "label": "B",
-              "text": "1"
-            },
-            {
-              "label": "C",
-              "text": "3"
-            }
-          ],
-          "knowledge": [
-            "梯形的概念及特点"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "9. ，运用了（       ）。 A．乘法交换律\tB．乘法结合律\tC．乘法分配律",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "乘法交换律"
-            },
-            {
-              "label": "B",
-              "text": "乘法结合律"
-            },
-            {
-              "label": "C",
-              "text": "乘法分配律"
-            }
-          ],
-          "knowledge": [
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "10. 按照下图的规律摆火柴：摆到第96个三角形时用了（       ）根火柴。 A．288\tB．193\tC．285",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "288"
-            },
-            {
-              "label": "B",
-              "text": "193"
-            },
-            {
-              "label": "C",
-              "text": "285"
-            }
-          ],
-          "knowledge": [
-            "图形的变化规律"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "11. 正方形是特殊的长方形。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "正方形的概念及特点解读",
-            "长方形的概念及特点解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "12. 大于1.6，小于1.9的小数有2个。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的大小比较解读",
-            "一位小数的大小比较解读",
-            "小数的初步认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "13. 把9.870末尾的小数点去掉，这个小数的大小不变。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的性质解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "14. 盒子里有5个白球、3个红球，任意摸一个，不可能摸到黄球。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "判断事件发生的可能性的大小"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "15. 20减去20除以20的商，所得的差再乘20，结果是0。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "除加、除减混合运算",
-            "有括号的运算顺序"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "16. 泸州市2022年粮食总产量大约是2302000吨。把“2302000”改写成用“万”做单位的数是(        )万，把“2302000”万位后面的尾数省略后大约是(        )万。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的改写",
-            "整数的近似数解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "17. 根据加法算式56万＋32万＝88万，写出两个减法算式：(        )、(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "加、减法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "18. 把6.18的小数点向左移动两位后是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点向左移动引起小数大小变化的规律"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "19. 计算19×[200÷（20＋80）]时，先算(        )法，最后算(        )法，计算结果是(        )。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "20. 小方在教室里的座位（如下图），用数对表示(        )，她坐在(        )行第(        )列。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "用数对表示位置"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "21. 8.3dm＝(        )cm                         2km800m＝(        )km 3吨56千克＝(        )千克                    1.76m＝(        )m(        )cm",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "千米和米之间的进率与换算",
-            "毫米、厘米、分米、米之间的进率与换算",
-            "吨、千克之间的换算与比较",
-            "运用小数点移动解决小数的单位换算问题"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "22. 有一个两位小数，个位上的数是4，百分位上的数是9，其余数位上的数是0。这个数写作(        )，读作(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "23. 小玲家的果园里有8棵桃树，共摘桃96千克。照这样计算，兰兰家的16棵桃树能摘桃(      )千克。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "归一问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "24. 把一个三角形剪成两个三角形（如下图），其中一个三角形的内角和是(      )度。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "三角形的内角和解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "25. 有两个完全相同的三角形，三条边的长分别为6厘米、8厘米、10厘米。 把这两个三角形拼成一个平行四边形，拼成的平行四边形的周长最小是(        )厘米。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的概念及特点解读",
-            "用同样的图形拼接",
-            "平面图形的拼接解读",
-            "平行四边形的周长"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "26. 神舟十五号载人飞船于2022年11月29 日成功发射，于2023年6月4日返回地球，在东风着落场成功着落。神舟十五号载人飞船从发射成功到返回东风着落场共(      )天。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平年、闰年的认识及判定方法解读",
-            "年、月、日有关的计算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "27. 直接写出计算结果。 638＋62＝                    86－59＝             25×8＝                           91÷13＝ 2.4＋0.9＝                    5.4－0.2＝             5.06＋1.02＝             7.8－2.3＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "两、三位数的连续进位加法",
-            "一位小数的进位加法、退位减法",
-            "多位小数的不进位加法、不退位减法",
-            "两位数与一位数的乘法口算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "28. 用简便方法计算下列各题。 171＋225＋129             30－4.8－5.2             76×43＋76×57",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "整数加法交换律解读",
-            "整数乘法分配律解读",
-            "与小数减法相关的简便运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "29. 计算下列各题。 320＋45÷9×16                           38×（94－484÷11）                    810÷[（17.56＋12.44）×3]",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "无括号的运算顺序解读",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "30. 泸州市启动“垃圾分类进小区，绿色生活入人心”的垃圾分类活动。下面是文明小区A、B两栋楼居民一天的生活垃圾分类情况统计。 文明小区A、B两栋楼居民一天的生活垃圾分类情况统计表 楼别 可回收物（千克） 厨余垃圾（千克） 有害垃圾（千克） 其它垃圾（千克） A栋 10 15 5 9 B栋 11 13 7 8 （1）请你根据统计表完成条形统计图， 并标出数据。 （2）文明小区A、B两栋楼都是（       ）垃圾最多，（       ）垃圾最少。 （3）通过统计，你想到了什么？（       ）",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "B两栋楼居民一天的生活垃圾分类情况统计。 文明小区"
-            },
-            {
-              "label": "A",
-              "text": "B两栋楼居民一天的生活垃圾分类情况统计表 楼别 可回收物（千克） 厨余垃圾（千克） 有害垃圾（千克） 其它垃圾（千克） A栋 10 15 5 9 B栋 11 13 7 8 （1）请你根据统计表完成条形统计图， 并标出数据。 （2）文明小区"
-            },
-            {
-              "label": "A",
-              "text": "B两栋楼都是（       ）垃圾最多，（       ）垃圾最少。 （3）通过统计，你想到了什么？（       ）"
-            }
-          ],
-          "knowledge": [
-            "统计图表的综合应用解读",
-            "复式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "31. 在学校的运动会上，东东跳远成绩为1.65m，比佳佳多跳了0.23m，佳佳跳了多少米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的不进位加法、不退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "32. 今年是泸州市建市40周年，泸州市志愿者服务队购买了28套纪念服。每件上衣25元，每条裤子50元。购买这些纪念服需要多少钱？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "经济问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "33. 长江自西向东横贯泸州市境内，甲、乙两船分别从泸州境内的东、西两地同时相向而行。甲船每小时行20千米，乙船每小时行14千米。经过4时后两船相遇，泸州境内的长江航线有多少千米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "相遇问题解读",
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "34. 公园里有一批游客共20人，准备买票坐游船（票价如下）。其中9人是成人，11人是儿童。他们买游船票至少要花多少钱？ 成人票：35元/人 儿童票：15元/人 团体票：20元/人（10人及10人以上，可以购买团体票。）",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "购票问题解读",
-            "经济问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        }
-      ],
-      "question_count": 34,
-      "subject": "math",
-      "subject_name": "数学"
-    },
-    {
-      "paper_id": "2393993",
-      "title": "2022-2023学年四川省泸州市纳溪区西南大学版四年级下册期末质量监测数学试卷",
-      "url": "https://zujuan.xkw.com/23p2393993.html",
-      "grade": 4,
-      "semester": "下",
-      "date": "2024-12-30",
-      "difficulty": "medium",
-      "questions": [
-        {
-          "question_text": "1. 下列各数，与21.08相等的数是（       ）。 A．2.108\tB．21.080\tC．21.8",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "2.108"
-            },
-            {
-              "label": "B",
-              "text": "21.080"
-            },
-            {
-              "label": "C",
-              "text": "21.8"
-            }
-          ],
-          "knowledge": [
-            "小数的性质解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "2. 0.9里面有（       ）个0.1。 A．10\tB．9\tC．100",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "10"
-            },
-            {
-              "label": "B",
-              "text": "9"
-            },
-            {
-              "label": "C",
-              "text": "100"
-            }
-          ],
-          "knowledge": [
-            "小数的数位和计数单位的认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "3. 六·一儿童节，四（1）班玩围三角形的游戏。下面（       ）组铁丝能围成一个三角形。 A．\tB．\tC．",
-          "question_type": "choice",
-          "options": [],
-          "knowledge": [
-            "三角形三边关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "4. 一个等腰三角形的底角是40°，这个三角形是（       ）。 A．锐角三角形\tB．直角三角形\tC．钝角三角形",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "锐角三角形"
-            },
-            {
-              "label": "B",
-              "text": "直角三角形"
-            },
-            {
-              "label": "C",
-              "text": "钝角三角形"
-            }
-          ],
-          "knowledge": [
-            "三角形的内角和解读",
-            "三角形的分类解读",
-            "等腰三角形和等边三角形的认识及特征解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "5. 下面的数，一个零都不读的是（       ）。 A．5.03\tB．1300\tC．8006",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "5.03"
-            },
-            {
-              "label": "B",
-              "text": "1300"
-            },
-            {
-              "label": "C",
-              "text": "8006"
-            }
-          ],
-          "knowledge": [
-            "万以内数的读、写法",
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "6. 把7.09两位小数“四舍五入”保留一位小数后是（       ）。 A．7.1\tB．7.0\tC．7.2",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "7.1"
-            },
-            {
-              "label": "B",
-              "text": "7.0"
-            },
-            {
-              "label": "C",
-              "text": "7.2"
-            }
-          ],
-          "knowledge": [
-            "小数的近似数"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "7. 端午节到了，食堂买回3箱粽子，平均每箱重65kg。第一箱和第二箱分别重60kg、52kg，第三箱重（       ）kg。 A．51\tB．53\tC．83",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "51"
-            },
-            {
-              "label": "B",
-              "text": "53"
-            },
-            {
-              "label": "C",
-              "text": "83"
-            }
-          ],
-          "knowledge": [
-            "无括号的运算顺序解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "8. 一个梯形，只有（       ）组对边平行。 A．2\tB．1\tC．3",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "2"
-            },
-            {
-              "label": "B",
-              "text": "1"
-            },
-            {
-              "label": "C",
-              "text": "3"
-            }
-          ],
-          "knowledge": [
-            "梯形的概念及特点"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "9. ，运用了（       ）。 A．乘法交换律\tB．乘法结合律\tC．乘法分配律",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "乘法交换律"
-            },
-            {
-              "label": "B",
-              "text": "乘法结合律"
-            },
-            {
-              "label": "C",
-              "text": "乘法分配律"
-            }
-          ],
-          "knowledge": [
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "10. 按照下图的规律摆火柴：摆到第96个三角形时用了（       ）根火柴。 A．288\tB．193\tC．285",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "288"
-            },
-            {
-              "label": "B",
-              "text": "193"
-            },
-            {
-              "label": "C",
-              "text": "285"
-            }
-          ],
-          "knowledge": [
-            "图形的变化规律"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "11. 正方形是特殊的长方形。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "正方形的概念及特点解读",
-            "长方形的概念及特点解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "12. 大于1.6，小于1.9的小数有2个。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的大小比较解读",
-            "一位小数的大小比较解读",
-            "小数的初步认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "13. 把9.870末尾的小数点去掉，这个小数的大小不变。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的性质解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "14. 盒子里有5个白球、3个红球，任意摸一个，不可能摸到黄球。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "判断事件发生的可能性的大小"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "15. 20减去20除以20的商，所得的差再乘20，结果是0。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "除加、除减混合运算",
-            "有括号的运算顺序"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "16. 泸州市2022年粮食总产量大约是2302000吨。把“2302000”改写成用“万”做单位的数是(        )万，把“2302000”万位后面的尾数省略后大约是(        )万。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的改写",
-            "整数的近似数解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "17. 根据加法算式56万＋32万＝88万，写出两个减法算式：(        )、(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "加、减法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "18. 把6.18的小数点向左移动两位后是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点向左移动引起小数大小变化的规律"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "19. 计算19×[200÷（20＋80）]时，先算(        )法，最后算(        )法，计算结果是(        )。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "20. 小方在教室里的座位（如下图），用数对表示(        )，她坐在(        )行第(        )列。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "用数对表示位置"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "21. 8.3dm＝(        )cm                         2km800m＝(        )km 3吨56千克＝(        )千克                    1.76m＝(        )m(        )cm",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "千米和米之间的进率与换算",
-            "毫米、厘米、分米、米之间的进率与换算",
-            "吨、千克之间的换算与比较",
-            "运用小数点移动解决小数的单位换算问题"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "22. 有一个两位小数，个位上的数是4，百分位上的数是9，其余数位上的数是0。这个数写作(        )，读作(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "23. 小玲家的果园里有8棵桃树，共摘桃96千克。照这样计算，兰兰家的16棵桃树能摘桃(      )千克。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "归一问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "24. 把一个三角形剪成两个三角形（如下图），其中一个三角形的内角和是(      )度。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "三角形的内角和解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "25. 有两个完全相同的三角形，三条边的长分别为6厘米、8厘米、10厘米。 把这两个三角形拼成一个平行四边形，拼成的平行四边形的周长最小是(        )厘米。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的概念及特点解读",
-            "用同样的图形拼接",
-            "平面图形的拼接解读",
-            "平行四边形的周长"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "26. 神舟十五号载人飞船于2022年11月29 日成功发射，于2023年6月4日返回地球，在东风着落场成功着落。神舟十五号载人飞船从发射成功到返回东风着落场共(      )天。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平年、闰年的认识及判定方法解读",
-            "年、月、日有关的计算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "27. 直接写出计算结果。 638＋62＝                    86－59＝             25×8＝                           91÷13＝ 2.4＋0.9＝                    5.4－0.2＝             5.06＋1.02＝             7.8－2.3＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "两、三位数的连续进位加法",
-            "一位小数的进位加法、退位减法",
-            "多位小数的不进位加法、不退位减法",
-            "两位数与一位数的乘法口算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "28. 用简便方法计算下列各题。 171＋225＋129             30－4.8－5.2             76×43＋76×57",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "整数加法交换律解读",
-            "整数乘法分配律解读",
-            "与小数减法相关的简便运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "29. 计算下列各题。 320＋45÷9×16                           38×（94－484÷11）                    810÷[（17.56＋12.44）×3]",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "无括号的运算顺序解读",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "30. 泸州市启动“垃圾分类进小区，绿色生活入人心”的垃圾分类活动。下面是文明小区A、B两栋楼居民一天的生活垃圾分类情况统计。 文明小区A、B两栋楼居民一天的生活垃圾分类情况统计表 楼别 可回收物（千克） 厨余垃圾（千克） 有害垃圾（千克） 其它垃圾（千克） A栋 10 15 5 9 B栋 11 13 7 8 （1）请你根据统计表完成条形统计图， 并标出数据。 （2）文明小区A、B两栋楼都是（       ）垃圾最多，（       ）垃圾最少。 （3）通过统计，你想到了什么？（       ）",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "B两栋楼居民一天的生活垃圾分类情况统计。 文明小区"
-            },
-            {
-              "label": "A",
-              "text": "B两栋楼居民一天的生活垃圾分类情况统计表 楼别 可回收物（千克） 厨余垃圾（千克） 有害垃圾（千克） 其它垃圾（千克） A栋 10 15 5 9 B栋 11 13 7 8 （1）请你根据统计表完成条形统计图， 并标出数据。 （2）文明小区"
-            },
-            {
-              "label": "A",
-              "text": "B两栋楼都是（       ）垃圾最多，（       ）垃圾最少。 （3）通过统计，你想到了什么？（       ）"
-            }
-          ],
-          "knowledge": [
-            "统计图表的综合应用解读",
-            "复式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "31. 在学校的运动会上，东东跳远成绩为1.65m，比佳佳多跳了0.23m，佳佳跳了多少米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的不进位加法、不退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "32. 今年是泸州市建市40周年，泸州市志愿者服务队购买了28套纪念服。每件上衣25元，每条裤子50元。购买这些纪念服需要多少钱？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "经济问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "33. 长江自西向东横贯泸州市境内，甲、乙两船分别从泸州境内的东、西两地同时相向而行。甲船每小时行20千米，乙船每小时行14千米。经过4时后两船相遇，泸州境内的长江航线有多少千米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "相遇问题解读",
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "34. 公园里有一批游客共20人，准备买票坐游船（票价如下）。其中9人是成人，11人是儿童。他们买游船票至少要花多少钱？ 成人票：35元/人 儿童票：15元/人 团体票：20元/人（10人及10人以上，可以购买团体票。）",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "购票问题解读",
-            "经济问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        }
-      ],
-      "question_count": 34,
-      "subject": "math",
-      "subject_name": "数学"
-    },
-    {
-      "paper_id": "1261769",
-      "title": "2020-2021学年四川省泸州市龙马潭区西南大学版四年级下册期末考试数学试卷",
-      "url": "https://zujuan.xkw.com/23p1261769.html",
-      "grade": 4,
-      "semester": "下",
-      "date": "",
-      "difficulty": "medium",
-      "questions": [
-        {
-          "question_text": "1. 在计算时，应先算(        )法，再算(        )法，最后算(        )法。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "有括号的运算顺序"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "2. 458760＝(        )万≈(        )万（保留两位小数） 319000000＝(        )亿≈(        )亿（保留一位小数）",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "整数的近似数解读",
-            "小数的近似数和改写解读",
-            "整数的改写解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "3. 一个数百位和百分位上都是6，其余各位都是0，这个数是(        )，读作(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "4. 把一个小数的小数点先向右移动两位，再向左移动三位得9.48，这个小数原来是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "5. 如图，用小棒摆三角形。 (1)摆1个三角形要用(        )根小棒，摆2个三角形要用(        )根小棒。 (2)像这样摆下去，摆18个这样的三角形，需要(        )根小棒。 (3)像这样摆下去，一共用了77根小棒，共摆了(        )个这样的三角形。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "图形的规律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "6. 0.408是由4个(        )和8个(        )组成。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的数位和计数单位的认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "7. 一个等腰梯形的下底是9厘米，上底是7厘米，一条腰长6厘米，围成这个等腰梯形至少要(        )厘米长的铁丝。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "梯形的周长解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "8. 一个三位小数保留两位小数后得26.40，这个三位小数最小是(        )，最大是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的近似数和改写解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "9. 小兰语文、数学、科学三门学科的平均分是88分，语文、数学两门学科的平均分是85分，小兰科学得了(        )分。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平均数的意义及求法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "10. 等腰三角形的一个底角是36°，顶角是(        )，这个三角形按角分类是(        )三角形。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的内角和解读",
-            "三角形的分类解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "11. 平行四边形和梯形都有(        )条高，内角和都是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的高及画法解读",
-            "多边形的内角和解读",
-            "梯形的高及画法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "12. 直角三角形只有一条高。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的高及画法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "13. 梯形只要求一组对边平行，另一组对边可以平行，也可以不平行。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "梯形的概念及特点"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "14. 将8.70的小数点去掉，它就扩大到原来的100倍。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "15. 8×7×5＝7×（8×5），这个算式只运用了乘法交换律。(        )",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "整数乘法交换律解读",
-            "整数乘法结合律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "16. 9.98精确到十分位约是10。(        )",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的近似数和改写解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "17. 下面各数中，去掉“0”大小不变的数是（       ）。 A．280\tB．7.08\tC．7.80",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "280"
-            },
-            {
-              "label": "B",
-              "text": "7.08"
-            },
-            {
-              "label": "C",
-              "text": "7.80"
-            }
-          ],
-          "knowledge": [
-            "小数的性质解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "18. 下面（       ）组中的三条线段能围成三角形。 A．5cm、5cm、10cm\tB．6cm、8cm、11cm\tC．14cm、4cm、20cm",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "5cm、5cm、10cm"
-            },
-            {
-              "label": "B",
-              "text": "6cm、8cm、11cm"
-            },
-            {
-              "label": "C",
-              "text": "14cm、4cm、20cm"
-            }
-          ],
-          "knowledge": [
-            "三角形三边关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "19. 在一个梯形里，画一条线段，将梯形分成一个三角形和一个平行四边形，有（       ）种画法。 A．1\tB．2\tC．无数种",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "1"
-            },
-            {
-              "label": "B",
-              "text": "2"
-            },
-            {
-              "label": "C",
-              "text": "无数种"
-            }
-          ],
-          "knowledge": [
-            "平面图形的分割解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "20. 与38×199计算结果相同的是（       ）。 A．30＋8×199\tB．38×100＋99\tC．38×200－38",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "30＋8×199"
-            },
-            {
-              "label": "B",
-              "text": "38×100＋99"
-            },
-            {
-              "label": "C",
-              "text": "38×200－38"
-            }
-          ],
-          "knowledge": [
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "21. （       ）÷32＝9……5，那么括号里可以填的数是（       ）。 A．28\tB．293\tC．46",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "28"
-            },
-            {
-              "label": "B",
-              "text": "293"
-            },
-            {
-              "label": "C",
-              "text": "46"
-            }
-          ],
-          "knowledge": [
-            "三位数除以两位数的有余数除法",
-            "乘、除法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "22. 直接写出下面各题的得数。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读",
-            "除加、除减混合运算",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "23. 简便计算。 125×64       4×65×25       69×101 143×9＋143       287×17－7×（       ）（在括号里填上适当的数，使计算简便）",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "整数乘法交换律解读",
-            "整数乘法结合律解读",
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "24. 脱式计算。 [625－（150－125）]×70             180－（325－900÷5）            11.2－5.76＋0.97",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "小数的加、减法混合运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "25. 画出下列各图形指定底边上的高。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的高及画法解读",
-            "三角形的高及画法解读",
-            "梯形的高及画法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "26. 画出下面方格中向右平移4格后的平行四边形，并用数对表示平移后各顶点的位置。 用数对表示平移后A点的位置是______，B点的位置是______，C点的位置是______，D点的位置是______。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "作平移后的图形解读",
-            "用数对表示位置"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "27. 看统计表完成统计图，并回答问题。 （1）根据上表中数据，完成下面条形统计图。 （2）平均每个年级有（       ）人参加比赛。 星星小学三~六年级同学参加体育比赛情况统计图",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "平均数的意义及求法解读",
-            "复式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "28. 一种棉纱1千克可织布7.5米，这种棉纱1克可织布多少厘米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读",
-            "厘米和米之间的进率与换算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "29. 王琳同学参加社团活动，买足球用去88.3元，比买排球多用去34.5元。王琳同学买足球和排球共用去多少元？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的加、减法混合运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "30. 中国共产党成立以来，人民生活蒸蒸日上，精神文化生活也越来越丰富多彩。大剧院举办大型交响乐演出，共设甲等座位80个，乙等座位360个。一场演出共收入16200元，那么本场演出最少有多少人来观看？ 甲等票价：99元 乙等票价：69元",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "经济问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "31. 学校买12张桌子和54把椅子需2700元，3把椅子的钱正好是1张桌子的钱。桌子和椅子的单价各是多少元？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "等量代换"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "32. 如下图，A、C两城间有两条公路。一辆汽车从A城出发，经B城到C城共用了6小时。 （1）返回时走另一条路，且每小时比去时每小时多行6km，返回到A城至少要用多少时间？ （2）现在计划新建一条公路，使B城与公路AC连通，怎样设计路程最短？请在图上画出设计路线",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "基础行程问题解读",
-            "画垂线解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "33. 社区开展假日志愿者服务，小强和小刚分别从自己家出发去社区办公室报名，小强骑摩托车，每分钟行600米，小刚骑自行车，每分钟行200米。小强比小刚提前2分钟出发，再经过7分钟后他们同时到达社区办公室，根据以上信息，提出一个数学问题并解决。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "基础行程问题解读",
-            "“提问题”“填条件”问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        }
-      ],
-      "question_count": 33,
-      "subject": "math",
-      "subject_name": "数学"
-    },
-    {
-      "paper_id": "1415430",
-      "title": "2021-2022学年四川省泸州市合江县西南大学版四年级下册期末考试数学试卷",
-      "url": "https://zujuan.xkw.com/23p1415430.html",
-      "grade": 4,
+      "paper_id": "3247849",
+      "title": "广东省清远市清城区2024-2025学年人教PEP版三年级下学期期末考试英语试题",
+      "url": "https://zujuan.xkw.com/25p3247849.html",
+      "grade": 3,
       "semester": "下",
       "date": "",
       "difficulty": "easy",
       "questions": [
         {
-          "question_text": "1. 个位和百分位上都是6，其他数位上都是0的数是（　　）。 A．6.06\tB．6.60\tC．600.06",
+          "question_text": "给同类单词找室友。 A. Canada     B. eighteen     C. under     D. long     E. touch F. short     G. China     H. taste     I. in     J. fourteen 1. fifteen _________ 2. thin _________ 3. UK _________ 4. hear _________ 5. on _________",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "6.06"
+              "text": "Canada"
             },
             {
               "label": "B",
-              "text": "6.60"
+              "text": "eighteen"
             },
             {
               "label": "C",
-              "text": "600.06"
+              "text": "under"
+            },
+            {
+              "label": "D",
+              "text": "long"
+            },
+            {
+              "label": "E",
+              "text": "touch F. short     G. China     H. taste     I. in     J. fourteen 1. fifteen _________ 2. thin _________ 3. UK _________ 4. hear _________ 5. on _________"
             }
           ],
           "knowledge": [
-            "小数的读法和写法解读"
+            "China",
+            "fourteen",
+            "Canada",
+            "形容词辨析解读",
+            "touch",
+            "taste",
+            "类别分类解读",
+            "动词辨析解读",
+            "eighteen",
+            "short",
+            "long",
+            "介词辨析解读",
+            "under"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "2. （       ）具有不易变性的特征。 A．三角形\tB．平行四边形\tC．长方形",
+          "question_text": "读句子，把图片和句子配对。 A.      B.      C.      D.      E. 6. The boy is a student. (     ) 7. It has a fat body and big ears. (     ) 8. —I’d like some meat, please. (     ) —Sure, here you are. 9. —Where is my ruler? (     ) —It’s on the chair. 10. —How much is the pen? (     ) —It’s sixteen yuan.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "E",
+              "text": "6. The boy is a student. (     ) 7. It has a fat body and big ears. (     ) 8. —I’d like some meat, please. (     ) —Sure, here you are. 9. —Where is my ruler? (     ) —It’s on the chair. 10. —How much is the pen? (     ) —It’s sixteen yuan."
+            }
+          ],
+          "knowledge": [
+            "how",
+            "much引导的特殊疑问句及其回答",
+            "陈述句肯定形式解读",
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "11. —Who’s that ________? (          ) —She’s my teacher, Miss Lin. A．boy\tB．man\tC．woman",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "三角形"
+              "text": "boy"
             },
             {
               "label": "B",
-              "text": "平行四边形"
+              "text": "man"
             },
             {
               "label": "C",
-              "text": "长方形"
+              "text": "woman"
             }
           ],
           "knowledge": [
-            "平行四边形的不稳定性及应用",
-            "三角形的稳定性及应用解读"
+            "woman",
+            "boy",
+            "man",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "3. （380－65×2）÷5的正确运算顺序是（   ）。 A．乘法、减法、除法\tB．乘法、除法、减法\tC．除法、乘法、减法",
+          "question_text": "12. We can ________ with our ears. (          ) A．taste\tB．hear\tC．touch",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "乘法、减法、除法"
+              "text": "taste"
             },
             {
               "label": "B",
-              "text": "乘法、除法、减法"
+              "text": "hear"
             },
             {
               "label": "C",
-              "text": "除法、乘法、减法"
+              "text": "touch"
             }
           ],
           "knowledge": [
-            "整数四则混合运算解读"
+            "动词辨析解读",
+            "hear",
+            "touch",
+            "taste"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "4. 一个四边形只有一组对边平行，这个四边形是（       ）。 A．梯形\tB．长方形\tC．平行四边形",
+          "question_text": "13. —Do you have any old things? (          ) —________ A．Yes, I do.\tB．Yes, it is.\tC．No, it isn’t.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "D",
+              "text": "o you have any old things? (          ) —________"
+            },
+            {
+              "label": "A",
+              "text": "Yes, I do."
+            },
+            {
+              "label": "B",
+              "text": "Yes, it is."
+            },
+            {
+              "label": "C",
+              "text": "No, it isn’t."
+            }
+          ],
+          "knowledge": [
+            "助动词引导的一般疑问句及其回答",
+            "其他情景交际用语"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "14. —________ books do we have? (          ) —We have seventeen. A．How many\tB．How much\tC．How old",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "梯形"
+              "text": "How many"
             },
             {
               "label": "B",
-              "text": "长方形"
+              "text": "How much"
             },
             {
               "label": "C",
-              "text": "平行四边形"
+              "text": "How old"
             }
           ],
           "knowledge": [
-            "平行四边形的概念及特点解读",
-            "长方形的概念及特点解读",
-            "梯形的概念及特点"
+            "how",
+            "many引导的特殊疑问句及其回答",
+            "how",
+            "many",
+            "其他固定搭配",
+            "数量解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "5. 杨树再种（ ）棵就和柳树同样多。 A．4\tB．6\tC．8",
+          "question_text": "15. One rabbit has two ears. Ten rabbits have ________ ears. (          ) A．eleven\tB．twelve\tC．twenty",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "4"
+              "text": "eleven"
             },
             {
               "label": "B",
-              "text": "6"
+              "text": "twelve"
             },
             {
               "label": "C",
-              "text": "8"
+              "text": "twenty"
             }
           ],
           "knowledge": [
-            "1格表示多个单位的单式条形统计图解读"
+            "twenty",
+            "twelve",
+            "eleven",
+            "基数词解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "6. 下面各组线段中，能拼成平行四边形的一组是（       ）。 A．3cm、5cm、4cm、6cm\tB．3cm、5cm、3cm、5cm\tC．3cm、5cm、5cm、4cm",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "3cm、5cm、4cm、6cm"
-            },
-            {
-              "label": "B",
-              "text": "3cm、5cm、3cm、5cm"
-            },
-            {
-              "label": "C",
-              "text": "3cm、5cm、5cm、4cm"
-            }
-          ],
+          "question_text": "文章大意：短文介绍了汤姆的基本信息。 阅读短文，判断句子是(T)否(F)正确。 Hello, I’m Tom. I’m a student. I’m eleven years old. I’m from Canada. I have fourteen old books and seventeen toy cars. I love fruit and vegetables. They’re healthy. I have a pet cat. It’s fat. It has a fat body and short legs. Look! It’s under my chair. So cute! 16. Tom is 11 years old. (     ) 17. Tom is from China. (     ) 18. Tom has 14 toy cars. (     ) 19. Tom loves fruit and vegetables. (     ) 20. The cat is under the chair. (     )",
+          "question_type": "true_false",
+          "options": null,
           "knowledge": [
-            "平行四边形的概念及特点解读"
+            "兴趣爱好解读",
+            "个人信息"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "7. 小李的遥控飞机在航模比赛中共飞行了5次其中飞行的时间最长的一次是68秒，最短的一次是63秒，这5次平均飞行的时间可能是（       ）秒。 A．63\tB．65\tC．68",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "63"
-            },
-            {
-              "label": "B",
-              "text": "65"
-            },
-            {
-              "label": "C",
-              "text": "68"
-            }
-          ],
-          "knowledge": [
-            "平均数的意义及求法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "8. 把一个长方形框架，拉成一个平行四边形，以下说法正确的是（       ）。 A．周长变短了\tB．周长没变\tC．周长变长了",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "周长变短了"
-            },
-            {
-              "label": "B",
-              "text": "周长没变"
-            },
-            {
-              "label": "C",
-              "text": "周长变长了"
-            }
-          ],
-          "knowledge": [
-            "周长的认识和大小比较解读",
-            "长方形的周长解读",
-            "平行四边形的周长"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "9. 条形统计图可以通过条形的（       ）看出数量的多和少。 A．长短\tB．宽窄\tC．颜色",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "长短"
-            },
-            {
-              "label": "B",
-              "text": "宽窄"
-            },
-            {
-              "label": "C",
-              "text": "颜色"
-            }
-          ],
-          "knowledge": [
-            "1格表示一个单位的单式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "10. 在一个没有余数的除法里，除数是14，商是75，被除数是（       ）。 A．1050\tB．950\tC．115",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "1050"
-            },
-            {
-              "label": "B",
-              "text": "950"
-            },
-            {
-              "label": "C",
-              "text": "115"
-            }
-          ],
-          "knowledge": [
-            "乘、除法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "11. 去掉小数点后面的零，小数的值不变。(      )",
+          "question_text": "21. I often make a  (card / car) for my mum.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "小数的性质解读"
+            "car",
+            "card",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "12. 梯形可以作无数条高。(        )",
+          "question_text": "22. —Who’s that  (man / woman)? —He’s my father.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "梯形的概念及特点",
-            "梯形的高及画法解读"
+            "woman",
+            "man",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "13. 几个数相乘，改变它们原来的运算顺序，积不变。(       )",
+          "question_text": "23. I  (smell / see) with my eyes.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "整数乘法交换律解读",
-            "整数乘法结合律解读"
+            "动词辨析解读",
+            "see",
+            "smell"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "14. 用括号能改变四则混合运算顺序。(        )",
+          "question_text": "24. —Have some  (juice / milk) too. —Thanks!",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "带有小括号的混合运算解读",
-            "无括号的运算顺序解读",
-            "有括号的运算顺序"
+            "juice",
+            "名词辨析解读",
+            "milk"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "15. 有两个角是锐角的三角形叫锐角三角形。(        )",
+          "question_text": "25. —How much is this  (doll / ball)? —It’s eleven yuan.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "三角形的分类解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "16. 三点八三写作(        )，有(        )位小数，它的计数单位是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的数位和计数单位的认识解读",
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "17. 把1，5，7，3四个数字组成最大的两位小数是(          )，最小的两位小数是(          )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的大小比较解读",
-            "小数的数位和计数单位的认识解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "18. 根据△×□＝20，写出一个除法算式：(        )÷(        )＝(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "乘、除法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "19. 用、和第三根木棒首尾相接组成三角形，则第三根木棒最短是(      )，最长可以是(      )。（整厘米长）",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "三角形三边关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "20. 在一个三角形中，∠1＝28°，∠2＝52°，∠3＝(        )°。这是一个(        )三角形。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的内角和解读",
-            "三角形的分类解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "21. 从平行四边形的一个顶点向对边作一条高，可以把平行四边形分成一个(        )形和一个(        )形。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的分类解读",
-            "平行四边形的高及画法解读",
-            "直角梯形和等腰梯形的概念及特点",
-            "平面图形的分割解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "22. 用70cm围一个等腰梯形，上底和腰长都是15cm，则下底长(        )cm。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "梯形的周长解读",
-            "直角梯形和等腰梯形的概念及特点"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "23. 条形统计图用2格表示40人，平均每格表示(        )人，5格表示(        )人，要表示120人要(        )格。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "归一问题解读",
-            "1格表示多个单位的单式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "24. 中国解析数论、矩几何学、典型群、自守函数论与多元复变函数论等多方研究的创始人和开拓者，他发现的统筹法和优选法在工农业生产中应用比较普遍，他是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的周长解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "25. 把0.02扩大到它的(        )倍是20，把7.5缩小到它的是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "26. 爸爸使用的皮带每两孔间的相隔3厘米。健身减肥前他使用第6孔，减肥后他使用第 2个孔。他的腰围减少了________厘米。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "间隔问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "27. 一个梯形的上底是7.8dm，比下底短3dm，高是上底的一半。这个梯形的下底是(        )dm，高是(        )dm，面积是(        )dm2。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "梯形的面积解读",
-            "小数与小数的乘法",
-            "小数的四则运算及法则解读",
-            "除数是整数的小数除法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "28. 放学以后，红红以每分60m的速度从学校往西走5分到了书店，买好书以后她又往北走2格再往东走3格就到家了。请用小点在图上标出书店和家的位置，并用数对表示。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "用数对表示位置",
-            "根据方向和距离描述简单的路线"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "29. 直接写出得数。 7－4.32＝                 4.23×10＝                 0.8＋0.02＝                 125×8＋40＝ 5÷100＝                 3.8＋7.2＝                 1.6－0.7＝                 25×4＋25×4＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点位置的移动解读",
-            "一位小数的进位加法、退位减法",
-            "乘加、乘减混合运算",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "30. 列竖式计算。 62.7－23.74＝                 25.8＋7.94＝                 102×43＝ 63×99＝                       595＋85＝                    840＋6＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三位数乘两位数，三位数中间有0解读",
-            "两、三位数的连续进位加法",
-            "两位数乘两位数的进位乘法",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "31. 计算下面各题。（怎样简便就怎样算） 420÷[3×（271－251）]                 8.65＋29.37－35.08                 8.29＋3.7＋2.71 25×16×125                                 288－47×（234÷39）                 675×39－375×39",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "带有中括号的混合运算解读",
-            "小数加、减法简便运算",
-            "整数乘法分配律解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "32. 四年级在劳动实践基地种植中草药，收获时四一中队采集中草药三个小队一共采集了9.81kg，第一小队采集了3.75kg，第二小队采集了3.25kg，第三小队采集了多少kg？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的加、减法混合运算",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "33. 一只啄木鸟每天能吃72只害虫，一只青蛙4天能吃800只害虫，青蛙比啄木鸟每天多吃多少只害虫？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "除加、除减混合运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "34. 为弘扬尊老、爱老、敬老、助老的传统美德，志愿者赵叔叔骑自行车，万叔叔坐公交车同时从家相对出发，经过2小时，在敬老院相遇。赵叔叔骑自行车每小时行16km，万叔叔坐公交车每小时行37km，万叔叔家到赵叔叔家多少km？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "相遇问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "35. 在课后服务时，两个小组共做267个中国结。第一小组每小时做18个，第二小组每小时做12个。第一小组做27个后，两个小组合作还要多少时才能完成任务？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "工程问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "36. 学校买了6个篮球和5个排球，每个篮球60元，买5个排球的钱正好够买3个篮球，学校买这些球一共用了多少元？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "等量代换"
+            "doll",
+            "名词辨析解读",
+            "ball"
           ],
           "answer": "",
           "explanation": ""
         }
       ],
-      "question_count": 36,
-      "subject": "math",
-      "subject_name": "数学"
+      "question_count": 13,
+      "subject": "english",
+      "subject_name": "英语"
     },
     {
-      "paper_id": "2721290",
-      "title": "2024-2025学年四川省眉山市仁寿县西南大学版四年级下册期末考试数学试卷",
-      "url": "https://zujuan.xkw.com/23p2721290.html",
-      "grade": 4,
+      "paper_id": "2039534",
+      "title": "2023-2024学年广东省清远市人教PEP版三年级下册期中练习英语试卷",
+      "url": "https://zujuan.xkw.com/25p2039534.html",
+      "grade": 3,
+      "semester": "下",
+      "date": "",
+      "difficulty": "medium",
+      "questions": [
+        {
+          "question_text": "00:00/00:00 1. 辨音，根据录音要求选择正确的选项。 第1小题至第5小题：选出听到发音的相对应的字母。 (     ) 1. A. k                 B. j                 C. l (     ) 2. A. z                 B. f                 C. q (     ) 3. A. t                 B. r                 C. s (     ) 4. A. y                 B. w                 C. v (     ) 5. A. n                 B. m                 C. h 第6小题至第8小题:选出所读单词一共有几个音素？ (     ) 6. A. 1个             B. 2个               C. 3个 (     ) 7. A. 1个             B. 2个               C. 3个 (     ) 8. A. 2个             B. 3个               C. 4个 第9小题至第10小题:选出所听到发音是单词中的第几个音？ (     ) 9. A. 第一个        B. 第二个          C. 第三个 (     ) 10. A. 第一个       B. 第二个          C. 第三个",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "k"
+            },
+            {
+              "label": "B",
+              "text": "j"
+            },
+            {
+              "label": "C",
+              "text": "l (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "z"
+            },
+            {
+              "label": "B",
+              "text": "f"
+            },
+            {
+              "label": "C",
+              "text": "q (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "t"
+            },
+            {
+              "label": "B",
+              "text": "r"
+            },
+            {
+              "label": "C",
+              "text": "s (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "y"
+            },
+            {
+              "label": "B",
+              "text": "w"
+            },
+            {
+              "label": "C",
+              "text": "v (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "n"
+            },
+            {
+              "label": "B",
+              "text": "m"
+            },
+            {
+              "label": "C",
+              "text": "h 第6小题至第8小题:选出所读单词一共有几个音素？ (     ) 6."
+            },
+            {
+              "label": "A",
+              "text": "1个"
+            },
+            {
+              "label": "B",
+              "text": "2个"
+            },
+            {
+              "label": "C",
+              "text": "3个 (     ) 7."
+            },
+            {
+              "label": "A",
+              "text": "1个"
+            },
+            {
+              "label": "B",
+              "text": "2个"
+            },
+            {
+              "label": "C",
+              "text": "3个 (     ) 8."
+            },
+            {
+              "label": "A",
+              "text": "2个"
+            },
+            {
+              "label": "B",
+              "text": "3个"
+            },
+            {
+              "label": "C",
+              "text": "4个 第9小题至第10小题:选出所听到发音是单词中的第几个音？ (     ) 9."
+            },
+            {
+              "label": "A",
+              "text": "第一个"
+            },
+            {
+              "label": "B",
+              "text": "第二个"
+            },
+            {
+              "label": "C",
+              "text": "第三个 (     ) 10."
+            },
+            {
+              "label": "A",
+              "text": "第一个"
+            },
+            {
+              "label": "B",
+              "text": "第二个"
+            },
+            {
+              "label": "C",
+              "text": "第三个"
+            }
+          ],
+          "knowledge": [
+            "leg",
+            "pig",
+            "元音字母的发音解读",
+            "ten",
+            "bag",
+            "辅音字母的发音解读",
+            "milk"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 2. 听录音，用ABCDE把下列各图排列正确的序号。 (     )      (     )      (     )      (     )      (     )",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 3. 听录音，判断下列各图是(T)否(F)正确。 (     ) 1. (     ) 2. (     ) 3. (     ) 4. (     ) 5.",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 4. 听录音，选出所读单词的首字母。 (     ) 1. A. f     B. y (     ) 2. A. p   B. q (     ) 3. A. n     B. m (     ) 4. A. b     B. p (     ) 5. A. i   B. l",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "f"
+            },
+            {
+              "label": "B",
+              "text": "y (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "p"
+            },
+            {
+              "label": "B",
+              "text": "q (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "n"
+            },
+            {
+              "label": "B",
+              "text": "m (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "b"
+            },
+            {
+              "label": "B",
+              "text": "p (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "i"
+            },
+            {
+              "label": "B",
+              "text": "l"
+            }
+          ],
+          "knowledge": [
+            "long",
+            "pen",
+            "形容词辨析解读",
+            "man",
+            "名词辨析解读",
+            "brother",
+            "family"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 5. 听录音，选择正确的单词或短语。 (     ) 1. A. me                    B. she                       C. he (     ) 2. A. father                 B. friend                    C. grandfather (     ) 3. A. short                 B. small                      C. thin (     ) 4. A. student             B. pupil                      C. children (     ) 5. A. long legs            B. small eyes               C. a short tail",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "me"
+            },
+            {
+              "label": "B",
+              "text": "she"
+            },
+            {
+              "label": "C",
+              "text": "he (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "father"
+            },
+            {
+              "label": "B",
+              "text": "friend"
+            },
+            {
+              "label": "C",
+              "text": "grandfather (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "short"
+            },
+            {
+              "label": "B",
+              "text": "small"
+            },
+            {
+              "label": "C",
+              "text": "thin (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "student"
+            },
+            {
+              "label": "B",
+              "text": "pupil"
+            },
+            {
+              "label": "C",
+              "text": "children (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "long legs"
+            },
+            {
+              "label": "B",
+              "text": "small eyes"
+            },
+            {
+              "label": "C",
+              "text": "a short tail"
+            }
+          ],
+          "knowledge": [
+            "grandfather",
+            "student",
+            "he",
+            "small",
+            "形容词辨析解读",
+            "名词词组解读",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 6. 听录音，选出所听到的句子的正确答语。 (     ) 1. A. I’m Zhang Peng.               B. I’m from Canada. (     ) 2. A. No, he isn’t.                      B. Yes, she is. (     ) 3. A. OK!                                B. Thank you! (     ) 4. A. She’s my sister.                 B. He’s my brother. (     ) 5. A. It’s so tall.                       B. It’s black and white.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "I’m Zhang Peng."
+            },
+            {
+              "label": "B",
+              "text": "I’m from Canada. (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "No, he isn’t."
+            },
+            {
+              "label": "B",
+              "text": "Yes, she is. (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "OK!"
+            },
+            {
+              "label": "B",
+              "text": "Thank you! (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "She’s my sister."
+            },
+            {
+              "label": "B",
+              "text": "He’s my brother. (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "It’s so tall."
+            },
+            {
+              "label": "B",
+              "text": "It’s black and white."
+            }
+          ],
+          "knowledge": [
+            "be动词引导的一般疑问句及其回答",
+            "who/whom引导的特殊疑问句及其回答",
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 7. 听短文，判断下列句子是(T)否(F)正确。 (     ) 1. I’m from China. (     ) 2. I am a teacher. (     ) 3. The monkey is fat. (     ) 4. The dog is short. (     ) 5. The elephant has a long nose.",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "动物解读",
+            "个人信息"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 听音，写出其相对应的字母的大小写形式，注意书写格式。 8. 9. 10. 11. 12.",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "I",
+            "字母的书写解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 根据所听到的发音，选择正确的单词写在四线格上，注意书写格式。 woman     fat     sister     USA     mother     pupil       thin 13. 14. 15. 16. 17.",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "sister",
+            "thin",
+            "形容词辨析解读",
+            "pupil",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "按正确的手写体书写下列单词在四线格上。 18. UK 19. long 20. woman",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "long",
+            "woman",
+            "形容词辨析解读",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "21. It’s so tall! (抄写句子)",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "22. Where are you from? (抄写句子)",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "读一读，根据下列单词的顺序给图片标序号。 A. grandma     B. China     C. fat     D. family     E. monkey 23.  (     ) 24. (     ) 25.  (     ) 26.  (     ) 27.  (     )",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "grandma"
+            },
+            {
+              "label": "B",
+              "text": "China"
+            },
+            {
+              "label": "C",
+              "text": "fat"
+            },
+            {
+              "label": "D",
+              "text": "family"
+            },
+            {
+              "label": "E",
+              "text": "monkey 23.  (     ) 24. (     ) 25.  (     ) 26.  (     ) 27.  (     )"
+            }
+          ],
+          "knowledge": [
+            "China",
+            "grandma",
+            "monkey",
+            "fat",
+            "形容词辨析解读",
+            "名词辨析解读",
+            "family"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "读一读，选出不同类的单词。28. A．China\tB．Canada\tC．teacher 29. A．woman\tB．grandma\tC．mother 30. A．tail\tB．short\tC．hand 31. A．boy\tB．girl\tC．bird 32. A．cat\tB．big\tC．pig",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "China"
+            },
+            {
+              "label": "B",
+              "text": "Canada"
+            },
+            {
+              "label": "C",
+              "text": "teacher 29."
+            },
+            {
+              "label": "A",
+              "text": "woman"
+            },
+            {
+              "label": "B",
+              "text": "grandma"
+            },
+            {
+              "label": "C",
+              "text": "mother 30."
+            },
+            {
+              "label": "A",
+              "text": "tail"
+            },
+            {
+              "label": "B",
+              "text": "short"
+            },
+            {
+              "label": "C",
+              "text": "hand 31."
+            },
+            {
+              "label": "A",
+              "text": "boy"
+            },
+            {
+              "label": "B",
+              "text": "girl"
+            },
+            {
+              "label": "C",
+              "text": "bird 32."
+            },
+            {
+              "label": "A",
+              "text": "cat"
+            },
+            {
+              "label": "B",
+              "text": "big"
+            },
+            {
+              "label": "C",
+              "text": "pig"
+            }
+          ],
+          "knowledge": [
+            "形容词辨析解读",
+            "词性分类解读",
+            "名词辨析解读",
+            "类别分类解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "33. Hi, I’ m Amy. I’ m from _____. (     ) A．USA\tB．the USA",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "my. I’ m from _____. (     )"
+            },
+            {
+              "label": "A",
+              "text": "US"
+            },
+            {
+              "label": "B",
+              "text": "the USA"
+            }
+          ],
+          "knowledge": [
+            "专有名词解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "34. This is Mr Zhao. He is _____ new teacher. (     ) A．a\tB．an",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "a"
+            },
+            {
+              "label": "B",
+              "text": "an"
+            }
+          ],
+          "knowledge": [
+            "a",
+            "不定冠词(a,an)解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "35. Tom ____ from Canada, but I _____ from China. (     ) A．is; am\tB．am; is",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "C",
+              "text": "anada, but I _____ from China. (     )"
+            },
+            {
+              "label": "A",
+              "text": "is; am"
+            },
+            {
+              "label": "B",
+              "text": "am; is"
+            }
+          ],
+          "knowledge": [
+            "is",
+            "am",
+            "be动词"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "36. —Is she your sister? (     ) —_____ She’s my friend. A．No, she isn’t.\tB．Yes, she is.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "No, she isn’t."
+            },
+            {
+              "label": "B",
+              "text": "Yes, she is."
+            }
+          ],
+          "knowledge": [
+            "家庭与朋友解读",
+            "be动词引导的一般疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "37. Come here, John! Look at the _____. It has a long nose. (     ) A．tiger\tB．elephant",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "C",
+              "text": "ome here, John! Look at the _____. It has a long nose. (     )"
+            },
+            {
+              "label": "A",
+              "text": "tiger"
+            },
+            {
+              "label": "B",
+              "text": "elephant"
+            }
+          ],
+          "knowledge": [
+            "tiger",
+            "elephant",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "38. The bird _____ small, but it _____ a big body. (     ) A．is; has\tB．has; is",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "is; has"
+            },
+            {
+              "label": "B",
+              "text": "has; is"
+            }
+          ],
+          "knowledge": [
+            "动词辨析解读",
+            "has",
+            "is"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "39. —I’m from Shandong. What about you? (     ) —_____ A．I’m nine.\tB．I’m from Wuhan.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "I’m nine."
+            },
+            {
+              "label": "B",
+              "text": "I’m from Wuhan."
+            }
+          ],
+          "knowledge": [
+            "省略句解读",
+            "方位或地方"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "40. —Who’s that _____? (     ) —She’s my mum. A．woman\tB．man",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "woman"
+            },
+            {
+              "label": "B",
+              "text": "man"
+            }
+          ],
+          "knowledge": [
+            "家庭与朋友解读",
+            "woman",
+            "man",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "41. —Nice to meet you. (       ) —Nice to meet you, __________. A．to\tB．too",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "to"
+            },
+            {
+              "label": "B",
+              "text": "too"
+            }
+          ],
+          "knowledge": [
+            "副词的用法解读",
+            "too"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "42. —A panda! (     ) —Wow! It is short _____ fat. A．and\tB．the",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "panda! (     ) —Wow! It is short _____ fat."
+            },
+            {
+              "label": "A",
+              "text": "and"
+            },
+            {
+              "label": "B",
+              "text": "the"
+            }
+          ],
+          "knowledge": [
+            "表并列关系的连词解读",
+            "and",
+            "动物解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "43. 判断情景的英语表达是(T)否(F)正确：跟别人介绍你的同学Chen Jie, 你会说：This is Chen Jie. She’ s a student. (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "44. 判断情景的英语表达是(T)否(F)正确：你想知道对方来自哪里，你会问：Who’ s that man? (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "who/whom引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "45. 判断情景的英语表达是(T)否(F)正确：新学期班里来了两位新同学，你应说：Welcome! (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "省略句解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "46. 判断情景的英语表达是(T)否(F)正确：你想让你妹妹把眼睛睁大，你应该说：Make your arms short. (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "祈使句肯定形式"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "47. 判断情景的英语表达是(T)否(F)正确：你想和Sarah一起去动物园，你会说：Sarah, let go to the zoo! (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "祈使句肯定形式"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "图文配对。阅读下列句子，选择正确的图片序号。 A.   B.    C.     D.      E. 48. I love my grandpa and grandma. (     ) 49. My name’s Amy. I’m from UK. (     ) 50. Look at the giraffe. It’s tall and has a long neck. (     ) 51. She is a teacher. (     ) 52. Who’s that man? He’s my father. (     )",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "E",
+              "text": "48. I love my grandpa and grandma. (     ) 49. My name’s Amy. I’m from UK. (     ) 50. Look at the giraffe. It’s tall and has a long neck. (     ) 51. She is a teacher. (     ) 52. Who’s that man? He’s my father. (     )"
+            }
+          ],
+          "knowledge": [
+            "祈使句肯定形式",
+            "陈述句肯定形式解读",
+            "who/whom引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "文章大意：本文介绍的是约翰及其家人的一些情况。 阅读短文，选择正确的答案。 Hello! I’m John. I’m from Australia. I’m a pupil. My mother is a teacher. She’ s tall and thin. My father is a doctor(医生). He’s fat. My brother has big eyes. He’s so cute. My friend is Mike. He’s from the Canada. He’s a student, too. I love my family and my friend. 53. My name is ______. (     ) A．John\tB．Sarah 54. I am from ______. (     ) A．Canada\tB．Australia 55. My father is ______. (     ) A．tall and thin\tB．fat 56. My brother has ______. (     ) A．big eyes\tB．small eyes 57. Mike is a ______. (     ) A．student\tB．teacher",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "ustralia. I’m a pupil. My mother is a teacher. She’ s tall and thin. My father is a doctor(医生). He’s fat. My brother has big eyes. He’s so cute. My friend is Mike. He’s from the Canada. He’s a student, too. I love my family and my friend. 53. My name is ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "John"
+            },
+            {
+              "label": "B",
+              "text": "Sarah 54. I am from ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "Canada"
+            },
+            {
+              "label": "B",
+              "text": "Australia 55. My father is ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "tall and thin"
+            },
+            {
+              "label": "B",
+              "text": "fat 56. My brother has ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "big eyes"
+            },
+            {
+              "label": "B",
+              "text": "small eyes 57. Mike is a ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "student"
+            },
+            {
+              "label": "B",
+              "text": "teacher"
+            }
+          ],
+          "knowledge": [
+            "家人和亲友"
+          ],
+          "answer": "",
+          "explanation": ""
+        }
+      ],
+      "question_count": 31,
+      "subject": "english",
+      "subject_name": "英语"
+    },
+    {
+      "paper_id": "3247849",
+      "title": "广东省清远市清城区2024-2025学年人教PEP版三年级下学期期末考试英语试题",
+      "url": "https://zujuan.xkw.com/25p3247849.html",
+      "grade": 3,
       "semester": "下",
       "date": "",
       "difficulty": "easy",
       "questions": [
         {
-          "question_text": "1. 下面各数中，把“0”去掉后大小不变的是（       ）。 A．5.08\tB．10.27\tC．7.330",
+          "question_text": "给同类单词找室友。 A. Canada     B. eighteen     C. under     D. long     E. touch F. short     G. China     H. taste     I. in     J. fourteen 1. fifteen _________ 2. thin _________ 3. UK _________ 4. hear _________ 5. on _________",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "5.08"
+              "text": "Canada"
             },
             {
               "label": "B",
-              "text": "10.27"
+              "text": "eighteen"
             },
             {
               "label": "C",
-              "text": "7.330"
+              "text": "under"
+            },
+            {
+              "label": "D",
+              "text": "long"
+            },
+            {
+              "label": "E",
+              "text": "touch F. short     G. China     H. taste     I. in     J. fourteen 1. fifteen _________ 2. thin _________ 3. UK _________ 4. hear _________ 5. on _________"
             }
           ],
           "knowledge": [
-            "小数的性质解读"
+            "China",
+            "fourteen",
+            "Canada",
+            "形容词辨析解读",
+            "touch",
+            "taste",
+            "类别分类解读",
+            "动词辨析解读",
+            "eighteen",
+            "short",
+            "long",
+            "介词辨析解读",
+            "under"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "2. 小马虎在读一个数时，误把小数点丢掉了，结果读作八万零六。原来的小数是读两个零的，这个数是(      )。 A．800.06\tB．80.006\tC．8.0006",
+          "question_text": "读句子，把图片和句子配对。 A.      B.      C.      D.      E. 6. The boy is a student. (     ) 7. It has a fat body and big ears. (     ) 8. —I’d like some meat, please. (     ) —Sure, here you are. 9. —Where is my ruler? (     ) —It’s on the chair. 10. —How much is the pen? (     ) —It’s sixteen yuan.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "E",
+              "text": "6. The boy is a student. (     ) 7. It has a fat body and big ears. (     ) 8. —I’d like some meat, please. (     ) —Sure, here you are. 9. —Where is my ruler? (     ) —It’s on the chair. 10. —How much is the pen? (     ) —It’s sixteen yuan."
+            }
+          ],
+          "knowledge": [
+            "how",
+            "much引导的特殊疑问句及其回答",
+            "陈述句肯定形式解读",
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "11. —Who’s that ________? (          ) —She’s my teacher, Miss Lin. A．boy\tB．man\tC．woman",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "800.06"
+              "text": "boy"
             },
             {
               "label": "B",
-              "text": "80.006"
+              "text": "man"
             },
             {
               "label": "C",
-              "text": "8.0006"
+              "text": "woman"
             }
           ],
           "knowledge": [
-            "亿以内数的读、写法解读",
-            "小数的读法和写法解读"
+            "woman",
+            "boy",
+            "man",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "3. 65×99＝65×100－65×1，这样简便运算的依据是（       ）。 A．乘法分配律\tB．乘法交换律\tC．乘法结合律",
+          "question_text": "12. We can ________ with our ears. (          ) A．taste\tB．hear\tC．touch",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "乘法分配律"
+              "text": "taste"
             },
             {
               "label": "B",
-              "text": "乘法交换律"
+              "text": "hear"
             },
             {
               "label": "C",
-              "text": "乘法结合律"
+              "text": "touch"
             }
           ],
           "knowledge": [
-            "整数乘法分配律解读"
+            "动词辨析解读",
+            "hear",
+            "touch",
+            "taste"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "4. 把470－150＝320，320÷40＝8，25×8＝200合并成一道综合算式是（       ）。 A．25×（470－150÷40） B．[25×（470－150）]÷40 C．25×[（470－150）÷40]",
+          "question_text": "13. —Do you have any old things? (          ) —________ A．Yes, I do.\tB．Yes, it is.\tC．No, it isn’t.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "D",
+              "text": "o you have any old things? (          ) —________"
+            },
+            {
+              "label": "A",
+              "text": "Yes, I do."
+            },
+            {
+              "label": "B",
+              "text": "Yes, it is."
+            },
+            {
+              "label": "C",
+              "text": "No, it isn’t."
+            }
+          ],
+          "knowledge": [
+            "助动词引导的一般疑问句及其回答",
+            "其他情景交际用语"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "14. —________ books do we have? (          ) —We have seventeen. A．How many\tB．How much\tC．How old",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "25×（470－150÷40）"
+              "text": "How many"
             },
             {
               "label": "B",
-              "text": "[25×（470－150）]÷40"
+              "text": "How much"
             },
             {
               "label": "C",
-              "text": "25×[（470－150）÷40]"
+              "text": "How old"
             }
           ],
           "knowledge": [
-            "带有中括号的混合运算解读"
+            "how",
+            "many引导的特殊疑问句及其回答",
+            "how",
+            "many",
+            "其他固定搭配",
+            "数量解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "5. 一个三角形的两个内角分别是34°和56°，这个三角形是（       ）。 A．锐角三角形\tB．直角三角形\tC．钝角三角形",
+          "question_text": "15. One rabbit has two ears. Ten rabbits have ________ ears. (          ) A．eleven\tB．twelve\tC．twenty",
           "question_type": "choice",
           "options": [
             {
               "label": "A",
-              "text": "锐角三角形"
+              "text": "eleven"
             },
             {
               "label": "B",
-              "text": "直角三角形"
+              "text": "twelve"
             },
             {
               "label": "C",
-              "text": "钝角三角形"
+              "text": "twenty"
             }
           ],
           "knowledge": [
-            "三角形的内角和解读",
-            "三角形的分类解读"
+            "twenty",
+            "twelve",
+            "eleven",
+            "基数词解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "6. 0.78是将780缩小到原来的（       ）。 A．\tB．\tC．",
-          "question_type": "choice",
-          "options": [],
+          "question_text": "文章大意：短文介绍了汤姆的基本信息。 阅读短文，判断句子是(T)否(F)正确。 Hello, I’m Tom. I’m a student. I’m eleven years old. I’m from Canada. I have fourteen old books and seventeen toy cars. I love fruit and vegetables. They’re healthy. I have a pet cat. It’s fat. It has a fat body and short legs. Look! It’s under my chair. So cute! 16. Tom is 11 years old. (     ) 17. Tom is from China. (     ) 18. Tom has 14 toy cars. (     ) 19. Tom loves fruit and vegetables. (     ) 20. The cat is under the chair. (     )",
+          "question_type": "true_false",
+          "options": null,
           "knowledge": [
-            "小数点向左移动引起小数大小变化的规律"
+            "兴趣爱好解读",
+            "个人信息"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "7. 在一个三角形中任意画一条高，都可以把这个三角形平均分成两个完全一样的小三角形，这个三角形是（       ）。 A．等腰三角形\tB．等边三角形\tC．钝角三角形",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "等腰三角形"
-            },
-            {
-              "label": "B",
-              "text": "等边三角形"
-            },
-            {
-              "label": "C",
-              "text": "钝角三角形"
-            }
-          ],
-          "knowledge": [
-            "轴对称的认识及辨认解读",
-            "三角形的分类解读",
-            "等腰三角形和等边三角形的认识及特征解读",
-            "三角形的高及画法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "8. 把18.24的小数点先向左移动两位，再向右移动三位，这个数就（       ）。 A．缩小到原来的 B．缩小到原来的 C．扩大到原来的10倍",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "缩小到原来的"
-            },
-            {
-              "label": "B",
-              "text": "缩小到原来的"
-            },
-            {
-              "label": "C",
-              "text": "扩大到原来的10倍"
-            }
-          ],
-          "knowledge": [
-            "小数点向右移动引起小数大小变化的规律",
-            "小数点向左移动引起小数大小变化的规律"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "9. 下图（       ）度。 A．40\tB．50\tC．60",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "40"
-            },
-            {
-              "label": "B",
-              "text": "50"
-            },
-            {
-              "label": "C",
-              "text": "60"
-            }
-          ],
-          "knowledge": [
-            "三角形的内角和解读",
-            "平角、周角的认识及特征解读",
-            "角度的计算解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "10. 下面最容易变形的图形是(      )。 A．三角形\tB．梯形\tC．平行四边形",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "三角形"
-            },
-            {
-              "label": "B",
-              "text": "梯形"
-            },
-            {
-              "label": "C",
-              "text": "平行四边形"
-            }
-          ],
-          "knowledge": [
-            "平行四边形的不稳定性及应用",
-            "梯形的概念及特点",
-            "三角形的稳定性及应用解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "11. 在一个梯形中，最多有（       ）个角是直角。 A．1\tB．2\tC．3",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "1"
-            },
-            {
-              "label": "B",
-              "text": "2"
-            },
-            {
-              "label": "C",
-              "text": "3"
-            }
-          ],
-          "knowledge": [
-            "梯形的概念及特点",
-            "直角梯形和等腰梯形的概念及特点"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "12. 一家快递公司，5月24日邮寄了22箱橘子，58箱枇杷，橘子和枇杷每箱12千克，这天邮寄橘子和枇杷一共多少千克。下列算式不正确的是（       ）。 A．12×22＋58\tB．12×（22＋58）\tC．12×22＋12×58",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "12×22＋58"
-            },
-            {
-              "label": "B",
-              "text": "12×（22＋58）"
-            },
-            {
-              "label": "C",
-              "text": "12×22＋12×58"
-            }
-          ],
-          "knowledge": [
-            "整数乘法分配律解读",
-            "乘加、乘减混合运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "13. 小明、小红、小刚、小思四人参加跳绳比赛，下面三幅图中的虚线能表示四人平均成绩的是（       ）。 A．\tB．\tC．",
-          "question_type": "choice",
-          "options": [],
-          "knowledge": [
-            "平均数的意义及求法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "14. 有4cm、5cm、6cm、9cm的四根小棒，从中选三根围成一个三角形，有（       ）种不同的选法。 A．2\tB．3\tC．4",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "2"
-            },
-            {
-              "label": "B",
-              "text": "3"
-            },
-            {
-              "label": "C",
-              "text": "4"
-            }
-          ],
-          "knowledge": [
-            "三角形三边关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "15. 如图，野生动物保护小组先测得一头大象的位置在（1，3），3时后，测得这头奔跑的大象的位置在（6，3）。如果图中每小格的边长代表12km，这头大象每时最少跑（       ）km。 A．20\tB．40\tC．60",
-          "question_type": "choice",
-          "options": [
-            {
-              "label": "A",
-              "text": "20"
-            },
-            {
-              "label": "B",
-              "text": "40"
-            },
-            {
-              "label": "C",
-              "text": "60"
-            }
-          ],
-          "knowledge": [
-            "根据数对找位置",
-            "基础行程问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "16. 一个三位小数保留两位小数是3.95，这个小数最小是3.949。(        )",
+          "question_text": "21. I often make a  (card / car) for my mum.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "小数的近似数"
+            "car",
+            "card",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "17. 用两个完全一样的三角形，可以拼成一个等腰三角形，也可以拼成一个平行四边形。(        )",
+          "question_text": "22. —Who’s that  (man / woman)? —He’s my father.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "平行四边形的概念及特点解读",
-            "等腰三角形和等边三角形的认识及特征解读",
-            "用同样的图形拼接"
+            "woman",
+            "man",
+            "名词辨析解读"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "18. 雅轩所在班级的平均身高是145cm，她的身高一定是145cm。(      )",
+          "question_text": "23. I  (smell / see) with my eyes.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "平均数的意义及求法解读"
+            "动词辨析解读",
+            "see",
+            "smell"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "19. 小红的座位是（5，4），同班小明的座位是（8，4），他俩在同一行。(        )",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "根据数对找位置"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "20. 平行四边形和等腰梯形都是轴对称图形，且有1条对称轴。(        )",
+          "question_text": "24. —Have some  (juice / milk) too. —Thanks!",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "平行四边形的概念及特点解读",
-            "轴对称的认识及辨认解读",
-            "直角梯形和等腰梯形的概念及特点"
+            "juice",
+            "名词辨析解读",
+            "milk"
           ],
           "answer": "",
           "explanation": ""
         },
         {
-          "question_text": "21. 一个小数由7个十，6个百分之一和5个千分之一组成，这个小数写作(      )，把它保留两位小数是(      )。",
+          "question_text": "25. —How much is this  (doll / ball)? —It’s eleven yuan.",
           "question_type": "short_answer",
           "options": null,
           "knowledge": [
-            "小数的近似数",
-            "小数的数位和计数单位的认识解读",
-            "小数的读法和写法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "22. 56dm²＝(        )m²        8.2km＝(        )km(        )m 4吨80千克＝(        )千克          6.08m＝(        )m(        )mm",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "千米和米之间的进率与换算",
-            "运用小数点移动解决小数的单位换算问题",
-            "平方厘米、平方分米、平方米之间的进率与换算",
-            "多位小数的不进位加法、不退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "23. 把小数0.06，0.4，0.26，0.18在数轴中用点表示出来，并在上方写出相应的小数，最后把这些小数按从大到小的顺序排列。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的大小比较解读",
-            "小数的意义解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "24. 填上适当的数。 _____－256＝364            _____÷11＝9……1 240÷（5×_____）＝12            35×（_____÷3）＝700",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "两、三位数的连续退位减法",
-            "除数是两位数的笔算除法解读",
-            "乘、除法的意义和各部分间的关系解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "25. 下图有(          )个平行四边形和(          )个梯形。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的概念及特点解读",
-            "梯形的概念及特点",
-            "数图形解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "26. 如果10千克大豆可以榨3.5千克豆油，1千克大豆就可以榨(        )千克豆油，(        )吨大豆可以榨1750千克豆油。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "除数是小数的小数除法",
-            "吨、千克之间的换算与比较",
-            "除数是整数的小数除法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "27. 一个等腰三角形的顶角是80度，它的一个底角是(          )度。根据三角形的内角和可以推导出梯形的内角和是(          )度。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "三角形的内角和解读",
-            "等腰三角形和等边三角形的认识及特征解读",
-            "梯形的概念及特点",
-            "角度的计算解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "28. 一块平行四边形的菜地一条边长8m，比它的邻边长2m，这块菜地的周长是(        )m。一个等腰梯形的周长为50cm，它的一条腰长10cm，上底和下底的和是(        )cm。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的概念及特点解读",
-            "梯形的周长解读",
-            "直角梯形和等腰梯形的概念及特点",
-            "平行四边形的周长"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "29. 苗苗家住16楼，放学回家时，维修师傅正在检修电梯，她只能走楼梯回家。如果苗苗每上1层楼大约需要40秒，她走到10楼时感觉有些累了，她停下休息了5分钟后再继续往家走，她从一楼到家至少需要(        )分。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "时、分、秒之间的换算与比较",
-            "植树问题（一端栽一端不栽）"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "30. 一列长450米的火车，每秒行驶20米，现在要通过一座长1950米的大桥（从车头上桥到车尾离桥），需要(        )秒，合(        )分。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "时、分、秒之间的换算与比较",
-            "基础行程问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "31. 用△搭大三角形（如图）搭8层共需要(        )个△，用400个这样的△可以搭(        )层。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "数与形（探索规律）解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "32. 直接写出得数。 ①90÷15＝       ②0.18×10＝       ③2÷100＝       ④0.36＋2.64＝ ⑤12×5＝       ⑥0.03÷10＝       ⑦0.26×1000＝       ⑧4.6×10÷100＝ ⑨1－0.09＝       ⑩1.3＋8.7＝       ⑪270－190＝       ⑫15×8÷15×8＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数点向右移动引起小数大小变化的规律",
-            "小数点向左移动引起小数大小变化的规律",
-            "除数是两位数的笔算除法解读",
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "33. 用竖式计算，带★的题要验算。 ①45.09＋14.98＝             ★②56.2－49.75＝",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "多位小数的进位加法、退位减法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "34. 计算下列各题，能简便运算的用简便方法计算。 ①25×32×125             ②101×72－72 ③29×74＋36×29－29×10       ④2.26－5.1＋17.74－5.9 ⑤（780－360）×（630÷70）       ⑥450÷[90÷（23.72＋6.28）]",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "带有中括号的混合运算解读",
-            "整数乘法结合律解读",
-            "整数乘法分配律解读",
-            "整数加法运算律推广到小数"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "35. 涂色表示相应的小数。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的意义解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "36. 看下图，用数对表示三角形ABC上A点的位置是(        )，当三角形ABC向上平移5格得到三角形，这时点的位置是(        )。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "用数对表示位置",
-            "方格纸上图形的平移问题（数对）"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "37. 先在下面点子图上画出一个平行四边形和一个锐角三角形，然后在此平行四边形和三角形内各画一条高，并标出垂足。",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "平行四边形的高及画法解读",
-            "画三角形解读",
-            "三角形的高及画法解读",
-            "画平行四边形解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "38. 下面是阳光小学四年级（1）班和（2）班二至五月回收矿泉水瓶统计表和图。 （1）根据统计图、表提供的信息补充完善统计表和统计图。 阳光小学四年级（1）班和（2）班二月至五月回收矿泉水瓶统计表 阳光小学四年级（1）班和（2）班二至五月回收矿泉水瓶统计图 （2）在这四个月里，四（1）班同学平均每月回收（       ）个矿泉水瓶。 （3）从统计图中可以知道（       ）。",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "复式统计表的特点及填补解读",
-            "平均数的意义及求法解读",
-            "复式条形统计图解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "39. 2025年4月23日是第30个世界读书日。小冬到书店买了两本书，一本68.5元，另一本19.8元。小冬付了2张50元，应找回多少元？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "小数的加、减法混合运算"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "40. 仓库内有270吨食盐需要送到各地销售点。现有6辆同样载重的货车，每辆都运了5次，还剩下30吨食盐没有运完。每辆货车一次运多少吨食盐？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "41. 这面墙有多少平方米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "长方形的面积",
-            "小数与小数的乘法"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "42. 国家实施“体重管理年”三年行动，其中走路和运动是控制体重的重要方式。于是小利一家商量，每天上放学（或上下班）坚持步行往返。小利从家到学校的路程是1500米，平时从家到校要20分钟。一天他只用了15分钟就到了学校，这天他每分钟行走的速度比平时快了多少米？",
-          "question_type": "fill_blank",
-          "options": null,
-          "knowledge": [
-            "基础行程问题解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "43. 学校购买一批体育器材，买9个篮球和5副乒乓球共用1200元。买5副乒乓球的钱正好够买3个篮球。篮球和乒乓球的单价各是多少元？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "带有小括号的混合运算解读",
-            "除数是两位数的笔算除法解读"
-          ],
-          "answer": "",
-          "explanation": ""
-        },
-        {
-          "question_text": "44. 甲、乙两个工程队要挖掘一条长460米的隧道，两队同时各从一端开工，甲工程队每天挖40米，乙工程队每天挖50米。挖了半天后，甲工程队因故障停了2天，之后继续挖，挖通时乙工程队挖了多少米？",
-          "question_type": "short_answer",
-          "options": null,
-          "knowledge": [
-            "除数是整数，需要补0的小数除法",
-            "有具体量的工程问题解读",
-            "小数与整数的乘法"
+            "doll",
+            "名词辨析解读",
+            "ball"
           ],
           "answer": "",
           "explanation": ""
         }
       ],
-      "question_count": 44,
-      "subject": "math",
-      "subject_name": "数学"
+      "question_count": 13,
+      "subject": "english",
+      "subject_name": "英语"
+    },
+    {
+      "paper_id": "2039534",
+      "title": "2023-2024学年广东省清远市人教PEP版三年级下册期中练习英语试卷",
+      "url": "https://zujuan.xkw.com/25p2039534.html",
+      "grade": 3,
+      "semester": "下",
+      "date": "",
+      "difficulty": "medium",
+      "questions": [
+        {
+          "question_text": "00:00/00:00 1. 辨音，根据录音要求选择正确的选项。 第1小题至第5小题：选出听到发音的相对应的字母。 (     ) 1. A. k                 B. j                 C. l (     ) 2. A. z                 B. f                 C. q (     ) 3. A. t                 B. r                 C. s (     ) 4. A. y                 B. w                 C. v (     ) 5. A. n                 B. m                 C. h 第6小题至第8小题:选出所读单词一共有几个音素？ (     ) 6. A. 1个             B. 2个               C. 3个 (     ) 7. A. 1个             B. 2个               C. 3个 (     ) 8. A. 2个             B. 3个               C. 4个 第9小题至第10小题:选出所听到发音是单词中的第几个音？ (     ) 9. A. 第一个        B. 第二个          C. 第三个 (     ) 10. A. 第一个       B. 第二个          C. 第三个",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "k"
+            },
+            {
+              "label": "B",
+              "text": "j"
+            },
+            {
+              "label": "C",
+              "text": "l (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "z"
+            },
+            {
+              "label": "B",
+              "text": "f"
+            },
+            {
+              "label": "C",
+              "text": "q (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "t"
+            },
+            {
+              "label": "B",
+              "text": "r"
+            },
+            {
+              "label": "C",
+              "text": "s (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "y"
+            },
+            {
+              "label": "B",
+              "text": "w"
+            },
+            {
+              "label": "C",
+              "text": "v (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "n"
+            },
+            {
+              "label": "B",
+              "text": "m"
+            },
+            {
+              "label": "C",
+              "text": "h 第6小题至第8小题:选出所读单词一共有几个音素？ (     ) 6."
+            },
+            {
+              "label": "A",
+              "text": "1个"
+            },
+            {
+              "label": "B",
+              "text": "2个"
+            },
+            {
+              "label": "C",
+              "text": "3个 (     ) 7."
+            },
+            {
+              "label": "A",
+              "text": "1个"
+            },
+            {
+              "label": "B",
+              "text": "2个"
+            },
+            {
+              "label": "C",
+              "text": "3个 (     ) 8."
+            },
+            {
+              "label": "A",
+              "text": "2个"
+            },
+            {
+              "label": "B",
+              "text": "3个"
+            },
+            {
+              "label": "C",
+              "text": "4个 第9小题至第10小题:选出所听到发音是单词中的第几个音？ (     ) 9."
+            },
+            {
+              "label": "A",
+              "text": "第一个"
+            },
+            {
+              "label": "B",
+              "text": "第二个"
+            },
+            {
+              "label": "C",
+              "text": "第三个 (     ) 10."
+            },
+            {
+              "label": "A",
+              "text": "第一个"
+            },
+            {
+              "label": "B",
+              "text": "第二个"
+            },
+            {
+              "label": "C",
+              "text": "第三个"
+            }
+          ],
+          "knowledge": [
+            "leg",
+            "pig",
+            "元音字母的发音解读",
+            "ten",
+            "bag",
+            "辅音字母的发音解读",
+            "milk"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 2. 听录音，用ABCDE把下列各图排列正确的序号。 (     )      (     )      (     )      (     )      (     )",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 3. 听录音，判断下列各图是(T)否(F)正确。 (     ) 1. (     ) 2. (     ) 3. (     ) 4. (     ) 5.",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 4. 听录音，选出所读单词的首字母。 (     ) 1. A. f     B. y (     ) 2. A. p   B. q (     ) 3. A. n     B. m (     ) 4. A. b     B. p (     ) 5. A. i   B. l",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "f"
+            },
+            {
+              "label": "B",
+              "text": "y (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "p"
+            },
+            {
+              "label": "B",
+              "text": "q (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "n"
+            },
+            {
+              "label": "B",
+              "text": "m (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "b"
+            },
+            {
+              "label": "B",
+              "text": "p (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "i"
+            },
+            {
+              "label": "B",
+              "text": "l"
+            }
+          ],
+          "knowledge": [
+            "long",
+            "pen",
+            "形容词辨析解读",
+            "man",
+            "名词辨析解读",
+            "brother",
+            "family"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 5. 听录音，选择正确的单词或短语。 (     ) 1. A. me                    B. she                       C. he (     ) 2. A. father                 B. friend                    C. grandfather (     ) 3. A. short                 B. small                      C. thin (     ) 4. A. student             B. pupil                      C. children (     ) 5. A. long legs            B. small eyes               C. a short tail",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "me"
+            },
+            {
+              "label": "B",
+              "text": "she"
+            },
+            {
+              "label": "C",
+              "text": "he (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "father"
+            },
+            {
+              "label": "B",
+              "text": "friend"
+            },
+            {
+              "label": "C",
+              "text": "grandfather (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "short"
+            },
+            {
+              "label": "B",
+              "text": "small"
+            },
+            {
+              "label": "C",
+              "text": "thin (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "student"
+            },
+            {
+              "label": "B",
+              "text": "pupil"
+            },
+            {
+              "label": "C",
+              "text": "children (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "long legs"
+            },
+            {
+              "label": "B",
+              "text": "small eyes"
+            },
+            {
+              "label": "C",
+              "text": "a short tail"
+            }
+          ],
+          "knowledge": [
+            "grandfather",
+            "student",
+            "he",
+            "small",
+            "形容词辨析解读",
+            "名词词组解读",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 6. 听录音，选出所听到的句子的正确答语。 (     ) 1. A. I’m Zhang Peng.               B. I’m from Canada. (     ) 2. A. No, he isn’t.                      B. Yes, she is. (     ) 3. A. OK!                                B. Thank you! (     ) 4. A. She’s my sister.                 B. He’s my brother. (     ) 5. A. It’s so tall.                       B. It’s black and white.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "I’m Zhang Peng."
+            },
+            {
+              "label": "B",
+              "text": "I’m from Canada. (     ) 2."
+            },
+            {
+              "label": "A",
+              "text": "No, he isn’t."
+            },
+            {
+              "label": "B",
+              "text": "Yes, she is. (     ) 3."
+            },
+            {
+              "label": "A",
+              "text": "OK!"
+            },
+            {
+              "label": "B",
+              "text": "Thank you! (     ) 4."
+            },
+            {
+              "label": "A",
+              "text": "She’s my sister."
+            },
+            {
+              "label": "B",
+              "text": "He’s my brother. (     ) 5."
+            },
+            {
+              "label": "A",
+              "text": "It’s so tall."
+            },
+            {
+              "label": "B",
+              "text": "It’s black and white."
+            }
+          ],
+          "knowledge": [
+            "be动词引导的一般疑问句及其回答",
+            "who/whom引导的特殊疑问句及其回答",
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 7. 听短文，判断下列句子是(T)否(F)正确。 (     ) 1. I’m from China. (     ) 2. I am a teacher. (     ) 3. The monkey is fat. (     ) 4. The dog is short. (     ) 5. The elephant has a long nose.",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "动物解读",
+            "个人信息"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 听音，写出其相对应的字母的大小写形式，注意书写格式。 8. 9. 10. 11. 12.",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "I",
+            "字母的书写解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "00:00/00:00 根据所听到的发音，选择正确的单词写在四线格上，注意书写格式。 woman     fat     sister     USA     mother     pupil       thin 13. 14. 15. 16. 17.",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "sister",
+            "thin",
+            "形容词辨析解读",
+            "pupil",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "按正确的手写体书写下列单词在四线格上。 18. UK 19. long 20. woman",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "long",
+            "woman",
+            "形容词辨析解读",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "21. It’s so tall! (抄写句子)",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "22. Where are you from? (抄写句子)",
+          "question_type": "short_answer",
+          "options": null,
+          "knowledge": [
+            "where引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "读一读，根据下列单词的顺序给图片标序号。 A. grandma     B. China     C. fat     D. family     E. monkey 23.  (     ) 24. (     ) 25.  (     ) 26.  (     ) 27.  (     )",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "grandma"
+            },
+            {
+              "label": "B",
+              "text": "China"
+            },
+            {
+              "label": "C",
+              "text": "fat"
+            },
+            {
+              "label": "D",
+              "text": "family"
+            },
+            {
+              "label": "E",
+              "text": "monkey 23.  (     ) 24. (     ) 25.  (     ) 26.  (     ) 27.  (     )"
+            }
+          ],
+          "knowledge": [
+            "China",
+            "grandma",
+            "monkey",
+            "fat",
+            "形容词辨析解读",
+            "名词辨析解读",
+            "family"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "读一读，选出不同类的单词。28. A．China\tB．Canada\tC．teacher 29. A．woman\tB．grandma\tC．mother 30. A．tail\tB．short\tC．hand 31. A．boy\tB．girl\tC．bird 32. A．cat\tB．big\tC．pig",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "China"
+            },
+            {
+              "label": "B",
+              "text": "Canada"
+            },
+            {
+              "label": "C",
+              "text": "teacher 29."
+            },
+            {
+              "label": "A",
+              "text": "woman"
+            },
+            {
+              "label": "B",
+              "text": "grandma"
+            },
+            {
+              "label": "C",
+              "text": "mother 30."
+            },
+            {
+              "label": "A",
+              "text": "tail"
+            },
+            {
+              "label": "B",
+              "text": "short"
+            },
+            {
+              "label": "C",
+              "text": "hand 31."
+            },
+            {
+              "label": "A",
+              "text": "boy"
+            },
+            {
+              "label": "B",
+              "text": "girl"
+            },
+            {
+              "label": "C",
+              "text": "bird 32."
+            },
+            {
+              "label": "A",
+              "text": "cat"
+            },
+            {
+              "label": "B",
+              "text": "big"
+            },
+            {
+              "label": "C",
+              "text": "pig"
+            }
+          ],
+          "knowledge": [
+            "形容词辨析解读",
+            "词性分类解读",
+            "名词辨析解读",
+            "类别分类解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "33. Hi, I’ m Amy. I’ m from _____. (     ) A．USA\tB．the USA",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "my. I’ m from _____. (     )"
+            },
+            {
+              "label": "A",
+              "text": "US"
+            },
+            {
+              "label": "B",
+              "text": "the USA"
+            }
+          ],
+          "knowledge": [
+            "专有名词解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "34. This is Mr Zhao. He is _____ new teacher. (     ) A．a\tB．an",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "a"
+            },
+            {
+              "label": "B",
+              "text": "an"
+            }
+          ],
+          "knowledge": [
+            "a",
+            "不定冠词(a,an)解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "35. Tom ____ from Canada, but I _____ from China. (     ) A．is; am\tB．am; is",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "C",
+              "text": "anada, but I _____ from China. (     )"
+            },
+            {
+              "label": "A",
+              "text": "is; am"
+            },
+            {
+              "label": "B",
+              "text": "am; is"
+            }
+          ],
+          "knowledge": [
+            "is",
+            "am",
+            "be动词"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "36. —Is she your sister? (     ) —_____ She’s my friend. A．No, she isn’t.\tB．Yes, she is.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "No, she isn’t."
+            },
+            {
+              "label": "B",
+              "text": "Yes, she is."
+            }
+          ],
+          "knowledge": [
+            "家庭与朋友解读",
+            "be动词引导的一般疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "37. Come here, John! Look at the _____. It has a long nose. (     ) A．tiger\tB．elephant",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "C",
+              "text": "ome here, John! Look at the _____. It has a long nose. (     )"
+            },
+            {
+              "label": "A",
+              "text": "tiger"
+            },
+            {
+              "label": "B",
+              "text": "elephant"
+            }
+          ],
+          "knowledge": [
+            "tiger",
+            "elephant",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "38. The bird _____ small, but it _____ a big body. (     ) A．is; has\tB．has; is",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "is; has"
+            },
+            {
+              "label": "B",
+              "text": "has; is"
+            }
+          ],
+          "knowledge": [
+            "动词辨析解读",
+            "has",
+            "is"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "39. —I’m from Shandong. What about you? (     ) —_____ A．I’m nine.\tB．I’m from Wuhan.",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "I’m nine."
+            },
+            {
+              "label": "B",
+              "text": "I’m from Wuhan."
+            }
+          ],
+          "knowledge": [
+            "省略句解读",
+            "方位或地方"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "40. —Who’s that _____? (     ) —She’s my mum. A．woman\tB．man",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "woman"
+            },
+            {
+              "label": "B",
+              "text": "man"
+            }
+          ],
+          "knowledge": [
+            "家庭与朋友解读",
+            "woman",
+            "man",
+            "名词辨析解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "41. —Nice to meet you. (       ) —Nice to meet you, __________. A．to\tB．too",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "to"
+            },
+            {
+              "label": "B",
+              "text": "too"
+            }
+          ],
+          "knowledge": [
+            "副词的用法解读",
+            "too"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "42. —A panda! (     ) —Wow! It is short _____ fat. A．and\tB．the",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "panda! (     ) —Wow! It is short _____ fat."
+            },
+            {
+              "label": "A",
+              "text": "and"
+            },
+            {
+              "label": "B",
+              "text": "the"
+            }
+          ],
+          "knowledge": [
+            "表并列关系的连词解读",
+            "and",
+            "动物解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "43. 判断情景的英语表达是(T)否(F)正确：跟别人介绍你的同学Chen Jie, 你会说：This is Chen Jie. She’ s a student. (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "陈述句肯定形式解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "44. 判断情景的英语表达是(T)否(F)正确：你想知道对方来自哪里，你会问：Who’ s that man? (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "who/whom引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "45. 判断情景的英语表达是(T)否(F)正确：新学期班里来了两位新同学，你应说：Welcome! (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "省略句解读"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "46. 判断情景的英语表达是(T)否(F)正确：你想让你妹妹把眼睛睁大，你应该说：Make your arms short. (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "祈使句肯定形式"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "47. 判断情景的英语表达是(T)否(F)正确：你想和Sarah一起去动物园，你会说：Sarah, let go to the zoo! (     )",
+          "question_type": "true_false",
+          "options": null,
+          "knowledge": [
+            "祈使句肯定形式"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "图文配对。阅读下列句子，选择正确的图片序号。 A.   B.    C.     D.      E. 48. I love my grandpa and grandma. (     ) 49. My name’s Amy. I’m from UK. (     ) 50. Look at the giraffe. It’s tall and has a long neck. (     ) 51. She is a teacher. (     ) 52. Who’s that man? He’s my father. (     )",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "E",
+              "text": "48. I love my grandpa and grandma. (     ) 49. My name’s Amy. I’m from UK. (     ) 50. Look at the giraffe. It’s tall and has a long neck. (     ) 51. She is a teacher. (     ) 52. Who’s that man? He’s my father. (     )"
+            }
+          ],
+          "knowledge": [
+            "祈使句肯定形式",
+            "陈述句肯定形式解读",
+            "who/whom引导的特殊疑问句及其回答"
+          ],
+          "answer": "",
+          "explanation": ""
+        },
+        {
+          "question_text": "文章大意：本文介绍的是约翰及其家人的一些情况。 阅读短文，选择正确的答案。 Hello! I’m John. I’m from Australia. I’m a pupil. My mother is a teacher. She’ s tall and thin. My father is a doctor(医生). He’s fat. My brother has big eyes. He’s so cute. My friend is Mike. He’s from the Canada. He’s a student, too. I love my family and my friend. 53. My name is ______. (     ) A．John\tB．Sarah 54. I am from ______. (     ) A．Canada\tB．Australia 55. My father is ______. (     ) A．tall and thin\tB．fat 56. My brother has ______. (     ) A．big eyes\tB．small eyes 57. Mike is a ______. (     ) A．student\tB．teacher",
+          "question_type": "choice",
+          "options": [
+            {
+              "label": "A",
+              "text": "ustralia. I’m a pupil. My mother is a teacher. She’ s tall and thin. My father is a doctor(医生). He’s fat. My brother has big eyes. He’s so cute. My friend is Mike. He’s from the Canada. He’s a student, too. I love my family and my friend. 53. My name is ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "John"
+            },
+            {
+              "label": "B",
+              "text": "Sarah 54. I am from ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "Canada"
+            },
+            {
+              "label": "B",
+              "text": "Australia 55. My father is ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "tall and thin"
+            },
+            {
+              "label": "B",
+              "text": "fat 56. My brother has ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "big eyes"
+            },
+            {
+              "label": "B",
+              "text": "small eyes 57. Mike is a ______. (     )"
+            },
+            {
+              "label": "A",
+              "text": "student"
+            },
+            {
+              "label": "B",
+              "text": "teacher"
+            }
+          ],
+          "knowledge": [
+            "家人和亲友"
+          ],
+          "answer": "",
+          "explanation": ""
+        }
+      ],
+      "question_count": 31,
+      "subject": "english",
+      "subject_name": "英语"
     }
   ]
 }

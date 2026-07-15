@@ -602,6 +602,82 @@ Cynthia Study 是一个专为小学生 Cynthia 设计的学习工具集，由家
 - ❌ 不要在打印模式下显示导航栏和按钮
 - ❌ 不要混用圆角尺寸（工具卡片统一 20px，内容卡片统一 15px）
 
+## Page Structure
+
+所有子页面（非首页）必须遵循统一的结构规范：
+
+### 页面模板
+
+```
+┌──────────────────────────────────────┐
+│  QuickNav (左侧固定导航栏)            │
+│                                      │
+│  ┌────────────────────────────────┐  │
+│  │  .page-wrapper                 │  │
+│  │  ┌──────────────────────────┐  │  │
+│  │  │  .page-header             │  │  │
+│  │  │  ← 返回首页               │  │  │
+│  │  │  🎯 页面标题               │  │  │
+│  │  │  页面描述                  │  │  │
+│  │  └──────────────────────────┘  │  │
+│  │  ┌──────────────────────────┐  │  │
+│  │  │  .content-card            │  │  │
+│  │  │  页面主内容               │  │  │
+│  │  └──────────────────────────┘  │  │
+│  └────────────────────────────────┘  │
+└──────────────────────────────────────┘
+```
+
+### 结构规则
+
+| 规则 | 说明 |
+|------|------|
+| 外层容器 | `.page-wrapper`，与首页一致的渐变背景 + 20px padding |
+| 内容容器 | `.container`，max-width 900px，居中，白色大圆角卡片（20px），`{shadows.card}` |
+| 页面头部 | `.page-header`，居中，40px 下边距 |
+| 返回按钮 | 所有子页面**必须**在头部之前显示 `← 返回首页`，链接到 `/` |
+| 标题 | emoji + 标题文本，32px bold，`{colors.primary-blue}` |
+| 描述 | 16px，`{colors.text-secondary}` |
+| 快速导航 | 除首页外，所有页面均引入 `<QuickNav />` |
+
+### 返回按钮规范
+
+```css
+.btn-back {
+  display: inline-block;
+  padding: 8px 20px;
+  background: {colors.surface};
+  color: {colors.primary-blue};
+  border: 2px solid {colors.border-light};
+  border-radius: {rounded.md};
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+.btn-back:hover {
+  background: {colors.primary-blue};
+  color: {colors.text-white};
+  border-color: {colors.primary-blue};
+}
+```
+
+### 首页例外
+
+首页不包含 QuickNav，不显示返回按钮，标题使用 `display-xl`（42px），白色文字 + 文字阴影。
+
+### 各页面状态
+
+| 页面 | QuickNav | 返回按钮 | 标题样式 | 背景渐变 |
+|------|----------|---------|---------|---------|
+| Home | ❌ | ❌ | 42px 白色 | blue-purple |
+| Schedule | ✅ | ✅ | 32px blue | blue-purple |
+| QuizGenerator | ✅ | ✅ | 32px blue | blue-purple |
+| AchievementWall | ✅ | ✅ | 32px blue | blue-purple |
+| PuzzleGames | ✅ | ✅ | 32px blue | blue-purple |
+| Study | ✅ | ✅ | 32px blue | blue-purple |
+
 ## Print Behavior
 
 所有页面必须支持打印输出：

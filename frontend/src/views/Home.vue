@@ -14,10 +14,10 @@
           <span class="tool-arrow">→</span>
         </router-link>
 
-        <router-link to="/quiz" class="tool-card reading">
+        <router-link to="/study" class="tool-card reading">
           <span class="tool-icon">📚</span>
-          <h2>寒假阅读题生成器</h2>
-          <p>导入阅读材料，生成阅读理解题<br/>智能创建题目，提升阅读能力</p>
+          <h2>学习题库</h2>
+          <p>选择年级和试卷，查看完整试卷内容<br/>支持图片展示和打印功能</p>
           <span class="tool-arrow">→</span>
         </router-link>
 
@@ -32,13 +32,6 @@
           <span class="tool-icon">🎮</span>
           <h2>益智游戏中心</h2>
           <p>远离电子产品保护视力<br/>益智游戏纸上学习乐无穷</p>
-          <span class="tool-arrow">→</span>
-        </router-link>
-
-        <router-link to="/study" class="tool-card study">
-          <span class="tool-icon">📚</span>
-          <h2>学习题库</h2>
-          <p>数学·语文·英语题库练习<br/>巩固知识，查漏补缺</p>
           <span class="tool-arrow">→</span>
         </router-link>
 

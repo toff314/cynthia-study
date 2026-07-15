@@ -3,323 +3,467 @@
     <QuickNav />
     <div class="container">
       <div class="header">
-        <h1>📚 阅读题生成器</h1>
-        <p>选择JSON数据文件，生成阅读理解题页面</p>
+        <router-link to="/" class="btn-back">← 返回首页</router-link>
+        <h1>📚 学习题库</h1>
+        <p>选择学科和年级，查看完整试卷</p>
       </div>
 
-      <div class="info-box">
-        <p><strong>💡 使用说明：</strong></p>
-        <ul class="info-list">
-          <li>选择JSON文件后，系统会自动将其保存到数据目录</li>
-          <li>点击文件列表中的下载图标可下载JSON文件</li>
-          <li>下载文件后，可使用AI工具生成新的阅读题JSON数据</li>
-        </ul>
-      </div>
-
-      <div class="tip-box" @click="showAIPrompt = !showAIPrompt">
-        <p><strong>🤖 AI生成提示词（点击展开/折叠）</strong></p>
-        <div v-if="showAIPrompt" class="ai-prompt">
-          <p>你可以将下载的JSON文件内容发送给AI工具（如ChatGPT、DeepSeek等），使用以下提示词生成新的阅读题：</p>
-          <div class="prompt-text">你是一个文学专家，请根据以下示例JSON结构生成 [书籍名称] 的阅读题目，包含4个选择题和1个思考题，并包含答案解析，请只返回JSON数据便于我保存。</div>
-          <p class="prompt-note">💡 提示：将 "[书籍名称]" 替换为你想要生成阅读题的书名</p>
-          
-          <div class="ai-links">
-            <p class="ai-links-title">🔗 推荐AI工具：</p>
-            <div class="ai-links-list">
-              <a href="https://chat.deepseek.com/" target="_blank" class="ai-link">💬 DeepSeek</a>
-              <a href="https://www.doubao.com/chat/" target="_blank" class="ai-link">☕ 豆包</a>
-              <a href="https://tongyi.aliyun.com/" target="_blank" class="ai-link">🌊 通义千问</a>
-              <a href="https://kimi.moonshot.cn/" target="_blank" class="ai-link">🌙 Kimi</a>
-              <a href="https://yiyan.baidu.com/" target="_blank" class="ai-link">🧠 文心一言</a>
-              <a href="https://chatglm.cn/" target="_blank" class="ai-link">🤖 智谱清言</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="upload-method">
-        <div 
-          :class="['method-tab', { active: uploadMethod === 'server' }]" 
-          @click="uploadMethod = 'server'"
-        >
-          📂 从项目选择
-        </div>
-        <div 
-          :class="['method-tab', { active: uploadMethod === 'local' }]" 
-          @click="uploadMethod = 'local'"
-        >
-          💻 本地上传
-        </div>
-      </div>
-
-      <div v-show="uploadMethod === 'server'" class="card">
-        <div class="card-header">
-          <h3>项目文件列表</h3>
-          <button class="btn-refresh" @click="loadServerFiles">🔄 刷新</button>
-        </div>
-        <div class="file-list" v-if="files.length > 0">
-          <div 
-            v-for="file in files" 
-            :key="file.name"
-            :class="['file-item', { selected: selectedFile === file.name }]"
+      <!-- 学科选择 -->
+      <div class="subject-selector">
+        <div class="subject-buttons">
+          <button
+            v-for="sub in subjects"
+            :key="sub.key"
+            :class="['subject-btn', { active: selectedSubject === sub.key }]"
+            @click="selectSubject(sub.key)"
           >
-            <div class="file-item-info" @click="selectFile(file.name)">
-              <span class="file-item-icon">📄</span>
-              <span class="file-item-name">{{ file.name }}</span>
-            </div>
-            <div class="file-item-actions">
-              <button 
-                class="btn-download-icon" 
-                @click.stop="downloadFile(file.name)"
-                title="下载JSON文件"
-              >
-                ⬇️
-              </button>
-              <span class="file-item-date">{{ file.modified }}</span>
-            </div>
-          </div>
-        </div>
-        <div v-else class="empty-state">
-          {{ loading ? '加载中...' : '📭 暂无文件' }}
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-primary" :disabled="!selectedFile" @click="loadSelectedFile">
-            ✅ 选择此文件
+            {{ sub.icon }} {{ sub.name }}
           </button>
         </div>
       </div>
 
-      <div v-show="uploadMethod === 'local'" class="card">
-        <div class="card-header">
-          <h3>本地上传</h3>
-        </div>
-        <div class="file-upload">
-          <input type="file" id="jsonFile" class="file-input" @change="handleFileUpload" accept=".json" />
-          <label for="jsonFile" class="file-label">
-            <span class="file-label-icon">📁</span>
-            <span class="file-label-text">点击选择JSON文件</span>
-          </label>
-          <p class="file-upload-hint">支持 .json 格式文件</p>
+      <!-- 年级选择 -->
+      <div v-if="selectedSubject" class="grade-selector">
+        <h3>选择学期</h3>
+        <div class="grade-buttons">
+          <button
+            v-for="g in gradeOptions"
+            :key="g.value"
+            :class="['grade-btn', { active: selectedGrade === g.value }]"
+            @click="selectGrade(g.value)"
+          >
+            {{ g.label }}
+          </button>
         </div>
       </div>
 
-      <div class="button-group">
-        <button class="btn btn-generate" :disabled="!loadedData" @click="generatePage">
-          ✨ 生成页面
-        </button>
-        <button class="btn btn-download" :disabled="!generatedHTML" @click="printQuiz">
-          🖨️ 打印阅读题
-        </button>
+      <!-- 试卷列表 -->
+      <div v-if="selectedGrade && !selectedPaper && !loadingPapers" class="paper-list">
+        <h3>试卷列表</h3>
+        <div v-if="papers.length > 0" class="paper-cards">
+          <div
+            v-for="paper in papers"
+            :key="paper.paper_id"
+            class="paper-card"
+            @click="selectPaper(paper)"
+          >
+            <div class="paper-card-title">{{ paper.title }}</div>
+            <div class="paper-card-info">
+              <span :class="['paper-type-badge', paper.paper_type === '同步教学' ? 'sync' : 'test']">{{ paper.paper_type }}</span>
+              <span>{{ paper.question_count }} 道题</span>
+              <span v-if="paper.semester">{{ paper.semester }}学期</span>
+            </div>
+          </div>
+        </div>
+        <div v-else class="empty-state">📭 该学期暂无试卷</div>
       </div>
 
-      <div class="preview" v-if="generatedHTML">
-        <div class="preview-title">预览</div>
-        <iframe :srcdoc="generatedHTML" style="width: 100%; height: 600px; border: none;"></iframe>
+      <div v-else-if="loadingPapers" class="loading-state">⏳ 加载试卷列表...</div>
+
+      <!-- 试卷内容 -->
+      <div v-if="selectedPaper && !loadingQuestions" class="quiz-paper">
+        <button class="btn-back-paper" @click="backToPaperList">← 返回试卷列表</button>
+        <div class="paper-header">
+          <h2>{{ selectedPaper.title }}</h2>
+          <p>{{ questions.length }} 道题目</p>
+        </div>
+
+        <div class="paper-content">
+          <div v-for="(q, index) in questions" :key="q.id" class="question-item">
+            <div class="question-header">
+              <span class="question-number">{{ index + 1 }}.</span>
+              <span class="question-type-badge">{{ typeLabel(q.question_type) }}</span>
+            </div>
+
+            <!-- 音频播放器 -->
+            <div v-if="q.audio_url" class="audio-player">
+              <audio :src="q.audio_url" controls preload="none"></audio>
+            </div>
+
+            <!-- 题目图片 -->
+            <div v-if="q.images && q.images.length > 0" class="question-images">
+              <img
+                v-for="(img, imgIdx) in q.images"
+                :key="imgIdx"
+                :src="img"
+                :alt="'题目' + (index+1) + '图片' + (imgIdx+1)"
+                class="question-img"
+                @click="previewImage(img)"
+              />
+            </div>
+
+            <div class="question-text">{{ q.question_text }}</div>
+
+            <div v-if="q.options && parsedOptions(q.options).length > 0" class="question-options">
+              <div v-for="(opt, oi) in parsedOptions(q.options)" :key="oi" class="option-item">
+                {{ typeof opt === 'object' ? (opt.label + '. ' + opt.text) : opt }}
+              </div>
+            </div>
+
+            <div v-if="q.question_type === 'short_answer' || q.question_type === 'fill_blank'" class="answer-blank">
+              <div class="blank-lines"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 答案（仅当有答案时才显示） -->
+        <div v-if="hasAnswers" class="answer-section">
+          <h3 class="answer-title">参考答案</h3>
+          <div v-for="(q, index) in questions" :key="'a' + q.id" class="answer-item">
+            <div v-if="q.answer" class="answer-line">
+              <span class="answer-num">{{ index + 1 }}.</span>
+              <span class="answer-val">{{ q.answer }}</span>
+              <span v-if="q.explanation" class="answer-exp">（{{ q.explanation }}）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-print" @click="printPaper">🖨️ 打印试卷</button>
+        </div>
+      </div>
+
+      <div v-else-if="loadingQuestions" class="loading-state">⏳ 加载题目...</div>
+
+      <!-- 图片预览 -->
+      <div v-if="previewImgUrl" class="image-preview-overlay" @click="previewImgUrl = ''">
+        <img :src="previewImgUrl" class="preview-full-img" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { quizApi, type FileInfo } from '@/api/quiz'
-import type { QuizData, ApiResponse } from '@/types'
+import { ref, computed } from 'vue'
 import QuickNav from '@/components/QuickNav.vue'
 
-const uploadMethod = ref<'server' | 'local'>('server')
-const files = ref<FileInfo[]>([])
-const selectedFile = ref('')
-const loadedData = ref<QuizData | null>(null)
-const generatedHTML = ref<string>('')
-const loading = ref(false)
-const showAIPrompt = ref(false)
+interface DbQuestion {
+  id: number
+  subject: string
+  grade: number
+  semester: string
+  question_type: string
+  question_text: string
+  options: any
+  answer: string
+  explanation: string
+  images: string[] | null
+  audio_url: string | null
+  paper_id: string
+  paper_title: string
+}
 
-const loadServerFiles = async () => {
-  loading.value = true
-  try {
-    const res = await quizApi.getFiles() as unknown as ApiResponse<{ files: FileInfo[] }>
-    if (res.success) {
-      files.value = res.data.files
-    }
-  } catch (error) {
-    console.error('加载文件列表失败:', error)
-  } finally {
-    loading.value = false
+interface Paper {
+  paper_id: string
+  title: string
+  subject: string
+  grade: number
+  semester: string
+  question_count: number
+  paper_type: string
+}
+
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://10.58.144.3:8000'
+
+const subjects = [
+  { key: 'chinese', icon: '📖', name: '语文' },
+  { key: 'math', icon: '🔢', name: '数学' },
+  { key: 'english', icon: '🔤', name: '英语' },
+]
+
+const gradeOptions = [
+  { value: '1-up', label: '一（上）' },
+  { value: '1-down', label: '一（下）' },
+  { value: '2-up', label: '二（上）' },
+  { value: '2-down', label: '二（下）' },
+  { value: '3-up', label: '三（上）' },
+  { value: '3-down', label: '三（下）' },
+  { value: '4-up', label: '四（上）' },
+  { value: '4-down', label: '四（下）' },
+  { value: '5-up', label: '五（上）' },
+  { value: '5-down', label: '五（下）' },
+  { value: '6-up', label: '六（上）' },
+  { value: '6-down', label: '六（下）' },
+]
+
+const selectedSubject = ref('')
+const selectedGrade = ref('')
+const selectedPaper = ref<Paper | null>(null)
+const papers = ref<Paper[]>([])
+const questions = ref<DbQuestion[]>([])
+const loadingPapers = ref(false)
+const loadingQuestions = ref(false)
+const previewImgUrl = ref('')
+
+const hasAnswers = computed(() => questions.value.some(q => q.answer && q.answer.trim()))
+
+const subjectMap: Record<string, string> = { math: '数学', chinese: '语文', english: '英语' }
+
+const selectSubject = (key: string) => {
+  selectedSubject.value = key
+  selectedGrade.value = ''
+  selectedPaper.value = null
+  papers.value = []
+  questions.value = []
+}
+
+const selectGrade = async (val: string) => {
+  selectedGrade.value = val
+  selectedPaper.value = null
+  questions.value = []
+  await loadPapers()
+}
+
+const selectPaper = async (paper: Paper) => {
+  selectedPaper.value = paper
+  await loadQuestions()
+}
+
+const backToPaperList = () => {
+  selectedPaper.value = null
+  questions.value = []
+}
+
+const parsedOptions = (opts: any): any[] => {
+  if (!opts) return []
+  if (Array.isArray(opts)) return opts
+  if (typeof opts === 'string') {
+    try { return JSON.parse(opts) } catch { return [] }
   }
+  return []
 }
 
-const selectFile = (filename: string) => {
-  selectedFile.value = filename
+const typeLabel = (t: string) => {
+  const m: Record<string, string> = {
+    choice: '选择题', fill_blank: '填空题',
+    true_false: '判断题', short_answer: '简答题'
+  }
+  return m[t] || t
 }
 
-const loadSelectedFile = async () => {
-  if (!selectedFile.value) return
-  
-  loading.value = true
+const gradeToInt = (val: string): number => parseInt(val.split('-')[0])
+const semesterFromGrade = (val: string): string => val.endsWith('-up') ? '上' : '下'
+
+const loadPapers = async () => {
+  if (!selectedSubject.value || !selectedGrade.value) return
+  loadingPapers.value = true
   try {
-    const res = await quizApi.getFile(selectedFile.value) as unknown as ApiResponse<{ content: string }>
-    if (res.success) {
-      loadedData.value = JSON.parse(res.data.content)
-      if (loadedData.value) {
-        await saveToServer(loadedData.value)
+    const params = new URLSearchParams({
+      subject: subjectMap[selectedSubject.value],
+      grade: String(gradeToInt(selectedGrade.value)),
+    })
+    const res = await fetch(`${API_BASE}/api/study/papers?${params}`)
+    const data = await res.json()
+    if (data.success) {
+      // 按学期过滤
+      const sem = semesterFromGrade(selectedGrade.value)
+      papers.value = data.data.papers.filter((p: Paper) => {
+        if (!p.semester) return true
+        return p.semester === sem
+      })
+      // 如果没有学期匹配，显示全部
+      if (papers.value.length === 0 && data.data.papers.length > 0) {
+        papers.value = data.data.papers
       }
     }
-  } catch (error) {
-    console.error('加载文件内容失败:', error)
+  } catch (e) {
+    console.error('加载试卷列表失败:', e)
   } finally {
-    loading.value = false
+    loadingPapers.value = false
   }
 }
 
-const handleFileUpload = async (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (!file) return
-  
-  const reader = new FileReader()
-  reader.onload = async (e) => {
-    try {
-      loadedData.value = JSON.parse(e.target?.result as string)
-      if (loadedData.value) {
-        await saveToServer(loadedData.value)
-      }
-      // 清空input的value，允许重复选择同一文件
-      target.value = ''
-    } catch (error) {
-      alert('JSON文件格式错误，请检查文件内容')
-    }
-  }
-  reader.readAsText(file)
-}
-
-const saveToServer = async (data: QuizData) => {
+const loadQuestions = async () => {
+  if (!selectedPaper.value) return
+  loadingQuestions.value = true
   try {
-    const res = await quizApi.saveQuiz(data) as unknown as ApiResponse<{ path: string }>
-    if (res.success) {
-      alert(`✅ 文件加载成功！包含 ${data.sections.length} 个章节\n\n`)
+    const params = new URLSearchParams({
+      paper_id: selectedPaper.value.paper_id,
+      limit: '200'
+    })
+    const res = await fetch(`${API_BASE}/api/study/questions?${params}`)
+    const data = await res.json()
+    if (data.success) {
+      questions.value = data.data.questions
     }
-  } catch (error) {
-    console.error('文件加载失败:', error)
+  } catch (e) {
+    console.error('加载题目失败:', e)
+  } finally {
+    loadingQuestions.value = false
   }
 }
 
-const generatePage = () => {
-  if (!loadedData.value) return
-  
-  const template = getTemplateHTML()
-  const dataString = JSON.stringify(loadedData.value, null, 2)
-  
-  generatedHTML.value = template.replace(
-    'const quizData = {};',
-    `const quizData = ${dataString};`
-  )
+const previewImage = (url: string) => {
+  previewImgUrl.value = url
 }
 
-const printQuiz = () => {
-  if (!generatedHTML.value) return
-  
-  const iframe = document.querySelector('.preview iframe') as HTMLIFrameElement
-  if (iframe && iframe.contentWindow) {
-    iframe.contentWindow.print()
-  }
+const printPaper = () => {
+  if (!selectedPaper.value) return
+  const w = window.open('', '_blank')
+  if (!w) return
+  w.document.write(buildPrintHTML())
+  w.document.close()
+  setTimeout(() => w.print(), 500)
 }
 
-const downloadFile = (filename: string) => {
-  quizApi.downloadFile(filename)
-}
+const buildPrintHTML = () => {
+  const title = selectedPaper.value?.title || '试卷'
+  let h = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>${title}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei",sans-serif;font-size:14px;line-height:1.8;color:#333;padding:20px;background:#fff}
+.container{max-width:800px;margin:0 auto;padding:40px}
+.paper-header{text-align:center;padding-bottom:15px;border-bottom:2px solid #333;margin-bottom:25px}
+.paper-header h2{font-size:22px;margin-bottom:6px}
+.paper-header p{color:#666;font-size:14px}
+.question-item{margin-bottom:18px;padding:12px 15px;background:#fafafa;border-radius:4px;page-break-inside:avoid}
+.question-header{display:flex;align-items:center;margin-bottom:8px}
+.question-number{font-weight:bold;font-size:15px;margin-right:8px}
+.question-type-badge{background:#e0e0e0;color:#333;padding:1px 8px;border-radius:3px;font-size:11px}
+.audio-player{margin-bottom:10px}
+.question-images{margin:10px 0;text-align:center}
+.question-images img{max-width:100%;max-height:300px;border-radius:4px;margin:5px}
+.question-text{margin-bottom:10px;line-height:1.8}
+.question-options{margin-left:20px}
+.option-item{padding:3px 0}
+.answer-blank{margin-top:10px}
+.blank-lines{height:60px;border-bottom:1px dashed #ccc}
+.answer-section{margin-top:30px;padding-top:15px;border-top:2px solid #333;page-break-before:always}
+.answer-title{font-size:18px;font-weight:bold;margin-bottom:15px}
+.answer-item{padding:6px 0}
+.answer-line{font-size:14px}
+.answer-num{font-weight:bold;margin-right:6px}
+.answer-val{color:#333}
+.answer-exp{color:#888;font-size:13px}
+@media print{body{padding:0}.container{padding:20px}.question-item{page-break-inside:avoid}.answer-section{page-break-before:always}.audio-player{display:none}}
+</style></head><body><div class="container">
+<div class="paper-header"><h2>${title}</h2><p>${questions.value.length} 道题目</p></div>`
 
-const copyPrompt = () => {
-  const prompt = `你是一个文学专家，请根据以下示例JSON结构生成 [书籍名称] 的阅读题目，包含4个选择题和1个思考题，并包含答案解析，请只返回JSON数据便于我保存。`
-  navigator.clipboard.writeText(prompt).then(() => {
-    alert('✅ 提示词已复制到剪贴板')
-  }).catch(() => {
-    alert('❌ 复制失败，请手动复制')
+  questions.value.forEach((q, i) => {
+    h += `<div class="question-item">
+<div class="question-header"><span class="question-number">${i + 1}.</span><span class="question-type-badge">${typeLabel(q.question_type)}</span></div>`
+    if (q.audio_url) {
+      h += `<div class="audio-player"><audio src="${q.audio_url}" controls></audio></div>`
+    }
+    if (q.images && q.images.length > 0) {
+      h += '<div class="question-images">'
+      q.images.forEach(img => {
+        h += `<img src="${img}" />`
+      })
+      h += '</div>'
+    }
+    h += `<div class="question-text">${q.question_text}</div>`
+    const opts = parsedOptions(q.options)
+    if (opts.length > 0) {
+      h += '<div class="question-options">'
+      opts.forEach(o => {
+        h += `<div class="option-item">${typeof o === 'object' ? (o.label + '. ' + o.text) : o}</div>`
+      })
+      h += '</div>'
+    }
+    if (q.question_type === 'short_answer' || q.question_type === 'fill_blank') {
+      h += '<div class="answer-blank"><div class="blank-lines"></div></div>'
+    }
+    h += '</div>'
   })
-}
 
-const getTemplateHTML = () => {
-  return `<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>阅读理解题</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Microsoft YaHei", Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-    .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-    .header { text-align: center; padding-bottom: 30px; border-bottom: 3px solid #667eea; }
-    .header h1 { color: #667eea; font-size: 28px; }
-    .section { margin-bottom: 30px; }
-    .section-title { background: #667eea; color: white; padding: 10px 20px; border-radius: 8px; font-size: 18px; margin-bottom: 20px; }
-    .question { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #667eea; }
-    .question-number { color: #667eea; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
-    .options { margin-left: 20px; }
-    .option { padding: 4px 0; font-size: 15px; }
-    .answer-key { background: #e8f5e9; padding: 20px; border-radius: 10px; border: 2px solid #4caf50; }
-    .page-break { page-break-before: always; }
-    .answer-section { page-break-before: always; }
-    .answer-item { padding: 15px; margin-bottom: 10px; background: white; border-radius: 8px; }
-    .answer-label { color: #4caf50; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
-    .answer-explanation { color: #666; font-size: 14px; line-height: 1.6; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 id="title">📚 阅读理解题</h1>
-    </div>
-    <div id="questions-container"></div>
-    <div class="section answer-section">
-      <div class="section-title" style="background: #4CAF50;">参考答案</div>
-      <div id="answers-container"></div>
-    </div>
-  </div>
-  <script>
-    const quizData = {};
-    function init() {
-      document.getElementById('title').textContent = '📚 ' + quizData.title;
-      const questionsContainer = document.getElementById('questions-container');
-      let html = '';
-      quizData.sections.forEach(section => {
-        html += '<div class="section"><div class="section-title">' + section.title + '</div>';
-        section.questions.forEach(q => {
-          html += '<div class="question"><div class="question-number">' + q.number + '. ' + q.text + '</div>';
-          if (q.options) {
-            html += '<div class="options">';
-            q.options.forEach(opt => html += '<div class="option">' + opt + '</div>');
-            html += '</div>';
-          }
-          html += '</div>';
-        });
-        html += '</div>';
-      });
-      questionsContainer.innerHTML = html;
-      
-      let answerHtml = '<div class="answer-key">';
-      quizData.sections.forEach(section => {
-        section.questions.forEach(q => {
-          if (q.answer) {
-            answerHtml += '<div class="answer-item"><div class="answer-label">' + q.number + '. ' + q.answer + '</div>';
-            if (q.explanation) {
-              answerHtml += '<div class="answer-explanation"><strong>解析：</strong>' + q.explanation + '</div>';
-            }
-            answerHtml += '</div>';
-          }
-        });
-      });
-      answerHtml += '</div>';
-      document.getElementById('answers-container').innerHTML = answerHtml;
-    }
-    document.addEventListener('DOMContentLoaded', init);
-  <\/script>
-</body>
-</html>`
+  h += '<div class="answer-section"><div class="answer-title">参考答案</div>'
+  questions.value.forEach((q, i) => {
+    h += `<div class="answer-item"><div class="answer-line"><span class="answer-num">${i + 1}.</span><span class="answer-val">${q.answer || '—'}</span>`
+    if (q.explanation) h += `<span class="answer-exp">（${q.explanation}）</span>`
+    h += '</div></div>'
+  })
+  h += '</div></div></body></html>'
+  return h
 }
-
-onMounted(() => {
-  loadServerFiles()
-})
 </script>
 
-<style scoped src="./QuizGenerator.css"></style>
+<style scoped>
+.quiz-generator { min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+.container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 15px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+.header { text-align: center; margin-bottom: 30px; }
+
+.btn-back {
+  display: inline-block; padding: 8px 20px; background: rgba(102, 126, 234, 0.15);
+  color: #667eea; border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 8px;
+  font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+  margin-bottom: 15px; transition: all 0.3s;
+}
+.btn-back:hover { background: #667eea; color: #fff; border-color: #667eea; transform: translateX(-3px); }
+
+.btn-back-paper {
+  display: inline-block; padding: 8px 16px; background: #f0f0f0; color: #555;
+  border: none; border-radius: 6px; font-size: 14px; cursor: pointer; margin-bottom: 15px; transition: all 0.3s;
+}
+.btn-back-paper:hover { background: #e0e0e0; }
+
+.subject-selector { margin-bottom: 25px; }
+.subject-buttons { display: flex; gap: 12px; justify-content: center; }
+.subject-btn { padding: 14px 32px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; font-size: 18px; cursor: pointer; transition: all 0.3s; }
+.subject-btn:hover, .subject-btn.active { background: #667eea; color: white; }
+
+.grade-selector { margin-bottom: 25px; }
+.grade-selector h3 { color: #333; margin-bottom: 12px; font-size: 17px; }
+.grade-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.grade-btn { padding: 10px 18px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 6px; font-size: 15px; cursor: pointer; transition: all 0.3s; }
+.grade-btn:hover, .grade-btn.active { background: #667eea; color: white; }
+
+.paper-list { margin-top: 20px; }
+.paper-list h3 { color: #333; margin-bottom: 15px; font-size: 20px; }
+.paper-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+.paper-card { background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 10px; padding: 18px; cursor: pointer; transition: all 0.3s; }
+.paper-card:hover { border-color: #667eea; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.paper-card-title { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 8px; }
+.paper-card-info { display: flex; gap: 12px; color: #666; font-size: 13px; align-items: center; }
+.paper-type-badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.paper-type-badge.sync { background: #e8f5e9; color: #2e7d32; }
+.paper-type-badge.test { background: #fff3e0; color: #e65100; }
+
+.quiz-paper { margin-top: 20px; }
+.paper-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #dee2e6; }
+.paper-header h2 { color: #333; font-size: 26px; }
+.paper-header p { color: #666; font-size: 15px; margin-top: 6px; }
+
+.question-item { background: white; padding: 18px 20px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #667eea; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.question-header { display: flex; align-items: center; margin-bottom: 10px; }
+.question-number { color: #667eea; font-weight: bold; font-size: 17px; margin-right: 10px; }
+.question-type-badge { background: #e9ecef; color: #495057; padding: 3px 10px; border-radius: 4px; font-size: 12px; }
+
+.audio-player { margin: 10px 0; }
+.audio-player audio { width: 100%; max-width: 400px; }
+
+.question-images { margin: 10px 0; }
+.question-img { max-width: 100%; max-height: 400px; border-radius: 8px; margin: 5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+.question-text { color: #333; font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
+.question-options { margin-left: 20px; }
+.option-item { padding: 5px 0; color: #495057; font-size: 14px; }
+.answer-blank { margin-top: 10px; }
+.blank-lines { height: 60px; border-bottom: 1px dashed #ccc; }
+
+.answer-section { margin-top: 30px; padding-top: 20px; border-top: 2px solid #dee2e6; }
+.answer-title { color: #28a745; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+.answer-item { padding: 6px 0; }
+.answer-line { font-size: 14px; }
+.answer-num { font-weight: bold; color: #333; margin-right: 6px; }
+.answer-val { color: #28a745; }
+.answer-exp { color: #6c757d; font-size: 13px; margin-left: 8px; }
+
+.action-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+.btn-print { background: #28a745; color: white; padding: 12px 32px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+.btn-print:hover { background: #218838; }
+
+.loading-state, .empty-state { text-align: center; padding: 40px; color: #6c757d; font-size: 16px; }
+
+.image-preview-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999; cursor: pointer; }
+.preview-full-img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+
+@media (max-width: 768px) {
+  .container { padding: 20px; }
+  .subject-buttons { flex-direction: column; }
+  .subject-btn { width: 100%; }
+  .grade-buttons { flex-direction: column; }
+  .grade-btn { width: 100%; }
+  .paper-cards { grid-template-columns: 1fr; }
+}
+</style>

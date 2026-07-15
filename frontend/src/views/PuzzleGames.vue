@@ -2,9 +2,9 @@
   <div class="puzzle-games">
     <QuickNav />
     <div class="header">
+      <router-link to="/" class="btn-back">← 返回首页</router-link>
       <h1>🎮 益智游戏中心 🎮</h1>
       <p>远离电子产品，保护眼睛，在纸上快乐学习</p>
-      <router-link to="/" class="back-link">← 返回首页</router-link>
     </div>
 
     <!-- 分类选择 -->

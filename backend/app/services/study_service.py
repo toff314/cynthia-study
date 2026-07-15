@@ -15,9 +15,9 @@ class StudyService:
 
     def get_questions(self, subject: Optional[str] = None, grade: Optional[int] = None,
                       question_type: Optional[str] = None, difficulty: Optional[str] = None,
+                      paper_id: Optional[str] = None,
                       limit: int = 50, offset: int = 0) -> tuple[List[QuestionBank], int]:
         query = self.db.query(QuestionBank)
-        total = query.count()
         if subject:
             query = query.filter(QuestionBank.subject == subject)
         if grade:
@@ -26,6 +26,9 @@ class StudyService:
             query = query.filter(QuestionBank.question_type == question_type)
         if difficulty:
             query = query.filter(QuestionBank.difficulty == difficulty)
+        if paper_id:
+            query = query.filter(QuestionBank.paper_id == paper_id)
+        total = query.count()
         items = query.order_by(QuestionBank.created_at.desc()).limit(limit).offset(offset).all()
         return items, total
 

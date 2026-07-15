@@ -39,11 +39,13 @@ export interface QuizQuestion {
   answer?: string
   explanation?: string
   placeholder?: string
+  image?: string  // 题目图片，支持base64或URL
 }
 
 export interface QuizData {
   title: string
   subtitle?: string
+  grade?: string
   sections: QuizSection[]
 }
 

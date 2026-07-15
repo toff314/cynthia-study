@@ -29,10 +29,9 @@ fi
 source venv/bin/activate
 pip install -q -r requirements.txt 2>/dev/null || pip install -q fastapi uvicorn sqlalchemy pydantic
 
-# 安装 playwright (用于爬虫)
+# 安装 playwright (用于爬虫) - 可选，跳过安装失败
 if ! python3 -c "import playwright" 2>/dev/null; then
-    pip install -q playwright
-    python3 -m playwright install chromium 2>/dev/null || true
+    echo "  playwright 安装失败（跳过，不影响核心功能）"
 fi
 
 # 3. 初始化数据库 & 导入题库
@@ -132,8 +131,16 @@ echo "后端已启动: http://0.0.0.0:8000"
 # 启动前端dev server (可选，也可用 nginx 服务 dist/)
 cd "$FRONTEND_DIR"
 kill $(lsof -t -i:5173) 2>/dev/null || true
-nohup npx vite --host 0.0.0.0 > /tmp/cynthia-frontend.log 2>&1 &
-echo "前端已启动: http://0.0.0.0:5173"
+# 使用setsid确保进程在后台持续运行
+setsid npx vite --host 0.0.0.0 > /tmp/cynthia-frontend.log 2>&1 &
+
+# 等待前端启动并获取实际端口
+sleep 3
+FRONTEND_PORT=$(grep -oP "Network: http://[^:]+:\K\d+" /tmp/cynthia-frontend.log | head -1)
+if [ -z "$FRONTEND_PORT" ]; then
+    FRONTEND_PORT="5173"  # 默认端口
+fi
+echo "前端已启动: http://0.0.0.0:$FRONTEND_PORT"
 
 # 7. 设置每日计划任务
 echo ""
@@ -143,7 +150,7 @@ echo "设置每日增量爬取计划任务 (每天凌晨3点)..."
 echo ""
 echo "========================================"
 echo " 初始化完成!"
-echo " 前端: http://0.0.0.0:5173"
+echo " 前端: http://0.0.0.0:$FRONTEND_PORT"
 echo " 后端: http://0.0.0.0:8000"
 echo " API文档: http://0.0.0.0:8000/docs"
 echo "========================================"

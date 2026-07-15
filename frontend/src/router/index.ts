@@ -15,11 +15,6 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/study',
     name: 'Study',
-    component: () => import('@/views/Study.vue')
-  },
-  {
-    path: '/quiz',
-    name: 'Quiz',
     component: () => import('@/views/QuizGenerator.vue')
   },
   {

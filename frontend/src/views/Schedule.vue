@@ -3,6 +3,7 @@
     <QuickNav />
     <div class="container">
       <div class="header-info">
+        <router-link to="/" class="btn-back">← 返回首页</router-link>
         <h1>🎄 寒假每日任务日程表 🎄</h1>
         <div class="week-display" id="winterWeekText"></div>
         <div class="input-group">

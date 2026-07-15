@@ -8,6 +8,7 @@ import json
 class QuestionBankBase(BaseModel):
     subject: str = Field(..., description="科目：math/chinese/english")
     grade: int = Field(..., ge=1, le=6, description="年级：1-6")
+    semester: Optional[str] = Field(None, description="学期：上/下")
     question_type: str = Field(..., description="题目类型：choice/fill_blank/true_false/short_answer")
     difficulty: str = Field(default="medium", description="难度：easy/medium/hard")
     question_text: str = Field(..., description="题目内容")
@@ -15,6 +16,10 @@ class QuestionBankBase(BaseModel):
     answer: str = Field(..., description="正确答案")
     explanation: Optional[str] = Field(None, description="答案解析")
     source: Optional[str] = Field(None, description="来源URL")
+    images: Optional[List[str]] = Field(None, description="题目图片URL列表")
+    audio_url: Optional[str] = Field(None, description="音频URL")
+    paper_id: Optional[str] = Field(None, description="试卷ID")
+    paper_title: Optional[str] = Field(None, description="试卷标题")
 
     @field_validator('options', mode='before')
     @classmethod

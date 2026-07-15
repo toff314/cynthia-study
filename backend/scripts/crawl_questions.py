@@ -136,12 +136,69 @@ def extract_questions_from_page(page) -> list[dict[str, Any]]:
 
     for block in question_blocks:
         try:
+            # 提取图片URL
+            images = []
+            img_els = block.query_selector_all("img")
+            for img in img_els:
+                src = (img.get_attribute("src") or "").strip()
+                if not src:
+                    continue
+                # 处理相对路径
+                if src.startswith("//"):
+                    src = "https:" + src
+                elif src.startswith("/"):
+                    src = BASE_URL + src
+                # 过滤掉小图标（通常 < 50px）
+                width = img.get_attribute("width") or ""
+                if width and int(width) < 50:
+                    continue
+                images.append(src)
+
+            # 提取音频URL
+            audio_url = None
+            audio_els = block.query_selector_all("audio source, audio, .audio-player audio")
+            for audio in audio_els:
+                src = (audio.get_attribute("src") or "").strip()
+                if not src:
+                    src = (audio.get_attribute("data-src") or "").strip()
+                if src:
+                    if src.startswith("//"):
+                        src = "https:" + src
+                    elif src.startswith("/"):
+                        src = BASE_URL + src
+                    audio_url = src
+                    break
+
+            # 如果没找到 audio 标签，尝试查找音频按钮的 data 属性
+            if not audio_url:
+                audio_btns = block.query_selector_all("[data-audio], [data-src*='.mp3'], [onclick*='audio'], [onclick*='play']")
+                for btn in audio_btns:
+                    data_src = btn.get_attribute("data-src") or ""
+                    data_audio = btn.get_attribute("data-audio") or ""
+                    onclick = btn.get_attribute("onclick") or ""
+                    for val in [data_src, data_audio]:
+                        if val and (".mp3" in val or ".m4a" in val or ".wav" in val):
+                            if val.startswith("//"):
+                                val = "https:" + val
+                            elif val.startswith("/"):
+                                val = BASE_URL + val
+                            audio_url = val
+                            break
+                    if audio_url:
+                        break
+                    # 从 onclick 中提取 URL
+                    if onclick:
+                        url_match = re.search(r"['\"](https?://[^'\"]+\.(?:mp3|m4a|wav))['\"]", onclick)
+                        if url_match:
+                            audio_url = url_match.group(1)
+                            break
+
             # 提取完整文本
             full_text = block.inner_text().strip()
             if not full_text or len(full_text) < 5:
                 continue
 
-            # 清理文本：移除元数据行
+            # 清理文本：移除元数据行和噪音
             lines = full_text.split("\n")
             clean_lines = []
             for line in lines:
@@ -151,15 +208,31 @@ def extract_questions_from_page(page) -> list[dict[str, Any]]:
                 # 跳过元数据行
                 if re.match(r"\d{4}/\d{2}/\d{2}", line):
                     break
+                # 跳过组卷网功能链接
                 if "次组卷" in line or "卷引用" in line:
                     break
                 if line in ("相似题", "纠错", "详情", "收藏", "加入试题篮"):
+                    continue
+                # 跳过整体分析、类文阅读等非题目内容
+                if line.startswith("整体分析") or line.startswith("类文阅读"):
+                    continue
+                if re.match(r"^\d+\.\s*(整体分析|类文阅读)", line):
+                    continue
+                # 跳过纯下划线占位行（如 ___________）
+                if re.match(r"^[_\s]{5,}$", line):
+                    continue
+                # 跳过"第X单元"等元信息
+                if re.match(r"^第[一二三四五六七八九十]+单元", line) and "课" in line:
                     continue
                 clean_lines.append(line)
 
             question_text = " ".join(clean_lines)
             if not question_text or len(question_text) < 5:
                 continue
+
+            # 如果有图片但没有文本，用图片说明作为文本
+            if images and len(question_text) < 5:
+                question_text = "（看图作答）"
 
             # 先尝试提取选项（支持全角/半角点号、空格、制表符分隔）
             option_matches = re.findall(r"([A-E])[\s.．、]*(.*?)(?=\s*[A-E][\s.．、]|\t[A-E][\s.．、]|$)", question_text, re.DOTALL)
@@ -191,7 +264,6 @@ def extract_questions_from_page(page) -> list[dict[str, Any]]:
             know_el = block.query_selector(".knowlegde")
             if know_el:
                 know_text = know_el.inner_text().strip()
-                # 提取知识点名称
                 know_matches = re.findall(r"【知识点】\s*(.+)", know_text)
                 if know_matches:
                     knowledge = [k.strip() for k in know_matches[0].split() if k.strip()]
@@ -203,6 +275,8 @@ def extract_questions_from_page(page) -> list[dict[str, Any]]:
                 "knowledge": knowledge,
                 "answer": "",  # 不爬答案
                 "explanation": "",  # 不爬解析
+                "images": images if images else None,
+                "audio_url": audio_url,
             })
 
         except Exception as e:
@@ -411,6 +485,7 @@ def import_to_api(papers: list[dict[str, Any]]):
             questions.append({
                 "subject": paper.get("subject", ""),
                 "grade": paper.get("grade", 0),
+                "semester": paper.get("semester", ""),
                 "question_type": q.get("question_type", "choice"),
                 "difficulty": paper.get("difficulty", "medium"),
                 "question_text": q.get("question_text", ""),
@@ -418,6 +493,8 @@ def import_to_api(papers: list[dict[str, Any]]):
                 "answer": q.get("answer", ""),
                 "explanation": q.get("explanation", ""),
                 "source": paper.get("url", ""),
+                "images": q.get("images"),
+                "audio_url": q.get("audio_url"),
                 "paper_id": paper.get("paper_id", ""),
                 "paper_title": paper.get("title", ""),
             })

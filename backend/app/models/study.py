@@ -10,6 +10,7 @@ class QuestionBank(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     subject = Column(String(20), nullable=False, comment="科目：math/chinese/english")
     grade = Column(Integer, nullable=False, comment="年级：1-6")
+    semester = Column(String(10), nullable=True, comment="学期：上/下")
     question_type = Column(String(30), nullable=False, comment="题目类型：choice/fill_blank/true_false/short_answer")
     difficulty = Column(String(10), nullable=False, default="medium", comment="难度：easy/medium/hard")
     question_text = Column(Text, nullable=False, comment="题目内容")
@@ -17,6 +18,10 @@ class QuestionBank(Base):
     answer = Column(Text, nullable=False, comment="正确答案")
     explanation = Column(Text, nullable=True, comment="答案解析")
     source = Column(String(255), nullable=True, comment="来源URL")
+    images = Column(JSON, nullable=True, comment="题目图片URL列表")
+    audio_url = Column(String(500), nullable=True, comment="音频URL（英语听力等）")
+    paper_id = Column(String(50), nullable=True, comment="试卷ID")
+    paper_title = Column(String(255), nullable=True, comment="试卷标题")
     created_at = Column(DateTime, server_default=func.now(), comment="创建时间")
 
 
