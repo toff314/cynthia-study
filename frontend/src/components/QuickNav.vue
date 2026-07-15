@@ -15,6 +15,9 @@
     <router-link to="/achievement" class="nav-item" :class="{ active: $route.path === '/achievement' }">
       <span class="nav-icon">🏆</span>
     </router-link>
+    <router-link to="/reading" class="nav-item" :class="{ active: $route.path === '/reading' }">
+      <span class="nav-icon">📖</span>
+    </router-link>
     <router-link to="/games" class="nav-item" :class="{ active: $route.path === '/games' }">
       <span class="nav-icon">🎮</span>
     </router-link>
@@ -63,11 +66,17 @@ const route = useRoute()
   transform: translateX(5px);
 }
 
-.nav-icon {
-  display: block;
-}
+  .nav-icon {
+    display: block;
+  }
 
-@media screen and (max-width: 768px) {
+  @media print {
+    .quick-nav {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
   .nav-item {
     width: 40px;
     height: 40px;

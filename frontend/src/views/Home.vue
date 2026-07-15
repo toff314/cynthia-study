@@ -28,6 +28,13 @@
           <span class="tool-arrow">→</span>
         </router-link>
 
+        <router-link to="/reading" class="tool-card books">
+          <span class="tool-icon">📖</span>
+          <h2>绘本阅读</h2>
+          <p>从云端读取绘本<br/>在线全屏阅读，支持打印</p>
+          <span class="tool-arrow">→</span>
+        </router-link>
+
         <router-link to="/games" class="tool-card games">
           <span class="tool-icon">🎮</span>
           <h2>益智游戏中心</h2>

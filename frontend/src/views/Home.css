@@ -74,6 +74,10 @@
   border: 3px solid #FF9800;
 }
 
+.tool-card.books:hover {
+  border: 3px solid #00BCD4;
+}
+
 .tool-card.games:hover {
   border: 3px solid #E91E63;
 }

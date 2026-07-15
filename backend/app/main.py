@@ -7,7 +7,7 @@ from pathlib import Path
 import uvicorn
 
 from app.config import settings
-from app.api import health, schedule, quiz, achievement, statistics, game, study
+from app.api import health, schedule, quiz, achievement, statistics, game, study, reading
 from app.database import init_db
 
 # 创建 FastAPI 应用
@@ -34,6 +34,7 @@ app.include_router(achievement.router, prefix=settings.API_PREFIX)
 app.include_router(statistics.router, prefix=settings.API_PREFIX)
 app.include_router(game.router, prefix=settings.API_PREFIX)
 app.include_router(study.router, prefix=settings.API_PREFIX)
+app.include_router(reading.router, prefix=settings.API_PREFIX)
 
 # 挂载静态文件（前端）
 # frontend_dist = Path(__file__).parent.parent / "frontend" / "dist"

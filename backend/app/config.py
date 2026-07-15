@@ -28,9 +28,16 @@ class Settings:
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     
+    # 绘本阅读模块配置
+    READING_CACHE_DIR: Path = DATA_DIR / "cache" / "reading"
+    READING_CONFIG_DIR: Path = Path.home() / ".config" / "cynthia-study"
+    READING_CONFIG_FILE: Path = READING_CONFIG_DIR / "baidu_config.json"
+    READING_ROOT_PATH: str = "/团团园圆/绘本/【1】3000套中文绘本（67G）"
+    
     # 确保 data 目录存在
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     QUIZ_DIR.mkdir(parents=True, exist_ok=True)
+    READING_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # 全局配置实例
