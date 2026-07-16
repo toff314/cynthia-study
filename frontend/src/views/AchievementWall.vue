@@ -4,7 +4,7 @@
     <div class="container">
       <div class="header">
         <router-link to="/" class="btn-back">← 返回首页</router-link>
-        <h1>🏆 寒假成就墙 🏆</h1>
+        <h1>🏆 假期成就墙 🏆</h1>
         <p>展示成就徽章，记录成长足迹</p>
       </div>
 

@@ -12,8 +12,8 @@ from app.database import init_db
 
 # 创建 FastAPI 应用
 app = FastAPI(
-    title="寒假工具集 API",
-    description="寒假每日任务日程表和阅读题生成器后端API",
+    title="假期工具集 API",
+    description="假期每日任务日程表和阅读题生成器后端API",
     version="1.0.0"
 )
 
@@ -53,7 +53,7 @@ async def startup_event():
 async def root():
     """根路径"""
     return {
-        "message": "欢迎使用寒假工具集 API",
+        "message": "欢迎使用假期工具集 API",
         "docs": "/docs",
         "health": "/health"
     }

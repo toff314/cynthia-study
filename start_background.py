@@ -181,7 +181,7 @@ def start_frontend():
 def start_all():
     """启动所有服务"""
     print("=" * 50)
-    print("  寒假工具集 - 后台启动服务")
+    print("  假期工具集 - 后台启动服务")
     print("=" * 50)
     print()
     

@@ -588,7 +588,7 @@ class AchievementService:
             ),
             Achievement(
                 code="streak_30",
-                name="寒假满勤",
+                name="假期满勤",
                 description="连续完成30天任务",
                 icon="🌟",
                 level="gold",

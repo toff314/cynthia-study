@@ -2,14 +2,14 @@
   <div class="home">
     <div class="container">
       <div class="header">
-        <h1>🎄 寒假工具集 🎄</h1>
-        <p>高效规划寒假时光，轻松提升学习效率</p>
+        <h1>🎄 假期工具集 🎄</h1>
+        <p>高效规划假期时光，轻松提升学习效率</p>
       </div>
 
       <div class="tools-container">
         <router-link to="/schedule" class="tool-card schedule">
           <span class="tool-icon">📅</span>
-          <h2>寒假每日任务日程表</h2>
+          <h2>假期每日任务日程表</h2>
           <p>管理每日任务，记录学习收获<br/>合理安排时间，养成良好习惯</p>
           <span class="tool-arrow">→</span>
         </router-link>
@@ -23,7 +23,7 @@
 
         <router-link to="/achievement" class="tool-card achievement">
           <span class="tool-icon">🏆</span>
-          <h2>寒假成就墙</h2>
+          <h2>假期成就墙</h2>
           <p>展示成就徽章，记录成长足迹<br/>可视化呈现进步，激励持续学习</p>
           <span class="tool-arrow">→</span>
         </router-link>
@@ -78,7 +78,7 @@
       </div>
 
       <div class="footer">
-        <p>© 2026 寒假学习助手 | 祝您学业进步！</p>
+        <p>© 2026 假期学习助手 | 祝您学业进步！</p>
         <p class="creator-info">由 Cynthia 倾心创作 | 欢迎家长们提出宝贵建议，如需反馈请与 Cynthia 的家人联系</p>
       </div>
     </div>
