@@ -10,3 +10,7 @@ logs
 *.pid
 venv
 tmp
+
+# Fabric 运行时目录（不提交）
+.agents/
+.qagent/

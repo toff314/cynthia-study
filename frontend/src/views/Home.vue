@@ -14,6 +14,13 @@
           <span class="tool-arrow">→</span>
         </router-link>
 
+        <router-link to="/course-schedule" class="tool-card course-schedule">
+          <span class="tool-icon">🗓️</span>
+          <h2>课程表生成器</h2>
+          <p>填入课程信息，一键渲染打印<br/>美观实用的学期课程表</p>
+          <span class="tool-arrow">→</span>
+        </router-link>
+
         <router-link to="/study" class="tool-card reading">
           <span class="tool-icon">📚</span>
           <h2>学习题库</h2>

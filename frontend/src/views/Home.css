@@ -82,6 +82,10 @@
   border: 3px solid #E91E63;
 }
 
+.tool-card.course-schedule:hover {
+  border: 3px solid #26a69a;
+}
+
 .tool-card.study:hover {
   border: 3px solid #9C27B0;
 }
