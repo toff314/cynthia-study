@@ -24,7 +24,7 @@
             </div>
             <div class="form-item">
               <label>学生姓名</label>
-              <input type="text" v-model="form.studentName" placeholder="如：袁芯盈" />
+              <input type="text" v-model="form.studentName" placeholder="如：Cynthia" />
             </div>
             <div class="form-item">
               <label>开学日期</label>
@@ -519,7 +519,7 @@ function fillExample() {
   form.schoolName = '建华实验学校'
   form.className = '一年级9班'
   form.semester = '2025-2026学年第一学期'
-  form.studentName = '袁芯盈'
+  form.studentName = 'Cynthia'
 
   timeSlots.value = [...defaultTimeSlotsPrimary]
   Object.keys(courseData).forEach(k => delete courseData[k])
