@@ -432,7 +432,7 @@ function applyPreset(type: 'primary' | 'middle') {
 
 // ===== 二年级9班课表模板（来源于课程安排表 a.xlsx）=====
 const GRADE2_CLASS9_TEMPLATE = {
-  form: { schoolName: '', className: '二年级9班', semester: '2026-2027学年第一学期', studentName: 'Cynthia', startDate: '', endDate: '' },
+  form: { schoolName: '建华实验学校', className: '二年级9班', semester: '2026-2027学年第一学期', studentName: 'Cynthia', startDate: '', endDate: '' },
   timeSlots: [
     '7:50-8:15', '8:20-9:00', '9:00-9:30', '9:30-10:10', '10:10-10:25',
     '10:25-11:05', '11:20-12:00', '12:00-13:20', '13:20-13:30', '13:30-14:10',
