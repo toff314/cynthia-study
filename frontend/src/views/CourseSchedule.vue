@@ -647,6 +647,38 @@ function mergedTimeText(rowIdx: number): string {
   return first && last ? `${first}-${last}` : timeSlots.value[rowIdx] || ''
 }
 
+// ===== PNG DPI 嵌入（pHYs chunk），保证图片按物理尺寸打印 =====
+function crc32(data: Uint8Array): number {
+  let crc = 0xffffffff
+  for (let i = 0; i < data.length; i++) {
+    crc ^= data[i]
+    for (let j = 0; j < 8; j++) {
+      crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1))
+    }
+  }
+  return (crc ^ 0xffffffff) >>> 0
+}
+
+async function embedPngDpi(blob: Blob, dpi: number): Promise<Blob> {
+  // 将像素/米写入 pHYs chunk（1 inch = 0.0254 m）
+  const ppm = Math.round(dpi / 0.0254)
+  const phys = new Uint8Array(21)
+  const dv = new DataView(phys.buffer)
+  dv.setUint32(0, 9)                       // chunk length
+  phys.set([0x70, 0x48, 0x59, 0x73], 4)     // 'pHYs'
+  dv.setUint32(8, ppm)                     // x pixels/meter
+  dv.setUint32(12, ppm)                    // y pixels/meter
+  phys[16] = 1                             // unit: meter
+  dv.setUint32(17, crc32(phys.subarray(4, 17)))  // CRC
+
+  const bytes = new Uint8Array(await blob.arrayBuffer())
+  const out = new Uint8Array(bytes.length + phys.length)
+  out.set(bytes.subarray(0, 33))           // 8 字节签名 + IHDR chunk(25)
+  out.set(phys, 33)
+  out.set(bytes.subarray(33), 33 + phys.length)
+  return new Blob([out], { type: 'image/png' })
+}
+
 // ===== 导出图片（SVG foreignObject + canvas，无外部依赖）=====
 async function exportPng() {
   if (!showPreview.value) showPreview.value = true
@@ -686,8 +718,23 @@ async function exportPng() {
     }
     cloneWithStyles(node, clone)
 
-    const scale = 2
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
+    // A4 横向 300dpi 画布：3508×2480，海报等比缩放居中，四周留白
+    const A4_W = 3508
+    const A4_H = 2480
+    const marginRatio = 0.08
+    const availW = A4_W * (1 - marginRatio * 2)
+    const availH = A4_H * (1 - marginRatio * 2)
+    const fitScale = Math.min(availW / w, availH / h)
+    const drawW = Math.round(w * fitScale)
+    const drawH = Math.round(h * fitScale)
+    const offX = Math.round((A4_W - drawW) / 2)
+    const offY = Math.round((A4_H - drawH) / 2)
+
+    // 克隆根节点按 fitScale 放大，保证导出 1:1 清晰
+    ;(clone as HTMLElement).style.transform = `scale(${fitScale})`
+    ;(clone as HTMLElement).style.transformOrigin = '0 0'
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${drawW}" height="${drawH}">
       <foreignObject width="100%" height="100%">
         <div xmlns="http://www.w3.org/1999/xhtml">${clone.outerHTML}</div>
       </foreignObject>
@@ -702,16 +749,19 @@ async function exportPng() {
     })
 
     const canvas = document.createElement('canvas')
-    canvas.width = w * scale
-    canvas.height = h * scale
+    canvas.width = A4_W
+    canvas.height = A4_H
     const ctx = canvas.getContext('2d')
     if (!ctx) throw new Error('no canvas context')
     ctx.fillStyle = '#ffffff'
-    ctx.fillRect(0, 0, w * scale, h * scale)
-    ctx.drawImage(img, 0, 0, w * scale, h * scale)
+    ctx.fillRect(0, 0, A4_W, A4_H)
+    ctx.imageSmoothingQuality = 'high'
+    ctx.drawImage(img, offX, offY, drawW, drawH)
 
-    const blob = await new Promise<Blob | null>(res => canvas.toBlob(res, 'image/png'))
+    let blob = await new Promise<Blob | null>(res => canvas.toBlob(res, 'image/png'))
     if (!blob) throw new Error('toBlob failed')
+    // 嵌入 300dpi（pHYs chunk），保证打印时按物理尺寸 A4 输出
+    blob = await embedPngDpi(blob, 300)
 
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')

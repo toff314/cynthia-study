@@ -843,7 +843,7 @@
   }
 
   .poster-title {
-    font-size: 22pt;
+    font-size: 24pt;
     text-shadow: none !important;
     margin-bottom: 0;
     -webkit-print-color-adjust: exact;
@@ -851,7 +851,7 @@
   }
 
   .poster-subtitle {
-    font-size: 16pt;
+    font-size: 17pt;
     text-shadow: none !important;
     margin-bottom: 0;
     -webkit-print-color-adjust: exact;
@@ -859,50 +859,50 @@
   }
 
   .poster-semester {
-    font-size: 10pt;
+    font-size: 12pt;
   }
 
   .poster-dates {
-    font-size: 8pt;
-    margin-top: 0.8mm;
+    font-size: 9pt;
+    margin-top: 1mm;
   }
 
   .schedule-table {
-    font-size: 9pt;
-    border-spacing: 1.5px;
+    font-size: 10pt;
+    border-spacing: 1.8px;
   }
 
   .schedule-table thead th {
-    font-size: 10pt;
-    padding: 1mm 2px;
+    font-size: 11pt;
+    padding: 1.2mm 2px;
   }
 
   .schedule-table tbody td {
-    font-size: 9pt !important;
-    padding: 1pt 2px !important;
-    line-height: 1.2 !important;
+    font-size: 10pt !important;
+    padding: 1.5pt 2px !important;
+    line-height: 1.22 !important;
   }
 
   .time-cell {
-    font-size: 7.5pt !important;
+    font-size: 8.5pt !important;
   }
 
   .schedule-table tbody .row-break-row td {
-    font-size: 9pt !important;
+    font-size: 10pt !important;
     padding: 2pt 3px !important;
   }
 
   .schedule-table tbody .course-cell.has-content,
   .schedule-table tbody .course-cell.cell-break-content {
-    font-size: 9pt !important;
+    font-size: 10pt !important;
   }
 
   .schedule-table tbody .note-cell {
-    font-size: 8pt !important;
+    font-size: 8.5pt !important;
   }
 
   .course-note {
-    font-size: 0.6em !important;
+    font-size: 0.65em !important;
   }
 
   .course-seq {
@@ -910,8 +910,8 @@
   }
 
   .course-stats {
-    font-size: 8pt !important;
-    margin-top: 4mm;
+    font-size: 9pt !important;
+    margin-top: 4.5mm;
     padding: 1.5mm 3mm;
   }
 
