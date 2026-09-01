@@ -8,8 +8,6 @@ import uuid
 from pathlib import Path
 from typing import Optional
 
-import fitz  # PyMuPDF
-
 from app.config import settings
 from app.services.baidu_pcs import BaiduPCSClient, BaiduPCSError
 
@@ -79,14 +77,25 @@ def _convert_ppt_to_pdf(ppt_file: Path, output_dir: Path) -> Path:
 
 
 def _convert_pdf_to_images(pdf_file: Path, output_dir: Path) -> int:
-    """使用 PyMuPDF 将 PDF 逐页转为 PNG 图片"""
-    doc = fitz.open(str(pdf_file))
-    for i in range(len(doc)):
-        page = doc.load_page(i)
-        # 150 dpi 兼顾清晰度与文件大小
-        pix = page.get_pixmap(dpi=150)
-        pix.save(str(output_dir / f"page_{i + 1}.png"))
-    return len(doc)
+    """使用 pdftoppm（poppler-utils）将 PDF 逐页转为 PNG 图片"""
+    cmd = [
+        "pdftoppm",
+        "-png",
+        "-r", "150",
+        "-sep", "_",
+        "-forcenum",
+        str(pdf_file),
+        str(output_dir / "page"),
+    ]
+    try:
+        subprocess.run(cmd, check=True, timeout=300, capture_output=True, text=True)
+    except FileNotFoundError as e:
+        raise RuntimeError("pdftoppm (poppler-utils) not found. Please install poppler-utils.") from e
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"PDF to images conversion failed: {e.stderr}") from e
+
+    pages = sorted(output_dir.glob("page_*.png"))
+    return len(pages)
 
 
 def convert_to_images(remote_path: str) -> dict:

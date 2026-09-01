@@ -4,7 +4,7 @@ pydantic==2.12.5
 sqlalchemy==2.0.36
 python-multipart==0.0.12
 psutil==7.2.2
-pymupdf==1.24.10
+# pymupdf==1.24.10  # 已改用系统 pdftoppm（poppler-utils）转换 PDF→图片，无需 PyMuPDF
 requests==2.32.3
 requests-toolbelt==1.0.0
 urllib3==2.2.3
