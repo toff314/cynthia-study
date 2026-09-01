@@ -6,6 +6,9 @@
     <router-link to="/schedule" class="nav-item" :class="{ active: $route.path === '/schedule' }">
       <span class="nav-icon">📅</span>
     </router-link>
+    <router-link to="/course-schedule" class="nav-item" :class="{ active: $route.path === '/course-schedule' }">
+      <span class="nav-icon">🗓️</span>
+    </router-link>
     <router-link to="/study" class="nav-item" :class="{ active: $route.path === '/study' }">
       <span class="nav-icon">📚</span>
     </router-link>
