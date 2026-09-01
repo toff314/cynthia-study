@@ -77,6 +77,7 @@ def import_to_db(papers, subject, grade, semester):
     """导入数据库，返回 (created, skipped)"""
     from app.database import SessionLocal
     from app.models.study import QuestionBank
+    from clean_question_bank import clean_question_dict
 
     subject_cn = SUBJECT_MAP[subject]["name"]
     sem_str = "上" if semester == 1 else "下"
@@ -85,6 +86,7 @@ def import_to_db(papers, subject, grade, semester):
     created, skipped = 0, 0
     for paper in papers:
         for q in paper.get("questions", []):
+            q = clean_question_dict(q)
             existing = db.query(QuestionBank).filter(
                 QuestionBank.question_text == q["question_text"]
             ).first()

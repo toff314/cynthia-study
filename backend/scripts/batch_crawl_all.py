@@ -100,6 +100,7 @@ def import_to_db(papers: list):
     """导入试卷到数据库"""
     from app.database import SessionLocal
     from app.models.study import QuestionBank
+    from clean_question_bank import clean_question_dict
 
     db = SessionLocal()
     created = 0
@@ -115,6 +116,7 @@ def import_to_db(papers: list):
         url = paper.get("url", "")
 
         for q in paper.get("questions", []):
+            q = clean_question_dict(q)
             existing = db.query(QuestionBank).filter(
                 QuestionBank.question_text == q["question_text"]
             ).first()

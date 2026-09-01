@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
 一键部署脚本
-参考: /home/yuanwu/zhihu-wiki/scripts/deploy.sh
 
 用法:
     sudo python deploy.py build     # 仅构建前端
-    sudo python deploy.py nginx     # 安装/配置/启动 nginx
-    sudo python deploy.py start     # 启动后端 + nginx
-    sudo python deploy.py stop      # 停止后端 + nginx
-    sudo python deploy.py restart   # 重启后端 + nginx
-    sudo python deploy.py reload    # 重载 nginx + 重启后端
+    sudo python deploy.py start     # 启动后端
+    sudo python deploy.py stop      # 停止后端
+    sudo python deploy.py restart   # 重启后端
     sudo python deploy.py status    # 查看状态
-    sudo python deploy.py serve     # 完整部署: build + nginx + start
+    sudo python deploy.py serve     # 完整部署: build + start
+
+nginx 统一由 /home/yuanwu/askfount-ops/scripts/deploy-nginx.sh 管理
 """
 
 import argparse
@@ -27,8 +26,6 @@ ROOT = Path(__file__).parent.resolve()
 FRONTEND_DIR = ROOT / "frontend"
 BACKEND_DIR = ROOT / "backend"
 VENV_DIR = ROOT / "venv"
-NGINX_CONF_SRC = ROOT / "deploy" / "nginx-cynthia.conf"
-NGINX_CONF_DST = Path("/etc/nginx/conf.d/cynthia-study.conf")
 
 SERVICE_NAME = "cynthia-study"
 DOMAIN = "cynthia.askfount.com"
@@ -52,38 +49,6 @@ def build():
         )
     run(["npm", "run", "build"], cwd=FRONTEND_DIR)
     print("==> Frontend built successfully.")
-
-
-def nginx_install():
-    """安装 nginx（如未安装）"""
-    if shutil.which("nginx"):
-        print("==> nginx already installed.")
-        return
-
-    print("==> Installing nginx...")
-    if shutil.which("yum"):
-        run(["yum", "install", "-y", "-q", "nginx"])
-    elif shutil.which("apt"):
-        run(["apt", "update", "-y"])
-        run(["apt", "install", "-y", "nginx"])
-    else:
-        raise RuntimeError("Unsupported package manager. Please install nginx manually.")
-
-
-def nginx_configure():
-    """配置 nginx"""
-    print(f"==> Configuring nginx for {DOMAIN}...")
-    if not NGINX_CONF_SRC.exists():
-        raise FileNotFoundError(f"nginx config not found: {NGINX_CONF_SRC}")
-    shutil.copy(NGINX_CONF_SRC, NGINX_CONF_DST)
-    run(["nginx", "-t"])
-
-
-def nginx_start():
-    """启动/重启 nginx"""
-    print("==> Starting nginx...")
-    run(["systemctl", "enable", "nginx"])
-    run(["systemctl", "restart", "nginx"])
 
 
 def install_backend_service():
@@ -151,39 +116,25 @@ def backend_stop():
 
 
 def start():
-    """启动后端 + nginx"""
-    nginx_configure()
+    """启动后端"""
     backend_start()
-    nginx_start()
     print(f"==> Services started. Visit http://{DOMAIN}")
 
 
 def stop():
-    """停止后端 + nginx"""
+    """停止后端"""
     backend_stop()
-    print("==> Stopping nginx...")
-    run(["systemctl", "stop", "nginx"], check=False)
 
 
 def restart():
-    """重启后端 + nginx"""
+    """重启后端"""
     stop()
     time.sleep(1)
     start()
 
 
-def reload():
-    """重载 nginx 配置并重启后端"""
-    nginx_configure()
-    print("==> Reloading nginx...")
-    run(["nginx", "-s", "reload"], check=False)
-    backend_start()
-
-
 def status():
     """查看服务状态"""
-    print("--- nginx ---")
-    run(["systemctl", "status", "nginx"], check=False)
     print(f"--- {SERVICE_NAME} ---")
     run(["systemctl", "status", SERVICE_NAME], check=False)
 
@@ -191,11 +142,11 @@ def status():
 def serve():
     """完整部署"""
     build()
-    nginx_install()
     start()
     print("============================================")
     print(f"  http://{DOMAIN}  -> nginx -> static files")
     print(f"  /api/*          -> backend localhost:8000")
+    print(f"  nginx managed by /home/yuanwu/askfount-ops")
     print("============================================")
 
 
@@ -203,18 +154,16 @@ def main():
     parser = argparse.ArgumentParser(description="Cynthia Study deployment script")
     parser.add_argument(
         "command",
-        choices=["build", "nginx", "start", "stop", "restart", "reload", "status", "serve"],
+        choices=["build", "start", "stop", "restart", "status", "serve"],
         help="部署命令",
     )
     args = parser.parse_args()
 
     commands = {
         "build": build,
-        "nginx": lambda: (nginx_install(), nginx_configure(), nginx_start()),
         "start": start,
         "stop": stop,
         "restart": restart,
-        "reload": reload,
         "status": status,
         "serve": serve,
     }

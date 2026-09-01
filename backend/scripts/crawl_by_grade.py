@@ -142,7 +142,7 @@ def extract_questions(page) -> list[dict]:
                     continue
                 clean.append(line)
 
-            text = " ".join(clean)
+            text = "\n".join(clean)
             if not text or len(text) < 5:
                 if not images:
                     continue
@@ -269,8 +269,10 @@ def crawl_subject_grade(subject, grade, semester, max_papers=0, max_pages=3):
 
 def import_to_db(papers, subject, grade, semester):
     sys.path.insert(0, str(Path(__file__).parent.parent))
+    sys.path.insert(0, str(Path(__file__).parent))
     from app.database import SessionLocal
     from app.models.study import QuestionBank
+    from clean_question_bank import clean_question_dict
 
     subject_cn = SUBJECT_MAP[subject]["name"]
     sem_str = "上" if semester == 1 else "下"
@@ -279,6 +281,7 @@ def import_to_db(papers, subject, grade, semester):
     created, skipped = 0, 0
     for paper in papers:
         for q in paper.get("questions", []):
+            q = clean_question_dict(q)
             existing = db.query(QuestionBank).filter(QuestionBank.question_text == q["question_text"]).first()
             if existing:
                 # 更新已有记录的图片和音频

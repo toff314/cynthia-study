@@ -226,7 +226,7 @@ def extract_questions_from_page(page) -> list[dict[str, Any]]:
                     continue
                 clean_lines.append(line)
 
-            question_text = " ".join(clean_lines)
+            question_text = "\n".join(clean_lines)
             if not question_text or len(question_text) < 5:
                 continue
 
@@ -472,16 +472,19 @@ def save_papers(papers: list[dict[str, Any]], output_path: str):
     return data
 
 
+from clean_question_bank import clean_question_dict
+
 def import_to_api(papers: list[dict[str, Any]]):
     """导入试卷到后端 API"""
     if not papers:
         logger.warning("没有可导入的试卷")
         return
 
-    # 转换为题目格式
+    # 转换为题目格式并清洗
     questions = []
     for paper in papers:
         for q in paper.get("questions", []):
+            q = clean_question_dict(q)
             questions.append({
                 "subject": paper.get("subject", ""),
                 "grade": paper.get("grade", 0),

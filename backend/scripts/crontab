@@ -1,0 +1,3 @@
+# 每日爬取试卷 (凌晨 03:00)
+# 日志: /var/log/crawl.log
+0 3 * * * /home/yuanwu/cynthia-study/backend/scripts/daily_crawl.sh >> /var/log/crawl.log 2>&1
